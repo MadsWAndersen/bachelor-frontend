@@ -7,4 +7,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  app: {
+    pageTransition: { name: 'slide', mode: 'out-in' }
+  },
 })

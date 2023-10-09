@@ -1,10 +1,9 @@
 <template>
-   <TheHeader/>
+  <TheHeader />
+
+  <div class="container mx-auto flex justify-between items-center p-4">
     <slot />
-    <TheFooter/>
+  </div>
 
+  <TheFooter />
 </template>
-
-<script>
-
-</script>
