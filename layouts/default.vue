@@ -1,6 +1,10 @@
 <template>
-    <div>
-    
+   <TheHeader/>
     <slot />
-  </div>
+    <TheFooter/>
+
 </template>
+
+<script>
+
+</script>
