@@ -1,39 +1,24 @@
 <template>
-  <div>
-    <h1>{{ result }}</h1>
-    <div v-for="page in pages" :key="page._id">
-      <p>Creator Name: {{ page._creatorName }}</p>
-      <p>
-        Page Name:
-        <NuxtLink :to="'/about/' + page._id">{{ page.name }}</NuxtLink>
-      </p>
+  <div v-if="data">
+    <div v-for="(e, index) in data.blocklist" :key="index">
+      <img :src="e.content.image[0]._url" alt="" />
+      <span v-html="e.content.bodytext" class="text-xl"></span>
+      <h1 v-html="e.content.title" class="text-xl font-bold"></h1>
     </div>
+
+    <div v-for="(e, index) in data.version" :key="index">
+      {{ e }}
+    </div>
+
+    <p></p>
+
+    <pre>{{ data }}</pre>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+const { data, pending, error } = useContent();
+const route = useRoute();
 
-const result = ref(null);
-const pages = ref([]);
-
-const fetchData = async () => {
-  try {
-    const response = await fetch("https://cdn.umbraco.io/content/", {
-      headers: {
-        "umb-project-alias": "pba-webdev",
-        "Accept-Language": "en-US",
-      },
-    });
-    const responseData = await response.json();
-    result.value = responseData;
-    // Assuming that the pages data is under "_embedded.content"
-    pages.value = responseData._embedded.content;
-    console.log(responseData);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-};
-
-onMounted(fetchData);
+const test = "/00424213-bb70-46b2-aefd-f7bb89f456e2";
 </script>
