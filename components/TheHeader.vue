@@ -9,6 +9,7 @@
         <NuxtLink class="text-white hover:underline" to="/about"
           >About</NuxtLink
         >
+        <NuxtLink class="text-white hover:underline" to="/form">Form</NuxtLink>
       </div>
     </nav>
   </header>

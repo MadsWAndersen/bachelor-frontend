@@ -15,6 +15,6 @@
 .slide-enter-from,
 .slide-leave-to {
   opacity: 0;
-  filter: blur(1rem);
+  filter: blur(0.2rem);
 }
 </style>
