@@ -17,5 +17,5 @@ export default defineNuxtConfig({
     pageTransition: { name: 'slide', mode: 'out-in' }
   },
 
-  modules: ["@nuxtjs/tailwindcss"]
+  modules: ["@nuxtjs/tailwindcss", "nuxt-icon"]
 })

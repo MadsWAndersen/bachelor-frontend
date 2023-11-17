@@ -6,8 +6,8 @@
       >
       <div class="space-x-4">
         <NuxtLink class="text-white hover:underline" to="/">Home</NuxtLink>
-        <NuxtLink class="text-white hover:underline" to="/about"
-          >About</NuxtLink
+        <NuxtLink class="text-white hover:underline" to="/documentation"
+          >Documentation</NuxtLink
         >
         <NuxtLink class="text-white hover:underline" to="/form">Form</NuxtLink>
       </div>

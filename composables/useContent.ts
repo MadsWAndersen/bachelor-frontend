@@ -15,3 +15,4 @@ export function useContent(urlPath = "") {
 
   return { data, pending, error, refresh };
 }
+
