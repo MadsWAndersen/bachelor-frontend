@@ -1,6 +1,8 @@
+
 export function useContent(urlPath = "") {
   // Base URL
   const baseUrl = "https://cdn.umbraco.io/content/";
+  
 
   // Complete URL
   const completeUrl = urlPath ? `${baseUrl}${urlPath}` : baseUrl;
@@ -15,4 +17,5 @@ export function useContent(urlPath = "") {
 
   return { data, pending, error, refresh };
 }
+
 

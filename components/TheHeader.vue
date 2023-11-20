@@ -1,17 +1,23 @@
 <template>
-  <header class="umbraco-header">
-    <nav class="container mx-auto flex justify-between items-center p-4">
-      <NuxtLink class="text-white font-semibold" to="/"
-        >Umbraco Bachelor</NuxtLink
+  <header class="umbraco-header container">
+    <div class="container-row">
+      <nav
+        class="col-span-full w-full mx-auto flex justify-between items-center p-4"
       >
-      <div class="space-x-4">
-        <NuxtLink class="text-white hover:underline" to="/">Home</NuxtLink>
-        <NuxtLink class="text-white hover:underline" to="/documentation"
-          >Documentation</NuxtLink
+        <NuxtLink class="mr-auto text-white font-semibold" to="/"
+          >Umbraco Bachelor</NuxtLink
         >
-        <NuxtLink class="text-white hover:underline" to="/form">Form</NuxtLink>
-      </div>
-    </nav>
+        <div class="space-x-4">
+          <NuxtLink class="text-white hover:underline" to="/">Home</NuxtLink>
+          <NuxtLink class="text-white hover:underline" to="/documentation"
+            >Documentation</NuxtLink
+          >
+          <NuxtLink class="text-white hover:underline" to="/form"
+            >Form</NuxtLink
+          >
+        </div>
+      </nav>
+    </div>
   </header>
 </template>
 
