@@ -1,13 +1,13 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
-  nitro: {  
-    preset: 'netlify'  
-  },  
+  nitro: {
+    preset: 'netlify'
+  },
   postcss: {
     plugins: {
       tailwindcss: {
-    
+
       },
       autoprefixer: {},
     },
@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     public: {
       apiBase: '/api',
     }
-   
+
   },
-  modules: ["@nuxtjs/tailwindcss", "nuxt-icon"]
+  modules: ["@nuxtjs/tailwindcss", "nuxt-icon", "@pinia/nuxt"]
 })

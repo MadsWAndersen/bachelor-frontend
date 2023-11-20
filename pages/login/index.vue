@@ -1,15 +1,18 @@
 <script setup>
+import { useUserStore } from "../../stores/user";
+const userData = useUserStore();
+
 let fetchResult = ref(""); // Declare a variable to store the fetch result
 
-let username = ref("");
-let password = ref("");
+let username = ref("testing1234");
+let password = ref("testing1234");
 
-let note = {
+/* let note = {
     "username": "Welander",
     "password": "UmbracoPassword123"
-}
-let login = () => {
-    console.log(username.value, password.value)
+} */
+
+let login = async () => {
     var requestOptions = {
         method: 'POST',
         headers: {
@@ -23,20 +26,11 @@ let login = () => {
         }),
         redirect: 'follow'
     };
-
-
-
-    fetch("https://cdn.umbraco.io/member/oauth/token", requestOptions)
-        .then(response => response.text())
-        .then(result => {
-            fetchResult.value = JSON.parse(result); // Convert the result to JSON and save it in the variable
-            console.log(fetchResult.value); // Log the JSON result if needed
-        })
-        .catch(error => console.log('error', error));
-
-    // Now you can use the fetchResult variable, which contains the result in JSON format.
-
+    const { data, pending, error, refresh } = await useFetch("https://cdn.umbraco.io/member/oauth/token", requestOptions);
+    userData.Bearer_token = data.value.access_token;
+    return { data, pending, error, refresh };
 }
+
 </script>
 
 <template>
@@ -59,7 +53,7 @@ let login = () => {
                             </label>
                             <input @keyup.enter="login" v-model="password"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                id="password" type="password" placeholder="******************">
+                                id="password" type="string" placeholder="******************">
                             <p v-if="!fetchResult.access_token" class="text-red-500 text-xs italic">{{
                                 !fetchResult.error_description ?
                                 fetchResult.error : fetchResult.error_description }}</p>
@@ -72,10 +66,12 @@ let login = () => {
                             </button>
                         </div>
                     </form>
+
+                    {{ data }}
                 </div>
             </div>
         </div>
-        <p v-if="fetchResult.access_token">{{ fetchResult.access_token }}</p>
+
 
     </div>
 </template>
