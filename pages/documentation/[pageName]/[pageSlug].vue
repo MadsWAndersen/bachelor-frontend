@@ -3,7 +3,7 @@
     <div class="container">
       <div class="container-row">
         <div class="col-span-2">
-          {{ data }}
+          <pre>{{ data }}</pre>
         </div>
         <div class="col-span-5">
           <div v-html="data.bodytext"></div>
