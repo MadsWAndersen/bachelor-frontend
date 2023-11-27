@@ -9,6 +9,7 @@
 
 <script setup>
 const { data, pending, error } = useContent();
+
 const getRoute = (content) => {
   return {
     path: `/documentation${content._url}`,
