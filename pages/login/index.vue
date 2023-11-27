@@ -7,11 +7,6 @@ let fetchResult = ref(""); // Declare a variable to store the fetch result
 let username = ref("testing1234");
 let password = ref("testing1234");
 
-/* let note = {
-    "username": "Welander",
-    "password": "UmbracoPassword123"
-} */
-
 let login = async () => {
     var requestOptions = {
         method: 'POST',
@@ -27,7 +22,37 @@ let login = async () => {
         redirect: 'follow'
     };
     const { data, pending, error, refresh } = await useFetch("https://cdn.umbraco.io/member/oauth/token", requestOptions);
+
+    // saves bearer token in localstorage 
     userData.Bearer_token = data.value.access_token;
+
+    // saves bearer token in localstorage 
+    window.localStorage.setItem(
+        "Bearer_token", data.value.access_token,
+    )
+
+    // fetches user data from Umbraco
+    fetchUser();
+    return { data, pending, error, refresh };
+}
+
+let fetchUser = async () => {
+    var requestOptions = {
+        method: 'GET',
+        headers: {
+            "Umb-Project-Alias": "pba-webdev",
+            "Authorization": "Basic cDA1ajNJMFF3T0JQMEpRZnBwcUw6"
+        },
+        redirect: 'follow'
+    };
+    const { data, pending, error, refresh } = await useFetch("https://api.umbraco.io/member/testing1234", requestOptions);
+
+    // save user infomation in pinia
+    userData.userInfo = data.value;
+
+    // Redirects user to home page
+    await navigateTo('/')
+
     return { data, pending, error, refresh };
 }
 
@@ -37,8 +62,9 @@ let login = async () => {
     <div class="container">
         <div class="container-row">
             <div class="col-span-full">
+
                 <div class="w-full max-w-xs">
-                    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    <form class="bg-white shadow-md px-8 pt-6 pb-8 mb-4">
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                 Username
@@ -66,8 +92,6 @@ let login = async () => {
                             </button>
                         </div>
                     </form>
-
-                    {{ data }}
                 </div>
             </div>
         </div>

@@ -8,6 +8,12 @@
 </template>
 
 <script setup>
+import { useUserStore } from "../../stores/user";
+const userData = useUserStore();
+onMounted(() => {
+  userData.RedirectUser()
+})
+
 const { data, pending, error } = useContent();
 const getRoute = (content) => {
   return {

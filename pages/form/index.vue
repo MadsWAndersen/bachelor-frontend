@@ -2,17 +2,11 @@
   <div class="container">
     <div class="container-row">
       <div class="col-span-full">
-        <Editor
-          api-key="ftvcr0z9nxcc2ozxsls3xowr1dtmrwm2atafqvcxtkw0mob4"
-          :init="{
-            plugins: 'lists link image table code help wordcount code',
-          }"
-        />
+        <Editor api-key="ftvcr0z9nxcc2ozxsls3xowr1dtmrwm2atafqvcxtkw0mob4" :init="{
+          plugins: 'lists link image table code help wordcount code',
+        }" />
       </div>
-      <button
-        class="col-span-full mr-auto ml-auto bg-slate-700 rounded-sm text-white w-12"
-        @click="updateContent"
-      >
+      <button class="col-span-full mr-auto ml-auto bg-slate-700 rounded-sm text-white w-12" @click="updateContent">
         Test console Editor data
       </button>
 
@@ -26,6 +20,12 @@
 </template>
 
 <script setup>
+import { useUserStore } from "../../stores/user";
+const userData = useUserStore();
+onMounted(() => {
+  userData.RedirectUser()
+})
+
 const { data } = useApi("/forms/01760615-f419-40be-9b1f-2d32f38790fb");
 
 const Data = ref("");
