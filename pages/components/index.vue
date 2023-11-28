@@ -1,16 +1,24 @@
 <template>
   <div class="container">
     <div class="container-row">
-      <h1 class="col-span-2">Insert components here</h1>
+      
+        <h1>Insert components here</h1>
+        <LinkButton
+          url="https://github.com/MadsWAndersen/bachelor-frontend/branches"
+          target="_blank"
+          title="Read more"
+          :style="'dark'"
+        />
 
-      <highlightCard
-        v-for="(card, index) in data"
-        :key="index"
-        v-if="data"
-        :title="card.title"
-        :bodyText="card.bodyText"
-        :url="card.url"
-      />
+        <highlightCard
+          v-for="(card, index) in data"
+          :key="index"
+          v-if="data"
+          :title="card.title"
+          :bodyText="card.bodyText"
+          :url="card.url"
+        />
+  
     </div>
   </div>
 </template>
