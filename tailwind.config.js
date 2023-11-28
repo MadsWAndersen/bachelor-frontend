@@ -40,7 +40,17 @@ module.exports = {
 			strokeWidth: {
 				1.5: "1.5px",
 			},
-	
+			colors: {
+				'um-white': '#FFFFFF',
+				'um-black': '#000000',
+				'um-blue-light': '#283A97',
+				'um-blue': '#1B264F',
+				'um-red': '#DC2626',
+				'um-light': '#FFF0EA',
+				'um-palepink': '#F5C1BC',
+				'um-green': '#16A34A',
+				'um-blue-info': '#2563EB',
+			},
 			transitionTimingFunction: {
 				"umbraco-ease": "cubic-bezier(0.785, 0.135, 0.15, 0.86);",
 			},
