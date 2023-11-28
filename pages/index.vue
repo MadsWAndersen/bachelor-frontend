@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div v-if="data" class="container">
     <pre>{{ Data }}</pre>
 
@@ -23,8 +23,8 @@ const { data, pending, error, refresh } = useApi("/media/");
 
 const mediaUrl = ref("https://media.umbraco.io/pba-webdev");
 </script>
- -->
 
+<!-- 
 <template>
   <div v-if="data">
     <div v-for="(content, index) in data._embedded.content" :key="index">
@@ -43,3 +43,4 @@ const getRoute = (content) => {
   };
 };
 </script>
+ -->

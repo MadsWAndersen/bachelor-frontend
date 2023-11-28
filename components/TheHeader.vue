@@ -5,7 +5,7 @@
         ><img src="@/assets/icons/logo.svg" alt=""
       /></NuxtLink>
 
-      <div class="lg:col-span-10 flex justify-end gap-8">
+      <div class="lg:col-span-10 flex justify-end gap-8 items-center">
         <NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/"
           >Home</NuxtLink
         >
@@ -20,7 +20,14 @@
         <NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/login"
           >login</NuxtLink
         >
+
+        <UserPicture :image="image" />
       </div>
     </nav>
   </header>
 </template>
+
+<script setup>
+const image =
+  "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
+</script>

@@ -16,6 +16,8 @@
         :bodyText="card.bodyText"
         :url="card.url"
       />
+
+      <UserPicture :image="image" />
     </div>
   </div>
 </template>
@@ -34,4 +36,7 @@ const data = [
     url: "documentation",
   },
 ];
+
+const image =
+  "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
 </script>
