@@ -8,9 +8,13 @@
 </template>
 
 <script setup>
+<<<<<<< HEAD
 useRedirect();
 
 const { data, pending, error } = useContent();
+=======
+const { data } = useContent();
+>>>>>>> origin/fetchAllBranch
 
 const getRoute = (content) => {
   return {
