@@ -1,5 +1,5 @@
 <template>
-  <div class="col-span-full h-full">
+  <div class="flex">
     <NuxtLink :class="buttonStyling()" :to="url" :target="target" :style="style"
       >{{ title }}
     </NuxtLink>
@@ -30,20 +30,17 @@ const buttonStyling = () => {
 
   switch (props.style) {
     case "dark":
-      bgColor =
-        "bg-um-blue text-um-palepink border-um-blue hover:bg-um-white hover:text-um-blue hover:border-um-blue ";
+      bgColor = "bg-um-blue text-um-palepink border-um-blue";
       break;
     case "light":
-      bgColor =
-        "bg-um-palepink text-um-blue  border-um-palepink hover:bg-um-white hover:text-um-palepink";
+      bgColor = "bg-um-palepink text-um-blue  border-um-palepink ";
       break;
     case "neutral":
-      bgColor =
-        "bg-transparent text-um-blue border-um-blue hover:bg-um-blue hover:text-um-white";
+      bgColor = "bg-transparent text-um-blue border-um-blue";
       break;
     default:
       bgColor =
-        "bg-um-blue text-um-palepink border-um-blue hover:bg-um-white hover:text-um-blue hover:border-um-blue ";
+        "bg-um-blue text-um-palepink border-um-blue hover:bg-um-white  ";
       break;
   }
 
