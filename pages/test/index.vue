@@ -57,7 +57,7 @@ onMounted(async () => {
 
     window.localStorage.setItem(
       "Documentation",
-      JSON.stringify(detailedData.value[5])
+      JSON.stringify(detailedData.value[4])
     );
   } catch (err) {
     error.value = err;

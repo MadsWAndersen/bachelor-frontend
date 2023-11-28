@@ -10,6 +10,13 @@
 
 <script setup>
 const route = useRoute();
+
+const storedData = ref(null);
+
+onMounted(() => {
+  storedData.value = JSON.parse(window.localStorage.getItem("Documentation"));
+});
+
 const { data } = useContent(`${route.query.id}/children`);
 </script>
 

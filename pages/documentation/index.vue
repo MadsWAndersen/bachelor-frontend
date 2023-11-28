@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-const { data, pending, error } = useContent();
+const { data } = useContent();
 
 const getRoute = (content) => {
   return {
