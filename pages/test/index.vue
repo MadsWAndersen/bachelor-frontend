@@ -62,7 +62,7 @@ onMounted(async () => {
       "documentation",
       JSON.stringify(detailedData.value[0])
     );
-
+    // sort documentation
     for (let i = 0; i < detailedData.value[0].childrenData._embedded.content.length; i++) {
       window.localStorage.setItem(
         detailedData.value[0].childrenData._embedded.content[i].name.toLowerCase(),

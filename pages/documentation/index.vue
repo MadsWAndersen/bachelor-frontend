@@ -5,7 +5,6 @@
       <h1 v-html="content.name" class="text-xl font-bold"></h1>
       <NuxtLink :to="`${content._url}`">{{ content._url }}</NuxtLink>
     </div>
-    {{ cmsContent.childrenData._embedded.content[1]._url }}
   </div>
 </template>
 
