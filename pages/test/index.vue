@@ -57,16 +57,16 @@ onMounted(async () => {
       (content) => content._links.self.href
     );
     detailedData.value = await fetchDetailedData(hrefs);
-
+    console.log(detailedData)
     window.localStorage.setItem(
-      "Documentation",
-      JSON.stringify(detailedData.value[4])
+      "documentation",
+      JSON.stringify(detailedData.value[0])
     );
 
-    for (let i = 0; i < detailedData.value[4].childrenData._embedded.content.length; i++) {
+    for (let i = 0; i < detailedData.value[0].childrenData._embedded.content.length; i++) {
       window.localStorage.setItem(
-        detailedData.value[4].childrenData._embedded.content[i].name,
-        JSON.stringify(detailedData.value[4].childrenData._embedded.content[i])
+        detailedData.value[0].childrenData._embedded.content[i].name.toLowerCase(),
+        JSON.stringify(detailedData.value[0].childrenData._embedded.content[i])
       );
     }
   } catch (err) {

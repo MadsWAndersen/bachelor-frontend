@@ -27,7 +27,7 @@ const mediaUrl = ref("https://media.umbraco.io/pba-webdev");
   <div v-if="data">
     <div v-for="(content, index) in data._embedded.content" :key="index">
       <h1 v-html="content.name" class="text-xl font-bold"></h1>
-      <NuxtLink :to="getRoute(content)">{{ content._url }}</NuxtLink>
+      <NuxtLink :to="content._url">{{ content._url }}</NuxtLink>
     </div>
   </div>
 </template>
@@ -35,10 +35,10 @@ const mediaUrl = ref("https://media.umbraco.io/pba-webdev");
 <script setup>
 const { data } = useContent();
 
-const getRoute = (content) => {
+/* const getRoute = (content) => {
   return {
     path: `${content._url}`,
-    query: { id: content._id },
+    query: `${content._url}`,
   };
-};
+}; */
 </script>

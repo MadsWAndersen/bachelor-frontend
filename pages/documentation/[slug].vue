@@ -6,6 +6,7 @@
           <pre>{{ data }}</pre>
         </div>
         <div class="col-span-5">
+          wda
           {{ cmsContent }}
         </div>
       </div>
@@ -25,6 +26,7 @@ const cmsContent = ref();
 onMounted(async () => {
   localStorageContent.value = ref(JSON.parse(window.localStorage.getItem(`${route.params.slug}`)));
   cmsContent.value = localStorageContent.value._value;
+  console.log(cmsContent)
 });
 </script>
 
