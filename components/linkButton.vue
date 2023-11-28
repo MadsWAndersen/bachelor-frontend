@@ -1,6 +1,11 @@
 <template>
-  <div class="flex">
-    <NuxtLink :class="buttonStyling()" :to="url" :target="target" :style="style"
+  <div class="flex">  
+    <NuxtLink
+      :class="buttonStyling()"
+      :to="url"
+      :target="target"
+      :style="style"
+      class="h-full relative"
       >{{ title }}
     </NuxtLink>
   </div>
