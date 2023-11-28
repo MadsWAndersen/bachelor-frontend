@@ -1,12 +1,9 @@
 <template>
-  <NuxtLink
-    class="  "
-    :class="buttonStyling()"
-    :to="url"
-    :target="target"
-    :style="style"
-    >{{ title }}
-  </NuxtLink>
+  <div class="col-span-full h-full">
+    <NuxtLink :class="buttonStyling()" :to="url" :target="target" :style="style"
+      >{{ title }}
+    </NuxtLink>
+  </div>
 </template>
 
 <script setup>

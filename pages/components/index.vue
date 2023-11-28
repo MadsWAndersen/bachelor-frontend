@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="container-row">
-      <div class="col-span-full">
+      
         <h1>Insert components here</h1>
         <LinkButton
           url="https://github.com/MadsWAndersen/bachelor-frontend/branches"
@@ -9,9 +9,32 @@
           title="Read more"
           :style="'dark'"
         />
-      </div>
+
+        <highlightCard
+          v-for="(card, index) in data"
+          :key="index"
+          v-if="data"
+          :title="card.title"
+          :bodyText="card.bodyText"
+          :url="card.url"
+        />
+  
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const data = [
+  {
+    title: "CMS - reset 2FA",
+    bodyText:
+      "But also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Slack sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+  },
+  {
+    title: "Accounting - how to set up payment",
+    bodyText:
+      "But also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Slack sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    url: "documentation",
+  },
+];
+</script>
