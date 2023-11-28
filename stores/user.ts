@@ -18,5 +18,7 @@ export const useUserStore = defineStore('user', () => {
         )
     }
 
-    return { Bearer_token, userInfo, logout, RedirectUser }
+    let loading = ref(false);
+
+    return { Bearer_token, userInfo, logout, RedirectUser, loading }
 })

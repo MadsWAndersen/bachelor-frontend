@@ -15,12 +15,7 @@
 </template>
 
 <script setup>
-import { useUserStore } from "../stores/user";
-const userData = useUserStore();
-
-onMounted(() => {
-  userData.RedirectUser()
-})
+useRedirect();
 
 const { data, pending, error, refresh } = useApi("/media/");
 
