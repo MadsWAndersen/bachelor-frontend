@@ -1,5 +1,8 @@
 <template>
-  <pre v-if="detailedData">{{ detailedData }}</pre>
+  <!--   <pre v-if="detailedData">{{ detailedData }}</pre> -->
+  <div>
+    <pre>dwa:{{ x }}</pre>
+  </div>
 </template>
 
 <script setup>
@@ -59,8 +62,19 @@ onMounted(async () => {
       "Documentation",
       JSON.stringify(detailedData.value[4])
     );
+
+    for (let i = 0; i < detailedData.value[4].childrenData._embedded.content.length; i++) {
+      window.localStorage.setItem(
+        detailedData.value[4].childrenData._embedded.content[i].name,
+        JSON.stringify(detailedData.value[4].childrenData._embedded.content[i])
+      );
+    }
   } catch (err) {
     error.value = err;
   }
+
+
+
 });
+
 </script>

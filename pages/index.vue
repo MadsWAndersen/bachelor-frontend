@@ -37,7 +37,7 @@ const { data } = useContent();
 
 const getRoute = (content) => {
   return {
-    path: `/documentation${content._url}`,
+    path: `${content._url}`,
     query: { id: content._id },
   };
 };
