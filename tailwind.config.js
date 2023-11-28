@@ -13,6 +13,18 @@ module.exports = {
 			xxl: "1440px",
 			xxxl: "1920px",
 		},
+
+		colors: {
+			'um-white': '#FFFFFF',
+			'um-black': '#000000',
+			'um-blue-light': '#283A97',
+			'um-blue': '#1B264F',
+			'um-red': '#DC2626',
+			'um-light': '#FFF0EA',
+			'um-palepink': '#F5C1BC',
+			'um-green': '#16A34A',
+			'um-blue-info': '#2563EB',
+		},
 		spacing: {
 			0: "0rem",
 			1: "0.25rem",
@@ -30,26 +42,21 @@ module.exports = {
 		},
 		borderRadius: {
 			none: "0",
-			sm: "0.75rem",
+			sm: "0.938rem",
 			DEFAULT: "1.25rem",
 			md: "1.875rem",
 			lg: "2.5rem",
 			full: "9999px",
 		},
+
 		extend: {
+
+			backgroundImage: {
+				'hero-pattern': "url('/assets/image/Blue_Corner.png')",
+			  },
+
 			strokeWidth: {
 				1.5: "1.5px",
-			},
-			colors: {
-				'um-white': '#FFFFFF',
-				'um-black': '#000000',
-				'um-blue-light': '#283A97',
-				'um-blue': '#1B264F',
-				'um-red': '#DC2626',
-				'um-light': '#FFF0EA',
-				'um-palepink': '#F5C1BC',
-				'um-green': '#16A34A',
-				'um-blue-info': '#2563EB',
 			},
 			transitionTimingFunction: {
 				"umbraco-ease": "cubic-bezier(0.785, 0.135, 0.15, 0.86);",
