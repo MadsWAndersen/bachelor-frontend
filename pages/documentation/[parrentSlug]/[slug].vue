@@ -17,7 +17,7 @@ onMounted(async () => {
 <template>
     <div v-if="realData">
         {{ realData.name }}
-        {{ realData.bodyText }}
+        {{ realData }}
     </div>
 </template>
 
