@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "nuxt-icon", "@pinia/nuxt", '@nuxtjs/google-fonts'],
+  modules: ["@nuxtjs/tailwindcss", "nuxt-icon", "@pinia/nuxt"],
   css: ['~/assets/css/main.css'],
   nitro: {
     preset: 'netlify'
@@ -17,7 +17,7 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'slide', mode: 'out-in' }
   },
-  runtimeConfig: {
+/*   runtimeConfig: {
     // The private keys which are only available within server-side
     UmbProjectAlias: 'pba-webdev',
     AcceptLanguage: 'en-US',
@@ -26,13 +26,13 @@ export default defineNuxtConfig({
       apiBase: '/api',
     }
 
-  },
+  }, */
 
-  googleFonts: {
+/*   googleFonts: {
     families: {
       Lato: [100, 200, 300, 400, 500, 600, 700],
     }
-  }
+  } */
 
 
 
