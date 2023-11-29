@@ -2,6 +2,14 @@
   <div class="container">
     <div class="container-row">
       <h1>Insert components here</h1>
+      <docButton
+        url="https://github.com/MadsWAndersen/bachelor-frontend/branches"
+        target="_blank"
+        title="documentation"
+        spanText="next"
+        :btnStyle="'next'"
+
+      />
       <linkButton
         url="https://github.com/MadsWAndersen/bachelor-frontend/branches"
         target="_blank"
@@ -37,7 +45,7 @@
         />
       </sectionCard>
     </div>
-  </div>
+    </div>
 </template>
 
 <script setup>
