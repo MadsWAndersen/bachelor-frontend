@@ -13,11 +13,6 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  prettier: {
-    tabWidth: 2,
-    singleQuote: true,
-    semi: false
-  },
 
   app: {
     pageTransition: { name: 'slide', mode: 'out-in' }
