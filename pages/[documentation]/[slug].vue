@@ -15,7 +15,8 @@
 
 <script setup>
 const route = useRoute();
-const { data } = useContent(`${route.params.pageSlug}`);
+console.log(route);
+const { data } = useContent(`${route.params.slug}`);
 </script>
 
 <style></style>
