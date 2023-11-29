@@ -21,7 +21,7 @@
           >login</NuxtLink
         >
 
-        <UserPicture :image="image" />
+        <profilePicture :image="image" />
       </div>
     </nav>
   </header>
