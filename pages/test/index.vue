@@ -4,7 +4,7 @@
     <pre>dwa:{{ x }}</pre>
   </div>
 </template>
-<!-- 
+
 <script setup>
 import { ref, onMounted } from "vue";
 
@@ -57,25 +57,26 @@ onMounted(async () => {
       (content) => content._links.self.href
     );
     detailedData.value = await fetchDetailedData(hrefs);
-    console.log(detailedData)
+    console.log(detailedData);
     window.localStorage.setItem(
       "documentation",
       JSON.stringify(detailedData.value[0])
     );
     // sort documentation
-    for (let i = 0; i < detailedData.value[0].childrenData._embedded.content.length; i++) {
+    for (
+      let i = 0;
+      i < detailedData.value[0].childrenData._embedded.content.length;
+      i++
+    ) {
       window.localStorage.setItem(
-        detailedData.value[0].childrenData._embedded.content[i].name.toLowerCase(),
+        detailedData.value[0].childrenData._embedded.content[
+          i
+        ].name.toLowerCase(),
         JSON.stringify(detailedData.value[0].childrenData._embedded.content[i])
       );
     }
   } catch (err) {
     error.value = err;
   }
-
-
-
 });
-
 </script>
- -->
