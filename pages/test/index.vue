@@ -4,7 +4,7 @@
     <pre>dwa:{{ x }}</pre>
   </div>
 </template>
-
+<!-- 
 <script setup>
 import { ref, onMounted } from "vue";
 
@@ -78,3 +78,4 @@ onMounted(async () => {
 });
 
 </script>
+ -->
