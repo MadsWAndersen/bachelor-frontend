@@ -2,6 +2,7 @@
   <div class="container">
     <div class="container-row">
       <h1>Insert components here</h1>
+      <versionTag :version="'12.12.12'" />
       <docButton
         url="https://github.com/MadsWAndersen/bachelor-frontend/branches"
         target="_blank"
