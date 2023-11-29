@@ -11,11 +11,12 @@ export const useUserStore = defineStore('user', () => {
         }
     }
 
-    const logout = () => {
+    const logout = async () => {
         Bearer_token.value = "";
         window.localStorage.setItem(
             "Bearer_token", ""
         )
+        await navigateTo('/login')
     }
 
     let loading = ref(false);
