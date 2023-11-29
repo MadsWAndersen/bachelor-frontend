@@ -41,6 +41,8 @@
 </template>
 
 <script setup>
+const svgUrl = "https://api.iconify.design/carbon:tools.svg";
+
 const data = [
   {
     title: "documentation",
@@ -60,4 +62,7 @@ const data = [
     svg: "https://api.iconify.design/carbon:tools.svg?color=%23ffffff",
   },
 ];
+
+const image =
+  "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
 </script>

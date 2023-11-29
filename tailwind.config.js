@@ -50,7 +50,6 @@ module.exports = {
 		},
 
 		extend: {
-
 			backgroundImage: {
 				'hero-pattern': "url('/assets/image/Blue_Corner.png')",
 			  },
