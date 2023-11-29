@@ -16,7 +16,7 @@
     }
   },
   "lint-staged": {
-      "*.{js,vue,ts}": [
+      "*.{jsx,js,vue,ts}": [
           "npx prettier --config .prettierrc --write"
       ]
   },
