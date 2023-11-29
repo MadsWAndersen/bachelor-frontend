@@ -1,12 +1,6 @@
 <template>
-  <div class="flex">  
-    <NuxtLink
-      :class="buttonStyling()"
-      :to="url"
-      :target="target"
-      :style="style"
-      class="h-full relative"
-      >{{ title }}
+  <div class="flex">
+    <NuxtLink :class="buttonStyling()" :to="url" :target="target" :style="style" class="h-full relative">{{ title }}
     </NuxtLink>
   </div>
 </template>
@@ -42,6 +36,9 @@ const buttonStyling = () => {
       break;
     case "neutral":
       bgColor = "bg-transparent text-um-blue border-um-blue";
+      break;
+    case "login":
+      bgColor = "bg-um-blue hover:bg-um-palepink text-um-palepink hover:text-um-blue hover:border-um-palepink border-um-blue text-center w-full";
       break;
     default:
       bgColor =

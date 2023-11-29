@@ -29,7 +29,7 @@
     >
       {{ bodyText }}
 
-      <NuxtLink class="text-um-blue" :href="url">Go to solution</NuxtLink>
+      <NuxtLink class="text-um-blue" :to="url">Go to solution</NuxtLink>
     </div>
   </div>
 </template>
