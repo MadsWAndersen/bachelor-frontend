@@ -24,6 +24,28 @@
     </div>
 
     <div class="container-row">
+      <versionTag class="col-span-1" :version="'12.12.12'" />
+      <docButton
+        url="https://github.com/MadsWAndersen/bachelor-frontend/branches"
+        target="_blank"
+        title="documentation"
+        spanText="prev"
+        :btnStyle="'prev'"
+        class="contain col-span-3"
+      />
+      <docButton
+        url="https://github.com/MadsWAndersen/bachelor-frontend/branches"
+        target="_blank"
+        title="documentation"
+        spanText="next"
+        :btnStyle="'next'"
+        class="contain col-span-3"
+      />
+    </div>
+
+    <div class="container-row"></div>
+
+    <div class="container-row">
       <sectionCard
         v-for="(card, index) in data._embedded.content"
         v-if="data"
