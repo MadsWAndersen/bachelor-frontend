@@ -1,27 +1,3 @@
-<!-- <template>
-  <div v-if="data" class="container">
-    <pre>{{ Data }}</pre>
-
-    <div class="container-row">
-      <div v-for="(image, index) in data._embedded.media" :key="index" class="col-span-3 hover:opacity-50">
-        {{ image.umbracoFile?.src }}
-
-        <NuxtLink :to="`${mediaUrl}/${image.umbracoFile?.src}`">
-          <img :src="`${mediaUrl}/${image.umbracoFile?.src}`" alt="" />
-        </NuxtLink>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script setup>
-useRedirect();
-
-const { data, pending, error, refresh } = useApi("/media/");
-
-const mediaUrl = ref("https://media.umbraco.io/pba-webdev");
-</script>
- -->
 
 <template>
   <div v-if="data">
@@ -29,37 +5,33 @@ const mediaUrl = ref("https://media.umbraco.io/pba-webdev");
       <h1 v-html="content.name" class="text-xl font-bold"></h1>
       <NuxtLink :to="content._url">{{ content._url }}</NuxtLink>
     </div>
-  </div>
-</template>
-
-<script setup>
-const { data } = useContent();
-
-/* const getRoute = (content) => {
-  return {
-    path: `${content._url}`,
-    query: `${content._url}`,
-  };
-}; */
-</script>
-
-<!-- 
-<template>
-  <div v-if="data">
-    <div v-for="(content, index) in data._embedded.content" :key="index">
-      <h1 v-html="content.name" class="text-xl font-bold"></h1>
-      <NuxtLink :to="getRoute(content)">{{ content._url }}</NuxtLink>
+    <div v-if="cmsContent">
+      <div v-if="cmsContent.childrenData._embedded.content">
+        <div v-for="(content, index) in cmsContent.childrenData._embedded.content" :key="index">
+          <div v-for="(childContent, index) in content.childrenData._embedded
+            .content" :key="index">
+            <div v-if="childContent.highligted">
+              <HighlightCard :title="childContent.headline" :bodyText="childContent.bodyText" :url="childContent._url">
+              </HighlightCard>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-const { data, pending, error } = useContent();
-const getRoute = (content) => {
-  return {
-    path: `${content._url}`,
-    query: { id: content._id },
-  };
-};
+const { data } = useContent();
+const localStorageContent = ref();
+const cmsContent = ref();
+
+onMounted(async () => {
+  localStorageContent.value = ref(
+    JSON.parse(window.localStorage.getItem("documentation"))
+  );
+  cmsContent.value = localStorageContent.value._value;
+  console.log(cmsContent.value.childrenData._embedded.content);
+});
 </script>
- -->
+
