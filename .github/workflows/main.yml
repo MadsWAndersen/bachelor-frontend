@@ -1,30 +1,33 @@
-name: "My Workflow"
+name: 'My Workflow'  
 
-on:
-  push:
-    branches:
-      - master
+on:  
+  push:  
+    branches:  
+    - master  
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+jobs:  
+  deploy:  
+    # Operating system to run job on  
+  runs-on: ubuntu-latest  
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.10.0
-
-      - run: npm install
-      - run: npm run build
-
-      - name: Deploy to Netlify
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.SITE_ID }}
-        with:
+    # Steps in job  
+  steps:  
+      # Get code from repo  
+      - name: Checkout code  
+        uses: actions/checkout@v1  
+      # Install NodeJS  
+    - name: Use Node.js 16.x  
+        uses: actions/setup-node@v1  
+        with:  
+          node-version: 18  
+      # Run npm install and build on our code  
+  - run: npm install  
+      - run: npm run build  
+      # Deploy to Netlify using our dev secrets  
+  - name: Deploy to netlify  
+        uses: netlify/actions/cli@master  
+        env:  
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}  
+          NETLIFY_SITE_ID:  ${{ secrets.SITE_ID }} 
+        with:  
           args: deploy
