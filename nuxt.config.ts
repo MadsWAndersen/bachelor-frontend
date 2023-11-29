@@ -17,12 +17,12 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'slide', mode: 'out-in' }
   },
- googleFonts: {
+/*  googleFonts: {
     families: {
       Lato: [100, 200, 300, 400, 500, 600, 700],
     }
   }
 
-
+ */
 
 })
