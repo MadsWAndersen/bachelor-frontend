@@ -1,42 +1,56 @@
 <script setup>
+definePageMeta({
+    layout: 'login'
+})
+
 import { useUserStore } from "../../stores/user";
+import { ref } from "vue";
 const userData = useUserStore();
 
-let fetchResult = ref(""); // Declare a variable to store the fetch result
+let errorMessage = ref(""); // Declare a variable to store the fetch result
 
-let username = ref("testing1234");
-let password = ref("testing1234");
+let username = ref("testperson");
+let password = ref("");
 
 let login = async () => {
-    userData.loading = true;
-    var requestOptions = {
-        method: 'POST',
-        headers: {
-            "Umb-Project-Alias": "pba-webdev",
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: new URLSearchParams({
-            "grant_type": "password",
-            "username": username.value,
-            "password": password.value
-        }),
-        redirect: 'follow'
-    };
-    const { data, pending, error, refresh } = await useFetch("https://cdn.umbraco.io/member/oauth/token", requestOptions);
-
-    // saves bearer token in localstorage 
-    userData.Bearer_token = data.value.access_token;
-
-    // saves bearer token in localstorage 
-    window.localStorage.setItem(
-        "Bearer_token", data.value.access_token,
-    )
+    if (!username.value + !password.value) {
+        document.querySelector("#username").classList.add("text-um-red")
+        document.querySelector("#password").classList.add("text-um-red")
+        errorMessage.value = "The username or password is missing."
+    } else {
+        userData.loading = true;
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                "Umb-Project-Alias": "pba-webdev",
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams({
+                "grant_type": "password",
+                "username": username.value,
+                "password": password.value
+            }),
+            redirect: 'follow'
+        };
+        const { data, pending, error, refresh } = await useFetch("https://cdn.umbraco.io/member/oauth/token", requestOptions);
 
 
+        if (!error._object.udMUIHuGdc == false) {
+            errorMessage.value = error._object.udMUIHuGdc.data.error;
+        }
 
-    // fetches user data from Umbraco
-    fetchUser();
-    return { data, pending, error, refresh };
+        // saves bearer token in localstorage 
+        userData.Bearer_token = data.value.access_token;
+
+        // saves bearer token in localstorage 
+        window.localStorage.setItem(
+            "Bearer_token", data.value.access_token,
+        )
+        // fetches user data from Umbraco
+        fetchUser();
+        return { data, pending, error, refresh };
+    }
+
 }
 
 let fetchUser = async () => {
@@ -48,7 +62,27 @@ let fetchUser = async () => {
         },
         redirect: 'follow'
     };
-    const { data, pending, error, refresh } = await useFetch("https://api.umbraco.io/member/testing1234", requestOptions);
+    const { data, pending, error, refresh } = await useFetch("https://api.umbraco.io/member/testperson", requestOptions);
+    try {
+        const initialResponse = await fetchData("https://cdn.umbraco.io/content/");
+        const hrefs = initialResponse._embedded.content.map(
+            (content) => content._links.self.href
+        );
+        detailedData.value = await fetchDetailedData(hrefs);
+        window.localStorage.setItem(
+            "documentation",
+            JSON.stringify(detailedData.value[0])
+        );
+        // sort documentation
+        for (let i = 0; i < detailedData.value[0].childrenData._embedded.content.length; i++) {
+            window.localStorage.setItem(
+                detailedData.value[0].childrenData._embedded.content[i].name.toLowerCase(),
+                JSON.stringify(detailedData.value[0].childrenData._embedded.content[i])
+            );
+        }
+    } catch (err) {
+        error.value = err;
+    }
 
 
     // save user infomation in pinia
@@ -62,54 +96,97 @@ let fetchUser = async () => {
     return { data, pending, error, refresh };
 }
 
+
+
+const detailedData = ref(null);
+function fetchData(url) {
+    return fetch(url, {
+        headers: {
+            "umb-project-alias": "pba-webdev",
+            "Accept-Language": "en-US",
+            Authorization: "Basic elFJZk50eEpCYWFidFFDSTNweDg6",
+        },
+    }).then((response) => response.json());
+}
+
+async function fetchRecursive(url) {
+    const data = await fetchData(url);
+    if (data._embedded && data._embedded.content) {
+        await Promise.all(
+            data._embedded.content.map(async (item) => {
+                if (item._links && item._links.children) {
+                    item.childrenData = await fetchRecursive(item._links.children.href);
+                }
+            })
+        );
+    }
+    return data;
+}
+
+async function fetchDetailedData(hrefs) {
+    const details = await Promise.all(hrefs.map((href) => fetchData(href)));
+    return Promise.all(
+        details.map((detail) => {
+            if (detail._links && detail._links.children) {
+                return fetchRecursive(detail._links.children.href).then(
+                    (childrenData) => {
+                        return { ...detail, childrenData };
+                    }
+                );
+            }
+            return detail;
+        })
+    );
+}
+
 </script>
 
 <template>
-    <div class="container">
-        <div class="container-row">
-            <div class="col-span-full" v-if="!userData.loading">
+    <div class="p-0 lg:col-span-12 ">
+        <div class="container-row p-0">
+            <div class="lg:col-span-8 h-screen hidden lg:block">
+                <img class="h-full object-cover" src="../../assets/image/Pink_Full.png" alt="">
+            </div>
+            <div class="col-span-4 h-screen flex justify-center items-center" v-if="!userData.loading">
 
-                <div class="w-full max-w-xs">
-                    <form class="bg-white shadow-md px-8 pt-6 pb-8 mb-4">
+                <div class="col-span-3 w-1/1">
+                    <form class="lg:col-span-4 bg-white px-8 pt-6 pb-8 mb-4">
+                        <div class="mb-4 text-center">
+                            <h1 class="text-5xl text-um-blue font-black p-2">Welcome Back</h1>
+                            <p class="text-um-blue font-black pb-6">Log in to the Support Hub</p>
+                        </div>
                         <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                Username
-                            </label>
                             <input @keyup.enter="login" v-model="username"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="border-b-2  w-full py-2  text-um-blue leading-tight focus:outline-none focus:shadow-outline"
                                 id="username" type="text" placeholder="Username">
                         </div>
                         <div class="mb-6">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                                Password
-                            </label>
                             <input @keyup.enter="login" v-model="password"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                id="password" type="string" placeholder="******************">
-                            <p v-if="!fetchResult.access_token" class="text-red-500 text-xs italic">{{
-                                !fetchResult.error_description ?
-                                fetchResult.error : fetchResult.error_description }}</p>
+                                class="border-b-2 w-full py-2 text-um-blue mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                id="password" type="password" placeholder="Password">
+                            <p class="text-um-red text-xs italic">{{
+                                errorMessage }}</p>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <button @click="login"
+
+                        <div class=" w-full">
+                            <!--              <button
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 type="button">
                                 Sign In
-                            </button>
-                            <div class="btn_logout">
-                                <button @click="userData.logout()"
-                                    class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                                    Logout
-                                </button>
-                            </div>
+                            </button> -->
+                            <linkButton @click="login" class="cursor-pointer" url="" target="_blank" title="Log in"
+                                :style="'login'" />
                         </div>
+                        <!--                         <div class="btn_logout">
+                            <button @click="userData.logout()"
+                                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                Logout
+                            </button>
+                        </div> -->
                     </form>
                 </div>
             </div>
         </div>
-
-
-
         <div class="spinnerContainer" v-if="userData.loading">
             <div class="spinner"></div>
             <div class="loader">

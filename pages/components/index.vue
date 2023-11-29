@@ -9,7 +9,6 @@
         title="documentation"
         spanText="next"
         :btnStyle="'next'"
-
       />
       <linkButton
         url="https://github.com/MadsWAndersen/bachelor-frontend/branches"
@@ -27,7 +26,7 @@
         :url="card.url"
       />
 
-      <sectionCard
+      <!--  <sectionCard
         v-for="(card, index) in data"
         v-if="data"
         :key="index"
@@ -44,9 +43,9 @@
           :title="'Go to ' + card.title"
           :style="'dark'"
         />
-      </sectionCard>
+      </sectionCard> -->
     </div>
-    </div>
+  </div>
 </template>
 
 <script setup>

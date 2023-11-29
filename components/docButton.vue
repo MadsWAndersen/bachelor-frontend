@@ -2,7 +2,7 @@
   <div
     :btnStyle="btnStyle"
     :class="flexOrientation()"
-    class="flex bg-um-white justify-between items-center border-2 p-4 rounded-sm max-h-9"
+    class="flex cursor-pointer bg-um-white justify-between items-center border-2 p-4 rounded-sm max-h-9"
   >
     <div class="flex flex-col pl-3" :class="textOrientation()">
       <span class="text-xs font-medium"> {{ spanText }}</span>
