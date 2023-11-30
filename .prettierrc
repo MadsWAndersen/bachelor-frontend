@@ -1,8 +1,8 @@
 {
-    "parser": "babel",
-    "singleQuote": true,
-    "semi": false,
-    "useTabs": true,
-    "tabWidth": 2,
-    "bracketSpacing": true
+	"singleQuote": true,
+	"semi": false,
+	"useTabs": true,
+	"tabWidth": 2,
+	"bracketSpacing": true,
+	"bracketSameLine": true
 }
