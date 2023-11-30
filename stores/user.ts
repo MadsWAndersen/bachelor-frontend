@@ -1,23 +1,23 @@
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', () => {
-	let Bearer_token = ref('')
+	const bearerToken = ref('')
 
-	let userInfo = ref('')
+	const userInfo = ref('')
 
 	const RedirectUser = () => {
-		if (!localStorage.getItem('Bearer_token')) {
+		if (!localStorage.getItem('bearerToken')) {
 			window.location.href = '/login'
 		}
 	}
 
 	const logout = async () => {
-		Bearer_token.value = ''
-		window.localStorage.setItem('Bearer_token', '')
+		bearerToken.value = ''
+		window.localStorage.setItem('bearerToken', '')
 		await navigateTo('/login')
 	}
 
-	let loading = ref(false)
+	const loading = ref(false)
 
-	return { Bearer_token, userInfo, logout, RedirectUser, loading }
+	return { bearerToken, userInfo, logout, RedirectUser, loading }
 })

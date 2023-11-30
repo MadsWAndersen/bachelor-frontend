@@ -3,9 +3,10 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
 	logoSrc: {
 		type: Image || String,
+		default: '',
 	},
 })
 </script>

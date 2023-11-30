@@ -25,18 +25,18 @@
 </template>
 
 <script setup>
+import Editor from '@tinymce/tinymce-vue'
 useRedirect()
 
 const { data } = useApi('/forms/01760615-f419-40be-9b1f-2d32f38790fb')
 
 const Data = ref('')
-import Editor from '@tinymce/tinymce-vue'
 function updateContent() {
 	if (tinymce && tinymce.activeEditor) {
 		Data.value = tinymce.activeEditor.getContent()
-		console.log(Data.value)
+		// console.log(Data.value)
 	} else {
-		console.error('The TinyMCE editor is not active or not found.')
+		// console.error('The TinyMCE editor is not active or not found.')
 	}
 }
 </script>

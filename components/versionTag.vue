@@ -5,9 +5,10 @@
 	>
 </template>
 <script setup>
-const props = defineProps({
+defineProps({
 	version: {
 		type: String,
+		default: '',
 	},
 })
 </script>

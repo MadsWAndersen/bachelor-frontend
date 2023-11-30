@@ -1,25 +1,26 @@
 <script setup>
+import { ref } from 'vue'
+import { useUserStore } from '../../stores/user'
+
 definePageMeta({
 	layout: 'login',
 })
 
-import { useUserStore } from '../../stores/user'
-import { ref } from 'vue'
 const userData = useUserStore()
 
-let errorMessage = ref('') // Declare a variable to store the fetch result
+const errorMessage = ref('') // Declare a variable to store the fetch result
 
-let username = ref('testperson')
-let password = ref('')
+const username = ref('testperson')
+const password = ref('')
 
-let login = async () => {
+const login = async () => {
 	if (!username.value + !password.value) {
 		document.querySelector('#username').classList.add('text-um-red')
 		document.querySelector('#password').classList.add('text-um-red')
 		errorMessage.value = 'The username or password is missing.'
 	} else {
 		userData.loading = true
-		var requestOptions = {
+		const requestOptions = {
 			method: 'POST',
 			headers: {
 				'Umb-Project-Alias': 'pba-webdev',
@@ -37,23 +38,23 @@ let login = async () => {
 			requestOptions,
 		)
 
-		if (!error._object.udMUIHuGdc == false) {
+		if (!error._object.udMUIHuGdc === false) {
 			errorMessage.value = error._object.udMUIHuGdc.data.error
 		}
 
 		// saves bearer token in localstorage
-		userData.Bearer_token = data.value.access_token
+		userData.bearerToken = data.value.access_token
 
 		// saves bearer token in localstorage
-		window.localStorage.setItem('Bearer_token', data.value.access_token)
+		window.localStorage.setItem('bearerToken', data.value.access_token)
 		// fetches user data from Umbraco
 		fetchUser()
 		return { data, pending, error, refresh }
 	}
 }
 
-let fetchUser = async () => {
-	var requestOptions = {
+const fetchUser = async () => {
+	const requestOptions = {
 		method: 'GET',
 		headers: {
 			'Umb-Project-Alias': 'pba-webdev',
@@ -159,8 +160,8 @@ async function fetchDetailedData(hrefs) {
 					alt="" />
 			</div>
 			<div
-				class="col-span-4 h-screen flex justify-center items-center"
-				v-if="!userData.loading">
+				v-if="!userData.loading"
+				class="col-span-4 h-screen flex justify-center items-center">
 				<div class="col-span-3 w-1/1">
 					<form class="lg:col-span-4 bg-white px-8 pt-6 pb-8 mb-4">
 						<div class="mb-4 text-center">
@@ -173,21 +174,21 @@ async function fetchDetailedData(hrefs) {
 						</div>
 						<div class="mb-4">
 							<input
-								@keyup.enter="login"
+								id="username"
 								v-model="username"
 								class="border-b-2 w-full py-2 text-um-blue leading-tight focus:outline-none focus:shadow-outline"
-								id="username"
 								type="text"
-								placeholder="Username" />
+								placeholder="Username"
+								@keyup.enter="login" />
 						</div>
 						<div class="mb-6">
 							<input
-								@keyup.enter="login"
+								id="password"
 								v-model="password"
 								class="border-b-2 w-full py-2 text-um-blue mb-3 leading-tight focus:outline-none focus:shadow-outline"
-								id="password"
 								type="password"
-								placeholder="Password" />
+								placeholder="Password"
+								@keyup.enter="login" />
 							<p class="text-um-red text-xs italic">
 								{{ errorMessage }}
 							</p>
@@ -200,12 +201,12 @@ async function fetchDetailedData(hrefs) {
                                 Sign In
                             </button> -->
 							<linkButton
-								@click="login"
 								class="cursor-pointer"
 								url=""
 								target="_blank"
 								title="Log in"
-								:style="'login'" />
+								:style="'login'"
+								@click="login" />
 						</div>
 						<!--                         <div class="btn_logout">
                             <button @click="userData.logout()"
@@ -217,7 +218,7 @@ async function fetchDetailedData(hrefs) {
 				</div>
 			</div>
 		</div>
-		<div class="spinnerContainer" v-if="userData.loading">
+		<div v-if="userData.loading" class="spinnerContainer">
 			<div class="spinner"></div>
 			<div class="loader">
 				<p>loading</p>

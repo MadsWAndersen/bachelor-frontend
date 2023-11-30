@@ -38,24 +38,30 @@
 const props = defineProps({
 	headline: {
 		type: String,
+		default: '',
 	},
 	url: {
 		type: String,
+		default: '',
 	},
 	description: {
 		type: String,
+		default: '',
 	},
 	image: {
 		type: String,
+		default: '',
 	},
 	icon: {
 		type: String,
+		default: '',
 	},
 	style: {
 		type: String,
 		validator(value) {
 			return ['dark', 'light'].includes(value)
 		},
+		default: '',
 	},
 })
 

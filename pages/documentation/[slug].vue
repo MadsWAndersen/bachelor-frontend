@@ -8,9 +8,7 @@
 						v-for="(content, index) in cmsContent.childrenData
 							._embedded.content"
 						:key="index">
-						<h1
-							v-html="content.name"
-							class="text-xl font-bold"></h1>
+						<h1 class="text-xl font-bold">{{ content.name }}</h1>
 						<NuxtLink :to="`${content._url}`">{{
 							content._url
 						}}</NuxtLink>
@@ -30,7 +28,7 @@ const localStorageContent = ref()
 const cmsContent = ref()
 
 onMounted(async () => {
-	localStorageContent.value = ref(
+	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem(`${route.params.slug}`)),
 	)
 	cmsContent.value = localStorageContent.value._value

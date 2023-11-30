@@ -6,5 +6,10 @@
 </template>
 
 <script setup>
-const props = defineProps(['image'])
+defineProps({
+	headline: {
+		type: String,
+		default: '',
+	},
+})
 </script>

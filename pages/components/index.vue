@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<div class="container-row">
+		<div v-if="data" class="container-row">
 			<h1>Insert components here</h1>
 			<versionTag :version="'12.12.12'" />
 			<docButton
@@ -18,7 +18,6 @@
 			<highlightCard
 				v-for="(card, index) in data"
 				:key="index"
-				v-if="data"
 				:title="card.title"
 				:bodyText="card.bodyText"
 				:url="card.url" />
@@ -46,8 +45,6 @@
 </template>
 
 <script setup>
-const svgUrl = 'https://api.iconify.design/carbon:tools.svg'
-
 const data = [
 	{
 		title: 'documentation',
@@ -65,7 +62,4 @@ const data = [
 		svg: 'https://api.iconify.design/carbon:tools.svg?color=%23ffffff',
 	},
 ]
-
-const image =
-	'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
 </script>

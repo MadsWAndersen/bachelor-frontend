@@ -8,13 +8,13 @@ console.log(route.params.slug.replace('-', ' '))
 console.log(cmsContent)
 
 onMounted(async () => {
-	localStorageContent.value = ref(
+	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem(`${route.params.parrentSlug}`)),
 	)
 	cmsContent.value = localStorageContent.value._value
 	realData.value = cmsContent.value.childrenData._embedded.content.filter(
 		(contentNode) =>
-			contentNode.name.toLowerCase() ==
+			contentNode.name.toLowerCase() ===
 			`${route.params.slug.replace('-', ' ')}`,
 	)[0]
 })

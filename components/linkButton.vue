@@ -15,18 +15,22 @@
 const props = defineProps({
 	url: {
 		type: String,
+		default: '',
 	},
 	title: {
 		type: String,
+		default: '',
 	},
 	target: {
 		type: String,
+		default: '',
 	},
 	style: {
 		type: String,
 		validator(value) {
 			return ['dark', 'light', 'neutral'].includes(value)
 		},
+		default: '',
 	},
 })
 

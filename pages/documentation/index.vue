@@ -22,8 +22,8 @@
 			<sectionCard
 				v-for="(card, index) in cmsContent.childrenData._embedded
 					.content"
-				:url="card._url"
 				:key="index"
+				:url="card._url"
 				:headline="card.documentationHeadline"
 				:description="card.documentationDescription"
 				:image="card.image"
@@ -35,20 +35,18 @@
 </template>
 
 <script setup>
-const route = useRoute()
-
 const localStorageContent = ref()
 const cmsContent = ref()
 
 onMounted(async () => {
-	localStorageContent.value = ref(
+	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem('documentation')),
 	)
 	cmsContent.value = localStorageContent.value._value
 	console.log(cmsContent.value.childrenData._embedded.content)
 })
 
-//const { data } = useContent(`${route.query.id}/children`);
+// const { data } = useContent(`${route.query.id}/children`);
 </script>
 
 <style></style>

@@ -24,21 +24,26 @@
 const props = defineProps({
 	url: {
 		type: String,
+		default: '',
 	},
 	title: {
 		type: String,
+		default: '',
 	},
 	spanText: {
 		type: String,
+		default: '',
 	},
 	target: {
 		type: String,
+		default: '',
 	},
 	btnStyle: {
 		type: String,
 		validator(value) {
 			return ['next', 'prev'].includes(value)
 		},
+		default: '',
 	},
 })
 

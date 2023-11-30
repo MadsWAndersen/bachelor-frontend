@@ -41,13 +41,12 @@
 
 		<div class="container-row"></div>
 
-		<div class="container-row">
+		<div v-if="data" class="container-row">
 			<sectionCard
 				v-for="(card, index) in data._embedded.content"
-				v-if="data"
+				:key="index"
 				class="col-span-3"
 				:url="card._url"
-				:key="index"
 				:headline="card.documentationHeadline"
 				:description="card.documentationDescription"
 				:image="card.image"
@@ -70,7 +69,7 @@ const localStorageContent = ref()
 const cmsContent = ref()
 
 onMounted(async () => {
-	localStorageContent.value = ref(
+	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem('documentation')),
 	)
 	cmsContent.value = localStorageContent.value._value

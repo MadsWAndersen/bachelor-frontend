@@ -29,7 +29,20 @@
 </template>
 
 <script setup>
-const props = defineProps(['bodyText', 'title', 'url'])
+defineProps({
+	bodyText: {
+		type: String,
+		default: '',
+	},
+	title: {
+		type: String,
+		default: '',
+	},
+	url: {
+		type: String,
+		default: '',
+	},
+})
 const isOpen = ref(false)
 
 const toggle = () => {
