@@ -21,7 +21,9 @@ export function useFetchAll() {
 			await Promise.all(
 				data._embedded.content.map(async (item) => {
 					if (item._links && item._links.children) {
-						item.childrenData = await fetchRecursive(item._links.children.href)
+						item.childrenData = await fetchRecursive(
+							item._links.children.href,
+						)
 					}
 				}),
 			)
@@ -47,7 +49,9 @@ export function useFetchAll() {
 
 	onMounted(async () => {
 		try {
-			const initialResponse = await fetchData('https://cdn.umbraco.io/content/')
+			const initialResponse = await fetchData(
+				'https://cdn.umbraco.io/content/',
+			)
 			const hrefs = initialResponse._embedded.content.map(
 				(content) => content._links.self.href,
 			)
@@ -57,7 +61,10 @@ export function useFetchAll() {
 				'Documentation',
 				JSON.stringify(detailedData.value[4]),
 			)
-			window.localStorage.setItem('CMS', JSON.stringify(detailedData.value[3]))
+			window.localStorage.setItem(
+				'CMS',
+				JSON.stringify(detailedData.value[3]),
+			)
 			storedData.value = JSON.parse(window.localStorage.getItem('CMS')) // Update the reactive property
 		} catch (err) {
 			error.value = err

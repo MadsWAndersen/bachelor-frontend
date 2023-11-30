@@ -2,11 +2,12 @@
 	<div v-if="cmsContent">
 		<div v-if="cmsContent.childrenData._embedded.content">
 			<div
-				v-for="(content, index) in cmsContent.childrenData._embedded.content"
+				v-for="(content, index) in cmsContent.childrenData._embedded
+					.content"
 				:key="index">
 				<div
-					v-for="(childContent, index) in content.childrenData._embedded
-						.content"
+					v-for="(childContent, index) in content.childrenData
+						._embedded.content"
 					:key="index">
 					<div v-if="childContent.highligted">
 						<HighlightCard
@@ -19,7 +20,8 @@
 		</div>
 		<div class="container-row">
 			<sectionCard
-				v-for="(card, index) in cmsContent.childrenData._embedded.content"
+				v-for="(card, index) in cmsContent.childrenData._embedded
+					.content"
 				:url="card._url"
 				:key="index"
 				:headline="card.documentationHeadline"

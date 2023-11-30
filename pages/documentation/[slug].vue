@@ -5,11 +5,15 @@
 				<div class="col-span-2"></div>
 				<div class="col-span-5">
 					<div
-						v-for="(content, index) in cmsContent.childrenData._embedded
-							.content"
+						v-for="(content, index) in cmsContent.childrenData
+							._embedded.content"
 						:key="index">
-						<h1 v-html="content.name" class="text-xl font-bold"></h1>
-						<NuxtLink :to="`${content._url}`">{{ content._url }}</NuxtLink>
+						<h1
+							v-html="content.name"
+							class="text-xl font-bold"></h1>
+						<NuxtLink :to="`${content._url}`">{{
+							content._url
+						}}</NuxtLink>
 					</div>
 					{{ cmsContent }}
 				</div>

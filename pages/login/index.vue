@@ -66,7 +66,9 @@ let fetchUser = async () => {
 		requestOptions,
 	)
 	try {
-		const initialResponse = await fetchData('https://cdn.umbraco.io/content/')
+		const initialResponse = await fetchData(
+			'https://cdn.umbraco.io/content/',
+		)
 		const hrefs = initialResponse._embedded.content.map(
 			(content) => content._links.self.href,
 		)
@@ -85,7 +87,9 @@ let fetchUser = async () => {
 				detailedData.value[0].childrenData._embedded.content[
 					i
 				].name.toLowerCase(),
-				JSON.stringify(detailedData.value[0].childrenData._embedded.content[i]),
+				JSON.stringify(
+					detailedData.value[0].childrenData._embedded.content[i],
+				),
 			)
 		}
 	} catch (err) {
@@ -118,7 +122,9 @@ async function fetchRecursive(url) {
 		await Promise.all(
 			data._embedded.content.map(async (item) => {
 				if (item._links && item._links.children) {
-					item.childrenData = await fetchRecursive(item._links.children.href)
+					item.childrenData = await fetchRecursive(
+						item._links.children.href,
+					)
 				}
 			}),
 		)
@@ -158,7 +164,9 @@ async function fetchDetailedData(hrefs) {
 				<div class="col-span-3 w-1/1">
 					<form class="lg:col-span-4 bg-white px-8 pt-6 pb-8 mb-4">
 						<div class="mb-4 text-center">
-							<h1 class="text-5xl text-um-blue font-black p-2">Welcome Back</h1>
+							<h1 class="text-5xl text-um-blue font-black p-2">
+								Welcome Back
+							</h1>
 							<p class="text-um-blue font-black pb-6">
 								Log in to the Support Hub
 							</p>
@@ -180,7 +188,9 @@ async function fetchDetailedData(hrefs) {
 								id="password"
 								type="password"
 								placeholder="Password" />
-							<p class="text-um-red text-xs italic">{{ errorMessage }}</p>
+							<p class="text-um-red text-xs italic">
+								{{ errorMessage }}
+							</p>
 						</div>
 
 						<div class="w-full">

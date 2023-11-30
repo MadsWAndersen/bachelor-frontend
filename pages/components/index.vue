@@ -53,8 +53,7 @@ const data = [
 		title: 'documentation',
 		bodyText:
 			'But also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Slack sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-		image:
-			'https://images.pexels.com/photos/1666068/pexels-photo-1666068.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+		image: 'https://images.pexels.com/photos/1666068/pexels-photo-1666068.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
 		svg: 'https://api.iconify.design/material-symbols:edit-document-outline.svg?color=%23ffffff',
 	},
 	{
@@ -62,8 +61,7 @@ const data = [
 		bodyText:
 			'But also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Slack sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
 		url: 'documentation',
-		image:
-			'https://media.umbraco.io/pba-webdev/mg4dnaxf/umbraco-patterns_pink_full.png',
+		image: 'https://media.umbraco.io/pba-webdev/mg4dnaxf/umbraco-patterns_pink_full.png',
 		svg: 'https://api.iconify.design/carbon:tools.svg?color=%23ffffff',
 	},
 ]

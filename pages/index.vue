@@ -3,11 +3,12 @@
 		<div v-if="cmsContent">
 			<div v-if="cmsContent.childrenData._embedded.content">
 				<div
-					v-for="(content, index) in cmsContent.childrenData._embedded.content"
+					v-for="(content, index) in cmsContent.childrenData._embedded
+						.content"
 					:key="index">
 					<div
-						v-for="(childContent, index) in content.childrenData._embedded
-							.content"
+						v-for="(childContent, index) in content.childrenData
+							._embedded.content"
 						:key="index">
 						<div v-if="childContent.highligted">
 							<HighlightCard

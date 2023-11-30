@@ -6,7 +6,9 @@
 			</NuxtLink>
 
 			<div class="lg:col-span-10 flex justify-end gap-8 items-center">
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/"
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/"
 					>Home</NuxtLink
 				>
 				<NuxtLink
@@ -14,10 +16,14 @@
 					to="/documentation"
 					>Documentation</NuxtLink
 				>
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/form"
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/form"
 					>Form</NuxtLink
 				>
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/login"
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/login"
 					>login</NuxtLink
 				>
 

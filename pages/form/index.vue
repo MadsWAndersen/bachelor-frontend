@@ -5,7 +5,8 @@
 				<Editor
 					api-key="ftvcr0z9nxcc2ozxsls3xowr1dtmrwm2atafqvcxtkw0mob4"
 					:init="{
-						plugins: 'lists link image table code help wordcount code',
+						plugins:
+							'lists link image table code help wordcount code',
 					}" />
 			</div>
 			<button

@@ -48,7 +48,8 @@ const buttonStyling = () => {
 				'bg-um-blue hover:bg-um-palepink text-um-palepink hover:text-um-blue hover:border-um-palepink border-um-blue text-center w-full'
 			break
 		default:
-			bgColor = 'bg-um-blue text-um-palepink border-um-blue hover:bg-um-white  '
+			bgColor =
+				'bg-um-blue text-um-palepink border-um-blue hover:bg-um-white  '
 			break
 	}
 
