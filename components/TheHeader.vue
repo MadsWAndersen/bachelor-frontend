@@ -29,7 +29,7 @@
 
 				<profilePicture
 					class="cursor-pointer"
-					:image="image"
+					:src="image"
 					@click="userData.logout()" />
 			</div>
 		</nav>
