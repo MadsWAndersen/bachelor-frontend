@@ -8,26 +8,13 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "prepare": "husky install", 
     "lint:prettier": "prettier . --write"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{jsx,js,vue,ts}": [
-      "npx prettier --config .prettierrc --write"
-    ]
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/google-fonts": "^3.1.0",
     "@nuxtjs/tailwindcss": "^6.9.4",
     "autoprefixer": "^10.4.16",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.1.0",
     "nuxt": "^3.7.4",
     "nuxt-icon": "^0.6.6",
     "postcss": "^8.4.31",

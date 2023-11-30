@@ -1,4 +1,4 @@
-# Bachelor Project
+# Bachelor Project - Umbraco
 
 ## Jacob, Ida and Mads
 
@@ -16,7 +16,12 @@ Start the development server on `http://localhost:3000`:
 
 ```bash
 npm run dev
+```
 
+Lint project via Prettier:
+
+```bash
+npm run lint:prettier
 ```
 
 ## Production
