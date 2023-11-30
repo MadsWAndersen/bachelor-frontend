@@ -1,11 +1,10 @@
 <template>
-  <img
-    :src="image"
-    alt=""
-    class="rounded-full h-[40px] w-[40px] object-cover"
-  />
+	<img
+		:src="image"
+		alt=""
+		class="rounded-full h-[40px] w-[40px] object-cover" />
 </template>
 
 <script setup>
-const props = defineProps(["image"]);
+const props = defineProps(['image'])
 </script>

@@ -1,12 +1,12 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 
 export const useDataStore = defineStore('dataStore', {
-  state: () => ({
-    data: []
-  }),
-  actions: {
-    setData(newData) {
-      this.data = newData;
-    }
-  }
-});
+	state: () => ({
+		data: [],
+	}),
+	actions: {
+		setData(newData) {
+			this.data = newData
+		},
+	},
+})
