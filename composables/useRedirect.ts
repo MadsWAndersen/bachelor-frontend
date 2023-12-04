@@ -1,9 +1,8 @@
-import { useUserStore } from "../stores/user";
+import { useUserStore } from '../stores/user'
 export function useRedirect() {
-
-    const userData = useUserStore();
-    onMounted(() => {
-        userData.RedirectUser()
-    })
-    return {};
+	const userData = useUserStore()
+	onMounted(() => {
+		userData.RedirectUser()
+	})
+	return {}
 }

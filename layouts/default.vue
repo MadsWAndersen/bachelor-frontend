@@ -1,9 +1,11 @@
 <template>
-  <TheHeader />
+	<div class="app">
+		<TheHeader />
 
-  <div class="justify-between items-center p-0">
-    <slot />
-  </div>
+		<div class="container">
+			<slot />
+		</div>
 
-  <TheFooter />
+		<TheFooter />
+	</div>
 </template>
