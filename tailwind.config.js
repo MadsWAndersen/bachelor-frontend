@@ -14,6 +14,7 @@ module.exports = {
 			xxxl: "1920px",
 		},
 
+
 		colors: {
 			'um-white': '#FFFFFF',
 			'um-black': '#000000',

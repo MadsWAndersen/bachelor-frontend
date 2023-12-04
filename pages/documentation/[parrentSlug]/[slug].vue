@@ -93,9 +93,6 @@ const pageDate = ref()
 const { formatDate } = useDateFormatter()
 const h3Contents = ref([])
 
-console.log(route.params.slug.replace('-', ' '))
-console.log(cmsContent)
-
 onMounted(async () => {
 	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem(`${route.params.parrentSlug}`)),

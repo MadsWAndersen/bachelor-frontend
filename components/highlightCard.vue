@@ -42,6 +42,10 @@ defineProps({
 		type: String,
 		default: '',
 	},
+	hightlightColor: {
+		type: String,
+		default: '',
+	},
 })
 const isOpen = ref(false)
 
