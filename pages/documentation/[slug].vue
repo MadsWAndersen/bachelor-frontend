@@ -22,8 +22,6 @@
 
 <script setup>
 const route = useRoute()
-/* const { data } = useContent(`${route.params.slug}`); */
-console.log(`${route.params.slug}`)
 const localStorageContent = ref()
 const cmsContent = ref()
 
