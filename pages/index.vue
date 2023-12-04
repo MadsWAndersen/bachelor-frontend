@@ -34,7 +34,7 @@ const localStorageContent = ref()
 const cmsContent = ref()
 
 onMounted(async () => {
-	localStorageContent.value = ref(
+	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem('documentation')),
 	)
 	cmsContent.value = localStorageContent.value._value
