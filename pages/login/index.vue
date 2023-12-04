@@ -13,14 +13,13 @@ const errorMessage = ref('') // Declare a variable to store the fetch result
 const username = ref('testperson')
 const password = ref('')
 
-const login = async () => {
+let login = async () => {
 	if (!username.value + !password.value) {
 		document.querySelector('#username').classList.add('text-um-red')
 		document.querySelector('#password').classList.add('text-um-red')
 		errorMessage.value = 'The username or password is missing.'
 	} else {
-		userData.loading = true
-		const requestOptions = {
+		var requestOptions = {
 			method: 'POST',
 			headers: {
 				'Umb-Project-Alias': 'pba-webdev',
@@ -38,7 +37,7 @@ const login = async () => {
 			requestOptions,
 		)
 
-		if (!error._object.udMUIHuGdc === false) {
+		if (!error._object.udMUIHuGdc == false) {
 			errorMessage.value = error._object.udMUIHuGdc.data.error
 		}
 
@@ -53,8 +52,9 @@ const login = async () => {
 	}
 }
 
-const fetchUser = async () => {
-	const requestOptions = {
+let fetchUser = async () => {
+	userData.loading = true
+	var requestOptions = {
 		method: 'GET',
 		headers: {
 			'Umb-Project-Alias': 'pba-webdev',
