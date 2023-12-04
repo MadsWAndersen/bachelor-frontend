@@ -18,6 +18,16 @@
 				>
 				<NuxtLink
 					class="text-um-blue font-bold m-0 hover:underline"
+					to="/tools"
+					>Tools</NuxtLink
+				>
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/insights"
+					>Insights</NuxtLink
+				>
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
 					to="/form"
 					>Form</NuxtLink
 				>
