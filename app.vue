@@ -9,12 +9,18 @@
 <style>
 .slide-enter-active,
 .slide-leave-active {
-	transition: all 0.4s;
+	transition: all 0.4s ease;
+	@apply ease-umbraco-ease;
 }
 
 .slide-enter-from,
 .slide-leave-to {
 	opacity: 0;
-	filter: blur(0.2rem);
+	transform: translateX(3%);
+}
+
+.slide-enter-to {
+	opacity: 1;
+	transform: translateX(0);
 }
 </style>
