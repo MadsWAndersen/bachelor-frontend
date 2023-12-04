@@ -26,7 +26,7 @@
 						class="mb-3">
 						<div v-if="childContent.highligted">
 							<HighlightCard
-								:title="childContent.headline"
+								:title="childContent.name"
 								:bodyText="childContent.bodyText"
 								:url="childContent._url">
 							</HighlightCard>
@@ -35,6 +35,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="container-row">
 			<sectionCard
 				v-for="(card, index) in data._embedded.content"
