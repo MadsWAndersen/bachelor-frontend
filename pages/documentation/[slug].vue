@@ -26,7 +26,7 @@
 									{{ cmsContent.documentationHeadline }}
 								</h1>
 								<p class="mb-5">
-									Date:
+									<span class="font-bold mr-2">Date:</span>
 									{{ formatDate(cmsContent._createDate) }}
 								</p>
 
@@ -47,7 +47,7 @@
 								"
 								spanText="next"
 								:btnStyle="'next'"
-								class="col-span-6" />
+								class="col-span-6 mb-10" />
 						</div>
 					</div>
 				</div>
@@ -74,13 +74,7 @@ const route = useRoute()
 const localStorageContent = ref()
 const cmsContent = ref()
 const h3Contents = ref([])
-
-function formatDate(inputDate) {
-	const date = new Date(inputDate)
-	const options = { day: 'numeric', month: 'long', year: 'numeric' }
-	const formattedDate = date.toLocaleDateString('en-US', options)
-	return formattedDate
-}
+const { formatDate } = useDateFormatter()
 
 onMounted(async () => {
 	localStorageContent.value = await ref(
