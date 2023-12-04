@@ -1,6 +1,5 @@
 <template>
 	<div v-if="realData">
-		<pre>{{ realData }}</pre>
 		<div class="container">
 			<div class="container-row">
 				<div class="col-span-2"></div>
@@ -29,18 +28,28 @@ const localStorageContent = ref()
 const cmsContent = ref()
 const realData = ref()
 
-console.log(route.params.slug.replace('-', ' '), '***Path***')
-console.log(cmsContent, '***cmscontent***')
-
 onMounted(async () => {
+	console.log(route.params.slug)
+	console.log(route.params.slug.replace(/-/g, ' '))
+
 	localStorageContent.value = await ref(
-		JSON.parse(window.localStorage.getItem('insights')),
+		JSON.parse(window.localStorage.getItem(`insights`)),
 	)
 	cmsContent.value = localStorageContent.value._value
+
+	console.log(
+		'cms',
+		cmsContent.value.childrenData._embedded.content.filter(
+			(contentNode) =>
+				contentNode.name.toLowerCase() ===
+				`${route.params.slug.replace('-', ' ')}`,
+		),
+	)
+
 	realData.value = cmsContent.value.childrenData._embedded.content.filter(
 		(contentNode) =>
 			contentNode.name.toLowerCase() ===
-			`${route.params.slug.replace('-', ' ')}`,
+			`${route.params.slug.replace(/-/g, ' ')}`,
 	)[0]
 })
 </script>
