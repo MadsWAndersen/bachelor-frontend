@@ -18,7 +18,6 @@ let login = async () => {
         document.querySelector("#password").classList.add("text-um-red")
         errorMessage.value = "The username or password is missing."
     } else {
-        userData.loading = true;
         var requestOptions = {
             method: 'POST',
             headers: {
@@ -54,6 +53,7 @@ let login = async () => {
 }
 
 let fetchUser = async () => {
+    userData.loading = true;
     var requestOptions = {
         method: 'GET',
         headers: {
