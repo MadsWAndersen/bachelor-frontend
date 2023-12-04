@@ -1,14 +1,10 @@
 <template>
 	<div v-if="cmsContent">
-		<div>
-			<h1 class="text-um-blue text-4xl mb-3">
-				{{ cmsContent.documentationHeadline }}
-			</h1>
-			<p class="text-um-blue text-xl">
-				{{ cmsContent.documentationDescription }}
-			</p>
-		</div>
-		<div v-if="cmsContent.childrenData._embedded.content">
+		<HeroHeader
+			:headline="cmsContent.documentationHeadline"
+			:heroText="cmsContent.documentationDescription" />
+
+		<div v-if="cmsContent.childrenData._embedded.content" class="-mb-3">
 			<div
 				v-for="(content, index) in cmsContent.childrenData._embedded
 					.content"
@@ -17,12 +13,12 @@
 					v-for="(childContent, index) in content.childrenData
 						._embedded.content"
 					:key="index"
-					class="mb-4 last-of-type:mb-0">
+					class="mb-3">
 					<div v-if="childContent.highligted === true">
 						<HighlightCard
 							:title="childContent.headline"
 							:bodyText="childContent.bodyText"
-							:url="childContent._url"></HighlightCard>
+							:url="childContent._url" />
 					</div>
 				</div>
 			</div>

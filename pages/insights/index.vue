@@ -17,7 +17,7 @@
 					v-for="(childContent, index) in content.childrenData
 						._embedded.content"
 					:key="index"
-					class="mb-4 last-of-type:mb-0">
+					class="mb-4">
 					<div v-if="childContent.highligted === true">
 						<HighlightCard
 							:title="childContent.headline"
