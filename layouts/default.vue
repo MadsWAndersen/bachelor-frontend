@@ -9,3 +9,5 @@
 		<TheFooter />
 	</div>
 </template>
+
+<script setup></script>

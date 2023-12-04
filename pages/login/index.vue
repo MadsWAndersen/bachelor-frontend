@@ -63,7 +63,7 @@ const fetchUser = async () => {
 		redirect: 'follow',
 	}
 	const { data, pending, error, refresh } = await useFetch(
-		'https://api.umbraco.io/member/testperson',
+		`https://api.umbraco.io/member/${username.value}`,
 		requestOptions,
 	)
 	try {
@@ -78,10 +78,18 @@ const fetchUser = async () => {
 			'documentation',
 			JSON.stringify(detailedData.value[0]),
 		)
-
 		window.localStorage.setItem(
 			'insights',
 			JSON.stringify(detailedData.value[1]),
+		)
+		window.localStorage.setItem(
+			'tools',
+			JSON.stringify(detailedData.value[2]),
+		)
+
+		window.localStorage.setItem(
+			'workshop',
+			JSON.stringify(detailedData.value[3]),
 		)
 		// sort documentation
 		for (
@@ -95,6 +103,35 @@ const fetchUser = async () => {
 				].name.toLowerCase(),
 				JSON.stringify(
 					detailedData.value[0].childrenData._embedded.content[i],
+				),
+			)
+		}
+		for (
+			let i = 0;
+			i < detailedData.value[1].childrenData._embedded.content.length;
+			i++
+		) {
+			window.localStorage.setItem(
+				detailedData.value[1].childrenData._embedded.content[
+					i
+				].name.toLowerCase(),
+				JSON.stringify(
+					detailedData.value[1].childrenData._embedded.content[i],
+				),
+			)
+		}
+
+		for (
+			let i = 0;
+			i < detailedData.value[3].childrenData._embedded.content.length;
+			i++
+		) {
+			window.localStorage.setItem(
+				detailedData.value[3].childrenData._embedded.content[
+					i
+				].name.toLowerCase(),
+				JSON.stringify(
+					detailedData.value[3].childrenData._embedded.content[i],
 				),
 			)
 		}

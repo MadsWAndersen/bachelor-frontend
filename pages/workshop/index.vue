@@ -2,13 +2,12 @@
 	<div v-if="cmsContent">
 		<div>
 			<h1 class="text-um-blue text-4xl mb-3">
-				{{ cmsContent.documentationHeadline }}
+				{{ cmsContent.headline }}
 			</h1>
 			<p class="text-um-blue text-xl">
-				{{ cmsContent.documentationDescription }}
+				{{ cmsContent.description }}
 			</p>
 		</div>
-
 		<div v-if="cmsContent.childrenData._embedded.content">
 			<div
 				v-for="(content, index) in cmsContent.childrenData._embedded
@@ -21,7 +20,7 @@
 					class="mb-4 last-of-type:mb-0">
 					<div v-if="childContent.highligted === true">
 						<HighlightCard
-							:title="childContent.name"
+							:title="childContent.headline"
 							:bodyText="childContent.bodyText"
 							:url="childContent._url"></HighlightCard>
 					</div>
@@ -34,9 +33,8 @@
 					.content"
 				:key="index"
 				:url="card._url"
-				:headline="card.documentationHeadline"
-				:description="card.documentationDescription"
-				:image="card.image"
+				:headline="card.insightHeadline"
+				:description="card.teaserText"
 				:icon="card.icon?.src"
 				:style="'light'">
 			</sectionCard>
@@ -50,7 +48,7 @@ const cmsContent = ref()
 
 onMounted(async () => {
 	localStorageContent.value = await ref(
-		JSON.parse(window.localStorage.getItem('documentation')),
+		JSON.parse(window.localStorage.getItem('workshop')),
 	)
 	cmsContent.value = localStorageContent.value._value
 	console.log(cmsContent.value.childrenData._embedded.content)

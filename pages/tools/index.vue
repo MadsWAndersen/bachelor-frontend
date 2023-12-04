@@ -2,13 +2,12 @@
 	<div v-if="cmsContent">
 		<div>
 			<h1 class="text-um-blue text-4xl mb-3">
-				{{ cmsContent.documentationHeadline }}
+				{{ cmsContent.headline }}
 			</h1>
 			<p class="text-um-blue text-xl">
-				{{ cmsContent.documentationDescription }}
+				{{ cmsContent.description }}
 			</p>
 		</div>
-
 		<div v-if="cmsContent.childrenData._embedded.content">
 			<div
 				v-for="(content, index) in cmsContent.childrenData._embedded
@@ -21,8 +20,8 @@
 					class="mb-4 last-of-type:mb-0">
 					<div v-if="childContent.highligted === true">
 						<HighlightCard
-							:title="childContent.name"
-							:bodyText="childContent.bodyText"
+							:title="childContent"
+							:bodyText="childContent.toolDescription"
 							:url="childContent._url"></HighlightCard>
 					</div>
 				</div>
@@ -33,9 +32,10 @@
 				v-for="(card, index) in cmsContent.childrenData._embedded
 					.content"
 				:key="index"
-				:url="card._url"
-				:headline="card.documentationHeadline"
-				:description="card.documentationDescription"
+				:url="card.toolLink[0].url"
+				:target="card.toolLink[0].target"
+				:headline="card.toolName"
+				:description="card.toolDescription"
 				:image="card.image"
 				:icon="card.icon?.src"
 				:style="'light'">
@@ -50,7 +50,7 @@ const cmsContent = ref()
 
 onMounted(async () => {
 	localStorageContent.value = await ref(
-		JSON.parse(window.localStorage.getItem('documentation')),
+		JSON.parse(window.localStorage.getItem('tools')),
 	)
 	cmsContent.value = localStorageContent.value._value
 	console.log(cmsContent.value.childrenData._embedded.content)
