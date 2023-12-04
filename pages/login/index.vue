@@ -78,6 +78,11 @@ const fetchUser = async () => {
 			'documentation',
 			JSON.stringify(detailedData.value[0]),
 		)
+
+		window.localStorage.setItem(
+			'insights',
+			JSON.stringify(detailedData.value[1]),
+		)
 		// sort documentation
 		for (
 			let i = 0;
