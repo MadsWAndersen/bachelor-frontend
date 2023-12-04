@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="mb-4 overflow-hidden col-span-full bg-cover bg-left rounded-sm py-4 pr-4 pl-5 lg:pl-[33px] relative before:content-[''] before:h-full before:absolute before:bg-um-red before:w-[13px] before:left-0 before:top-0">
+		class="overflow-hidden col-span-full bg-cover bg-left rounded-sm py-4 pr-4 pl-5 lg:pl-[33px] relative before:content-[''] before:h-full before:absolute before:bg-um-red before:w-[13px] before:left-0 before:top-0">
 		<div
 			class="bg-[url('/assets/image/Pale__Full.png')] w-full h-full absolute top-0 -z-10 bg-cover bg-left left-0 bg-opacity-5"></div>
 
@@ -21,7 +21,7 @@
 		<div
 			v-if="isOpen"
 			class="text-um-black pt-3 lg:pr-[227px] flex flex-col gap-5">
-			{{ bodyText }}
+			<div v-if="bodyText" v-html="bodyText"></div>
 
 			<NuxtLink class="text-um-blue" :to="url">Go to solution</NuxtLink>
 		</div>
