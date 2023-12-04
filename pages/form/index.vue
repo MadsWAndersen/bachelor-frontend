@@ -32,7 +32,6 @@ const Data = ref('')
 function updateContent() {
 	if (tinymce && tinymce.activeEditor) {
 		Data.value = tinymce.activeEditor.getContent()
-	} else {
 	}
 }
 </script>
