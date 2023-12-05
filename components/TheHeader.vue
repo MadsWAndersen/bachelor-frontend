@@ -1,5 +1,5 @@
 <template>
-	<header class="container pb-7 pt-7">
+	<header class="container pb-10 pt-7">
 		<nav class="container-row items-center">
 			<NuxtLink
 				class="col-span-2 mr-auto text-white font-semibold"

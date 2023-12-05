@@ -22,7 +22,7 @@
 			:src="icon" />
 
 		<h3 class="font-bold text-2xl mb-3 capitalize">{{ headline }}</h3>
-		<p class="text-sm pr-8 line-clamp-3">{{ description }}</p>
+		<p class="text-sm pr-8 line-clamp-3" v-html="description"></p>
 
 		<NuxtLink
 			:to="url"
