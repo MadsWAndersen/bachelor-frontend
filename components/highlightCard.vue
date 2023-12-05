@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="overflow-hidden col-span-full bg-cover bg-left rounded-sm py-4 pr-4 pl-5 lg:pl-[33px] relative">
+		class="overflow-hidden col-span-full bg-cover bg-left rounded-sm py-4 pr-4 pl-5 lg:pl-[33px] relative hover:shadow-md shadow-none duration-150 ease-umbraco-ease">
 		<div
 			:class="`h-full absolute w-[13px] left-0 top-0 ${highlightedColor}`"></div>
 		<div

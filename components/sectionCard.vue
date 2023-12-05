@@ -1,7 +1,7 @@
 <template>
 	<NuxtLink
 		:to="url"
-		class="relative lg:col-span-3 col-span-full p-5 mt-4 rounded-sm min-h-[350px] flex flex-col justify-end bg-opacity-70 [&>.icon]:opacity-100"
+		class="relative lg:col-span-3 col-span-full p-5 mt-4 rounded-sm min-h-[350px] flex flex-col justify-end bg-opacity-70 [&>.icon]:opacity-100 hover:shadow-2xl shadow-none duration-150 ease-umbraco-ease"
 		:class="containerStyling()"
 		:target="target">
 		<img
