@@ -50,26 +50,17 @@
 								v-html="pageData.bodyText"></div>
 						</div>
 						<docButton
-							:url="
-								cmsContent.childrenData._embedded.content[0]
-									._url
-							"
-							:title="
-								cmsContent.childrenData._embedded.content[0]
-									.name
-							"
+							v-if="itemBefore"
+							:url="itemBefore?._url"
+							:title="itemBefore?.name"
 							spanText="prev"
 							:btnStyle="'prev'"
 							class="col-span-6" />
+
 						<docButton
-							:url="
-								cmsContent.childrenData._embedded.content[0]
-									._url
-							"
-							:title="
-								cmsContent.childrenData._embedded.content[0]
-									.name
-							"
+							v-if="itemAfter"
+							:url="itemAfter?._url"
+							:title="itemAfter?.name"
 							spanText="next"
 							:btnStyle="'next'"
 							class="col-span-6" />
@@ -90,6 +81,8 @@ const cmsContent = ref()
 const pageData = ref()
 const { formatDate } = useDateFormatter()
 const h3Contents = ref([])
+const itemBefore = ref()
+const itemAfter = ref()
 
 const scrollToSection = (index) => {
 	const h3Elements = document.querySelectorAll('.rteBlock h3')
@@ -120,6 +113,19 @@ onMounted(async () => {
 
 	for (const match of matches) {
 		h3Contents?.value?.push(match[1])
+	}
+
+	// Find current page
+	const currentPage = cmsContent.value.childrenData._embedded.content
+
+	const indexOfMatch = currentPage.findIndex(
+		(contentNode) => contentNode.name === pageData.value.name,
+	)
+
+	if (indexOfMatch !== -1) {
+		// Set the value of itemBefore and itemAfter
+		itemBefore.value = currentPage[indexOfMatch - 1]
+		itemAfter.value = currentPage[indexOfMatch + 1]
 	}
 })
 </script>
