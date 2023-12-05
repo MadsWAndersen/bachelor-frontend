@@ -1,6 +1,6 @@
 <template>
 	<header
-		class="container py-7 fixed bg-um-white top-0 left-1/2 -translate-x-1/2 shadow-sm w-full z-20">
+		class="container py-7 fixed bg-um-white top-0 left-1/2 -translate-x-1/2 shadow-sm w-full z-40">
 		<nav class="container-row items-center">
 			<NuxtLink
 				class="col-span-2 mr-auto text-white font-semibold"
@@ -9,8 +9,7 @@
 			</NuxtLink>
 
 			<div class="lg:hidden col-span-2 flex justify-end">
-				<button class="text-um-blue z-20" @click="toggleMobileMenu">
-					<!-- Use a conditional rendering for the icon -->
+				<button class="text-um-blue z-50" @click="toggleMobileMenu">
 					<svg
 						v-if="!isMobileMenuOpen"
 						class="w-6 h-6"
@@ -42,13 +41,13 @@
 			</div>
 
 			<div
-				class="container pb-10 pt-10 fixed top-0 right-0 h-screen w-full md:w-1/2 bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-end gap-5 z-10"
+				class="container pb-10 pt-10 fixed top-0 right-0 h-screen w-full md:w-1/2 bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-end gap-5 z-40"
 				:class="{
-					'translate-x-0': isMobile && isMobileMenuOpen,
+					'translate-x-0': isMobileMenuOpen,
 					'translate-x-full': !isMobileMenuOpen,
 				}">
 				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underlin"
+					class="text-um-blue font-bold m-0 hover:underline"
 					to="/documentation"
 					@click="toggleMobileMenu">
 					Documentation
@@ -158,8 +157,6 @@ const toggleDropdown = () => {
 }
 const toggleMobileMenu = () => {
 	isMobileMenuOpen.value = !isMobileMenuOpen.value
-	// Close the profile dropdown when opening the mobile menu
-	isDropdownVisible.value = false
 }
 
 watch(isDropdownVisible, (newValue) => {
