@@ -3,7 +3,7 @@
 		v-if="h3Contents && h3Contents.length > 0"
 		class="col-span-2 col-start-11">
 		<div class="fixed">
-			<p class="font-bold mb-4">Page Content</p>
+			<p class="font-bold mb-4">Page content</p>
 			<ul>
 				<li
 					v-for="(h3Tag, index) in h3Contents"
