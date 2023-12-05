@@ -3,7 +3,7 @@
 		<div class="container-row text-um-blue">
 			<div
 				v-if="cmsContent.childrenData._embedded.content"
-				class="col-span-2">
+				class="col-span-2 fixed">
 				<h1
 					v-if="cmsContent.documentationHeadline"
 					class="text-2xl mb-5">
@@ -76,21 +76,9 @@
 					</div>
 				</div>
 			</div>
-			<div
-				v-if="h3Contents && h3Contents.length > 0"
-				class="col-span-2 col-start-11">
-				<div>
-					<p class="font-bold mb-4">Page Content</p>
-					<ul>
-						<li
-							v-for="(h3Tag, index) in h3Contents"
-							:key="index"
-							class="mb-4">
-							{{ h3Tag }}
-						</li>
-					</ul>
-				</div>
-			</div>
+			<pageContent
+				:h3Contents="h3Contents"
+				:scrollToSection="scrollToSection" />
 		</div>
 	</div>
 </template>
@@ -102,6 +90,15 @@ const cmsContent = ref()
 const pageData = ref()
 const { formatDate } = useDateFormatter()
 const h3Contents = ref([])
+
+const scrollToSection = (index) => {
+	const h3Elements = document.querySelectorAll('.rteBlock h3')
+
+	if (h3Elements.length > index) {
+		const h3Element = h3Elements[index]
+		h3Element.scrollIntoView({ behavior: 'smooth' })
+	}
+}
 
 onMounted(async () => {
 	localStorageContent.value = await ref(

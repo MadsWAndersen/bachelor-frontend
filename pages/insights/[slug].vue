@@ -20,21 +20,9 @@
 					class="rteBlock"
 					v-html="pageData.bodyText"></div>
 			</div>
-			<div
-				v-if="h3Contents && h3Contents.length > 0"
-				class="col-span-2 col-start-11">
-				<div>
-					<p class="font-bold mb-4">Page Content</p>
-					<ul>
-						<li
-							v-for="(h3Tag, index) in h3Contents"
-							:key="index"
-							class="mb-4">
-							{{ h3Tag }}
-						</li>
-					</ul>
-				</div>
-			</div>
+			<pageContent
+				:h3Contents="h3Contents"
+				:scrollToSection="scrollToSection" />
 		</div>
 	</div>
 </template>
@@ -47,26 +35,38 @@ const pageData = ref()
 const { formatDate } = useDateFormatter()
 const h3Contents = ref([])
 
+const scrollToSection = (index) => {
+	const h3Elements = document.querySelectorAll('.rteBlock h3')
+
+	if (h3Elements.length > index) {
+		const h3Element = h3Elements[index]
+		h3Element.scrollIntoView({ behavior: 'smooth' })
+	}
+}
+
 onMounted(async () => {
-	localStorageContent.value = await ref(
-		JSON.parse(window.localStorage.getItem(`insights`)),
-	)
-	cmsContent.value = localStorageContent.value._value
-	pageData.value = cmsContent.value.childrenData._embedded.content.filter(
-		(contentNode) =>
-			contentNode.name.toLowerCase() ===
-			`${route.params.slug.replace(/-/g, ' ')}`,
-	)[0]
+	try {
+		const localStorageData = await JSON.parse(
+			window.localStorage.getItem('insights'),
+		)
+		localStorageContent.value = ref(localStorageData || {})
+		cmsContent.value = localStorageContent.value._value
 
-	// Find h3 tags and display them in the h3Contents
-	const pageBodyText = pageData.value.bodyText
+		const slug = route.params.slug.replace(/-/g, ' ').toLowerCase()
+		const matchingContentNode =
+			cmsContent.value.childrenData._embedded.content.find(
+				(contentNode) => contentNode.name.toLowerCase() === slug,
+			)
 
-	const matches = pageBodyText.matchAll(/<h3>(.*?)<\/h3>/g)
+		pageData.value = matchingContentNode || {}
 
-	h3Contents.value = []
+		// Find h3 tags and display them in h3Contents
+		const pageBodyText = pageData.value.bodyText || ''
+		const matches = pageBodyText.matchAll(/<h3>(.*?)<\/h3>/g)
 
-	for (const match of matches) {
-		h3Contents.value.push(match[1])
+		h3Contents.value = Array.from(matches, (match) => match[1])
+	} catch (error) {
+		console.error('An error occurred during initialization:', error)
 	}
 })
 </script>
