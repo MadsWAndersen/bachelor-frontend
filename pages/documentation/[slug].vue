@@ -2,7 +2,7 @@
 	<div v-if="localStorageContent">
 		<div class="text-um-blue">
 			<div class="container-row">
-				<div class="col-span-2">
+				<div class="col-span-2 fixed">
 					<h1 class="text-2xl mb-5">
 						{{ cmsContent.documentationHeadline }}
 					</h1>
@@ -25,6 +25,7 @@
 								<h1 class="text-4xl mb-5">
 									{{ cmsContent.documentationHeadline }}
 								</h1>
+								<BreadCrumb :data="cmsContent._url" />
 								<p class="mb-5">
 									<span class="font-bold mr-2">Date:</span>
 									{{ formatDate(cmsContent._createDate) }}
@@ -51,19 +52,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-span-2 col-start-11">
-					<div v-if="h3Contents.length > 0">
-						<p class="font-bold mb-4">Page Content</p>
-						<ul v-if="h3Contents.length > 0">
-							<li
-								v-for="(h3Tag, index) in h3Contents"
-								:key="index"
-								class="mb-4">
-								{{ h3Tag }}
-							</li>
-						</ul>
-					</div>
-				</div>
+				<pageContent
+					:h3Contents="h3Contents"
+					:scrollToSection="scrollToSection" />
 			</div>
 		</div>
 	</div>
@@ -76,12 +67,21 @@ const cmsContent = ref()
 const h3Contents = ref([])
 const { formatDate } = useDateFormatter()
 
+const scrollToSection = (index) => {
+	const h3Elements = document.querySelectorAll('.rteBlock h3')
+
+	if (h3Elements.length > index) {
+		const h3Element = h3Elements[index]
+		h3Element.scrollIntoView({ behavior: 'smooth' })
+	}
+}
+
 onMounted(async () => {
 	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem(`${route.params.slug}`)),
 	)
 	cmsContent.value = localStorageContent.value._value
-
+	console.log(cmsContent.value)
 	// Find h3 tags and display them in the h3Contents
 	const documentationDescription = cmsContent.value.documentationDescription
 
