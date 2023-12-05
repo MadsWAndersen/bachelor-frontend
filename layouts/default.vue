@@ -2,7 +2,7 @@
 	<div class="app">
 		<TheHeader />
 
-		<div class="container mt-10">
+		<div class="container">
 			<slot />
 		</div>
 	</div>

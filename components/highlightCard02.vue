@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-let isVisible = ref(true)
+const isVisible = ref(true)
 
 const closeIcon = () => {
 	isVisible.value = !isVisible.value

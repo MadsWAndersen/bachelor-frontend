@@ -33,7 +33,7 @@
 					<profilePicture
 						class="cursor-pointer"
 						:src="image"
-						@click="toggleDropdown()" />
+						@click.stop="toggleDropdown()" />
 					<div
 						v-if="isDropdownVisible"
 						class="absolute right-0 mt-2 w-48 bg-white border-um-blue border-2 rounded-sm shadow-xl overflow-hidden">
@@ -67,4 +67,30 @@ const isDropdownVisible = ref(false)
 const toggleDropdown = () => {
 	isDropdownVisible.value = !isDropdownVisible.value
 }
+
+watch(isDropdownVisible, (newValue) => {
+	const body = document.querySelector('body')
+	if (newValue === true) {
+		body.addEventListener('click', closeDropdown)
+	} else {
+		body.removeEventListener('click', closeDropdown)
+	}
+})
+
+function closeDropdown() {
+	console.log(isDropdownVisible.value)
+	isDropdownVisible.value = false
+}
+
+onMounted(() => {
+	if (isDropdownVisible.value === true) {
+		const body = document.querySelector('body')
+		body.addEventListener('click', closeDropdown)
+	}
+})
+
+onUnmounted(() => {
+	const body = document.querySelector('body')
+	body.removeEventListener('click', closeDropdown)
+})
 </script>
