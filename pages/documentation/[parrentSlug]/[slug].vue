@@ -1,8 +1,12 @@
 <template>
 	<div v-if="pageData">
 		<div class="container-row text-um-blue">
-			<div class="col-span-2">
-				<h1 class="text-2xl mb-5">
+			<div
+				v-if="cmsContent.childrenData._embedded.content"
+				class="col-span-2">
+				<h1
+					v-if="cmsContent.documentationHeadline"
+					class="text-2xl mb-5">
 					{{ cmsContent.documentationHeadline }}
 				</h1>
 				<ul
@@ -21,10 +25,10 @@
 				<div class="container p-0">
 					<div class="container-row">
 						<div class="col-span-full mb-10">
-							<h1 class="text-4xl mb-5">
+							<h1 v-if="pageData.name" class="text-4xl mb-5">
 								{{ pageData.name }}
 							</h1>
-							<p class="mb-5">
+							<p v-if="pageData.date" class="mb-5">
 								<span class="font-bold mr-2">Date:</span>
 								{{ formatDate(pageData.date) }}
 							</p>
@@ -41,6 +45,7 @@
 									:version="version" />
 							</div>
 							<div
+								v-if="pageData.bodyText"
 								class="rteBlock"
 								v-html="pageData.bodyText"></div>
 						</div>
@@ -71,10 +76,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-span-2 col-start-11">
-				<div v-if="h3Contents.length > 0">
+			<div
+				v-if="h3Contents && h3Contents.length > 0"
+				class="col-span-2 col-start-11">
+				<div>
 					<p class="font-bold mb-4">Page Content</p>
-					<ul v-if="h3Contents.length > 0">
+					<ul>
 						<li
 							v-for="(h3Tag, index) in h3Contents"
 							:key="index"
@@ -108,14 +115,14 @@ onMounted(async () => {
 	)[0]
 
 	// Find h3 tags and display them in the h3Contents
-	const pageBodyText = pageData.value.bodyText
+	const pageBodyText = pageData.value?.bodyText
 
-	const matches = pageBodyText.matchAll(/<h3>(.*?)<\/h3>/g)
+	const matches = pageBodyText?.matchAll(/<h3>(.*?)<\/h3>/g)
 
 	h3Contents.value = []
 
 	for (const match of matches) {
-		h3Contents.value.push(match[1])
+		h3Contents?.value?.push(match[1])
 	}
 })
 </script>
