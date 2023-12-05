@@ -6,11 +6,8 @@
 					<h1 class="text-2xl mb-5">
 						{{ cmsContent.documentationHeadline }}
 					</h1>
-					<ul
-						v-for="(content, index) in cmsContent.childrenData
-							._embedded.content"
-						:key="index"
-						class="list-disc">
+					<ul v-for="(content, index) in cmsContent.childrenData
+								._embedded.content" :key="index" class="list-disc">
 						<li class="ml-6 mb-4 hover:underline">
 							<NuxtLink :to="`${content._url}`">{{
 								content.name
@@ -25,35 +22,24 @@
 								<h1 class="text-4xl mb-5">
 									{{ cmsContent.documentationHeadline }}
 								</h1>
+								<BreadCrumb :data="cmsContent._url" />
 								<p class="mb-5">
 									<span class="font-bold mr-2">Date:</span>
 									{{ formatDate(cmsContent._createDate) }}
 								</p>
 
-								<div
-									class="rteBlock"
-									v-html="
-										cmsContent.documentationDescription
+								<div class="rteBlock" v-html="cmsContent.documentationDescription
 									"></div>
 							</div>
-							<docButton
-								:url="
-									cmsContent.childrenData._embedded.content[0]
-										._url
-								"
-								:title="
-									cmsContent.childrenData._embedded.content[0]
-										.name
-								"
-								spanText="next"
-								:btnStyle="'next'"
-								class="col-span-6 mb-10" />
+							<docButton :url="cmsContent.childrenData._embedded.content[0]
+								._url
+								" :title="cmsContent.childrenData._embedded.content[0]
+		.name
+		" spanText="next" :btnStyle="'next'" class="col-span-6 mb-10" />
 						</div>
 					</div>
 				</div>
-				<pageContent
-					:h3Contents="h3Contents"
-					:scrollToSection="scrollToSection" />
+				<pageContent :h3Contents="h3Contents" :scrollToSection="scrollToSection" />
 			</div>
 		</div>
 	</div>
@@ -80,7 +66,7 @@ onMounted(async () => {
 		JSON.parse(window.localStorage.getItem(`${route.params.slug}`)),
 	)
 	cmsContent.value = localStorageContent.value._value
-
+	console.log(cmsContent.value);
 	// Find h3 tags and display them in the h3Contents
 	const documentationDescription = cmsContent.value.documentationDescription
 

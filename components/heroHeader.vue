@@ -4,7 +4,7 @@
 			<h1 v-if="headline" class="text-um-blue text-4xl mb-3">
 				{{ headline }}
 			</h1>
-
+			<BreadCrumb :data="heroBreadCrumbs" />
 			<p v-if="heroText" class="text-um-blue text-lg">{{ heroText }}</p>
 		</div>
 	</div>
@@ -20,5 +20,9 @@ defineProps({
 		type: String,
 		default: '',
 	},
+	heroBreadCrumbs: {
+		type: String,
+		default: '',
+	}
 })
 </script>
