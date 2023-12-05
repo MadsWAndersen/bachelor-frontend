@@ -1,5 +1,5 @@
 <template>
-	<div v-if="pageDate">
+	<div v-if="pageData">
 		<div class="container-row text-um-blue">
 			<div class="col-span-2">
 				<h1 class="text-2xl mb-5">
@@ -22,24 +22,27 @@
 					<div class="container-row">
 						<div class="col-span-full mb-10">
 							<h1 class="text-4xl mb-5">
-								{{ pageDate.name }}
+								{{ pageData.name }}
 							</h1>
 							<p class="mb-5">
 								<span class="font-bold mr-2">Date:</span>
-								{{ formatDate(pageDate.date) }}
+								{{ formatDate(pageData.date) }}
 							</p>
 							<div
-								v-if="pageDate.version.length > 0"
+								v-if="
+									pageData.version &&
+									pageData.version.length > 0
+								"
 								class="mb-5 flex row-auto gap-2 items-center">
 								<span class="font-bold">Version:</span>
 								<versionTag
-									v-for="(version, index) in pageDate.version"
+									v-for="(version, index) in pageData.version"
 									:key="index"
 									:version="version" />
 							</div>
 							<div
 								class="rteBlock"
-								v-html="pageDate.bodyText"></div>
+								v-html="pageData.bodyText"></div>
 						</div>
 						<docButton
 							:url="
@@ -89,7 +92,7 @@
 const route = useRoute()
 const localStorageContent = ref()
 const cmsContent = ref()
-const pageDate = ref()
+const pageData = ref()
 const { formatDate } = useDateFormatter()
 const h3Contents = ref([])
 
@@ -98,14 +101,14 @@ onMounted(async () => {
 		JSON.parse(window.localStorage.getItem(`${route.params.parrentSlug}`)),
 	)
 	cmsContent.value = localStorageContent.value._value
-	pageDate.value = cmsContent.value.childrenData._embedded.content.filter(
+	pageData.value = cmsContent.value.childrenData._embedded.content.filter(
 		(contentNode) =>
 			contentNode.name.toLowerCase() ===
 			`${route.params.slug.replace('-', ' ')}`,
 	)[0]
 
 	// Find h3 tags and display them in the h3Contents
-	const pageBodyText = pageDate.value.bodyText
+	const pageBodyText = pageData.value.bodyText
 
 	const matches = pageBodyText.matchAll(/<h3>(.*?)<\/h3>/g)
 
