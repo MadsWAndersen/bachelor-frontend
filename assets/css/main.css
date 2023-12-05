@@ -3,8 +3,29 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 * {
     font-family: 'Lato', sans-serif,
+}
+.rteBlock {
+    @apply mt-9
+}
+.rteBlock > h3 {
+    @apply text-3xl mb-5
+}
+.rteBlock >  p {
+    @apply text-base mb-5
+}
+.rteBlock >  ul {
+    @apply text-base mb-5
+}
+
+.rteBlock >  ul > li {
+    @apply list-disc ml-5
+}
+.rteBlock >  p > a {
+    @apply underline
+}
+
+.rteBlock .linkButton  {
+    @apply rounded-sm px-6 py-2 border-2 bg-um-blue text-um-palepink border-um-blue hover:text-um-blue hover:bg-um-white font-bold text-xs
 }

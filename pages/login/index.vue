@@ -13,13 +13,13 @@ const errorMessage = ref('') // Declare a variable to store the fetch result
 const username = ref('testperson')
 const password = ref('')
 
-let login = async () => {
+const login = async () => {
 	if (!username.value + !password.value) {
 		document.querySelector('#username').classList.add('text-um-red')
 		document.querySelector('#password').classList.add('text-um-red')
 		errorMessage.value = 'The username or password is missing.'
 	} else {
-		var requestOptions = {
+		const requestOptions = {
 			method: 'POST',
 			headers: {
 				'Umb-Project-Alias': 'pba-webdev',
@@ -37,7 +37,7 @@ let login = async () => {
 			requestOptions,
 		)
 
-		if (!error._object.udMUIHuGdc == false) {
+		if (!error._object.udMUIHuGdc === false) {
 			errorMessage.value = error._object.udMUIHuGdc.data.error
 		}
 
@@ -52,9 +52,9 @@ let login = async () => {
 	}
 }
 
-let fetchUser = async () => {
+const fetchUser = async () => {
 	userData.loading = true
-	var requestOptions = {
+	const requestOptions = {
 		method: 'GET',
 		headers: {
 			'Umb-Project-Alias': 'pba-webdev',
@@ -63,7 +63,7 @@ let fetchUser = async () => {
 		redirect: 'follow',
 	}
 	const { data, pending, error, refresh } = await useFetch(
-		'https://api.umbraco.io/member/testperson',
+		`https://api.umbraco.io/member/${username.value}`,
 		requestOptions,
 	)
 	try {
@@ -78,6 +78,19 @@ let fetchUser = async () => {
 			'documentation',
 			JSON.stringify(detailedData.value[0]),
 		)
+		window.localStorage.setItem(
+			'insights',
+			JSON.stringify(detailedData.value[1]),
+		)
+		window.localStorage.setItem(
+			'tools',
+			JSON.stringify(detailedData.value[2]),
+		)
+
+		window.localStorage.setItem(
+			'workshop',
+			JSON.stringify(detailedData.value[3]),
+		)
 		// sort documentation
 		for (
 			let i = 0;
@@ -90,6 +103,35 @@ let fetchUser = async () => {
 				].name.toLowerCase(),
 				JSON.stringify(
 					detailedData.value[0].childrenData._embedded.content[i],
+				),
+			)
+		}
+		for (
+			let i = 0;
+			i < detailedData.value[1].childrenData._embedded.content.length;
+			i++
+		) {
+			window.localStorage.setItem(
+				detailedData.value[1].childrenData._embedded.content[
+					i
+				].name.toLowerCase(),
+				JSON.stringify(
+					detailedData.value[1].childrenData._embedded.content[i],
+				),
+			)
+		}
+
+		for (
+			let i = 0;
+			i < detailedData.value[3].childrenData._embedded.content.length;
+			i++
+		) {
+			window.localStorage.setItem(
+				detailedData.value[3].childrenData._embedded.content[
+					i
+				].name.toLowerCase(),
+				JSON.stringify(
+					detailedData.value[3].childrenData._embedded.content[i],
 				),
 			)
 		}
