@@ -24,6 +24,10 @@ let addVersion = () => {
 }
 
 let submit = async () => {
+
+
+
+
     parentId.value = document.querySelector("#parentId").value;
     if (tinymce && tinymce.activeEditor) {
         contentBodyText.value = tinymce.activeEditor.getContent()
@@ -61,26 +65,6 @@ let submit = async () => {
             "$invariant": contentBodyText.value
         }
     });
-    console.log(raw);
-
-    // ping the editors on slack 
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-
-    const { data, pending, error, refresh } = await useFetch(
-        'https://api.umbraco.io/content',
-        requestOptions,
-    )
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-        "text": "event"
-    });
 
     var requestOptions = {
         method: 'POST',
@@ -88,14 +72,62 @@ let submit = async () => {
         body: raw,
         redirect: 'follow'
     };
+    if (headline.value && parentId.value && headline.value && issue.value && versions.value && contentBodyText.value) {
+        const { data, pending, error, refresh } = await useFetch(
+            'https://api.umbraco.io/content',
+            requestOptions,
+        )
 
-    fetch("https://eocet9yn9ivqaq7.m.pipedream.net", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
 
-    // redirects user
-    await navigateTo('/documentation')
+
+        // ping the editors on slack 
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "text": "event"
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("https://eocet9yn9ivqaq7.m.pipedream.net", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+        // redirects user
+        await navigateTo('/documentation')
+    } else {
+        //resets error handling
+        document.querySelector("#parentId").classList.remove("ring-um-red");
+        document.querySelector("#issue").classList.remove("ring-um-red");
+        document.querySelector("#versions").classList.remove("ring-um-red");
+        document.querySelector("#versionBtn").classList.remove("ring-um-red");
+        document.querySelector("#bodytext").classList.remove("ring-um-red");
+        document.querySelector("#headline").classList.remove("ring-um-red");
+        if (!headline.value) {
+            document.querySelector("#headline").classList.add("ring-um-red");
+        }
+        if (parentId.value == "none") {
+            console.log(parentId.value);
+            document.querySelector("#parentId").classList.add("ring-um-red");
+        }
+        if (!issue.value) {
+            document.querySelector("#issue").classList.add("ring-um-red");
+        }
+        if (versions.value.length === 0) {
+            document.querySelector("#versions").classList.add("ring-um-red");
+            document.querySelector("#versionBtn").classList.add("ring-um-red");
+        }
+        if (!contentBodyText.value) {
+            document.querySelector("#bodytext").classList.add("ring-um-red");
+        }
+    }
 }
 </script>
 
@@ -127,12 +159,12 @@ let submit = async () => {
                     </select>
                 </div>
                 <div class="w-1/2">
-                    <p class="w-2/3 text-m font-semibold text-um-blue pt-6 mr-5">Select the category</p>
+                    <p class="w-2/3 text-m font-semibold text-um-blue pt-6 mr-5">Select the versions</p>
                     <div class="w-full flex">
                         <input
                             class="inline-flex w-3/4 justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue "
                             @keyup.enter="addVersion()" id="versions" placeholder="type in version">
-                        <button @click="addVersion()"
+                        <button @click="addVersion()" id="versionBtn"
                             class="inline-flex w-1/6 justify-center rounded-xs bg-white px-3 p-2 m-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue ">+
                         </button>
                     </div>
@@ -146,24 +178,26 @@ let submit = async () => {
 
             <div class="w-full">
                 <p class="w-2/3 text-m font-semibold text-um-blue pt-6 mr-5">Select the headline</p>
-                <input
-                    class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue "
+                <input id="headline"
+                    class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue  "
                     v-model="headline" placeholder="Enter your headline here..." @keyup.enter="console.log(headline)" />
 
             </div>
             <div class="w-full">
                 <p class=" text-m font-semibold text-um-blue pt-6 mr-5">The issue</p>
-                <textarea
+                <textarea id="issue"
                     class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue "
                     v-model="issue" placeholder="Add description of the issue"></textarea>
             </div>
 
             <p class="w-2/3 text-m font-semibold text-um-blue pt-6 my-3">Describe the solution</p>
-            <Editor api-key="ftvcr0z9nxcc2ozxsls3xowr1dtmrwm2atafqvcxtkw0mob4" :init="{
-                plugins:
-                    'lists link image table code help wordcount code',
-            }" />
-
+            <div id="bodytext"
+                class="m-0 rounded-xs bg-white p-1 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
+                <Editor api-key="ftvcr0z9nxcc2ozxsls3xowr1dtmrwm2atafqvcxtkw0mob4" :init="{
+                    plugins:
+                        'lists link image table code help wordcount code',
+                }" />
+            </div>
             <linkButton class="cursor-pointer mt-5 mb-10" url="" target="_blank" title="Submit solution" :style="'dark'"
                 @click="submit()" />
         </div>
