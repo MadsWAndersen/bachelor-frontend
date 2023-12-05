@@ -16,6 +16,7 @@
 					class="mb-3">
 					<div v-if="childContent.highligted === true">
 						<HighlightCard
+							:highlightedColor="'bg-um-red'"
 							:title="childContent.name"
 							:bodyText="childContent.bodyText"
 							:url="childContent._url" />
@@ -23,6 +24,20 @@
 				</div>
 			</div>
 		</div>
+
+		<div v-if="sortedAndLimitedContent.length > 0" class="mt-6">
+			<div
+				v-for="(solution, index) in sortedAndLimitedContent"
+				:key="index"
+				class="mb-3">
+				<HighlightCard02
+					:highlightedColor="'bg-um-green'"
+					:title="solution.name"
+					:bodyText="solution.bodyText"
+					:url="solution._url" />
+			</div>
+		</div>
+
 		<div class="container-row">
 			<sectionCard
 				v-for="(card, index) in cmsContent.childrenData._embedded
@@ -48,10 +63,19 @@ onMounted(async () => {
 		JSON.parse(window.localStorage.getItem('documentation')),
 	)
 	cmsContent.value = localStorageContent.value._value
-	console.log(cmsContent.value.childrenData._embedded.content)
 })
 
-// const { data } = useContent(`${route.query.id}/children`);
+const sortedAndLimitedContent = computed(() => {
+	const allContent = cmsContent.value.childrenData._embedded.content.flatMap(
+		(c) => c.childrenData._embedded.content,
+	)
+
+	const sortedContent = allContent.sort(
+		(a, b) => new Date(b._updateDate) - new Date(a._updateDate),
+	)
+
+	return sortedContent.slice(0, 2)
+})
 </script>
 
 <style></style>
