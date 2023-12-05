@@ -7,7 +7,8 @@
 					:src="pageData.image[0]?._url"
 					:alt="pageData.image[0]?.name" />
 			</div>
-			<div class="col-span-6 col-start-4">
+
+			<div class="lg:col-span-6 lg:col-start-4 col-span-4">
 				<HeroHeader
 					:headline="pageData.name"
 					:heroText="pageData.description"
@@ -21,6 +22,7 @@
 					class="rteBlock"
 					v-html="pageData.bodyText"></div>
 			</div>
+
 			<pageContent
 				:h3Contents="h3Contents"
 				:scrollToSection="scrollToSection" />

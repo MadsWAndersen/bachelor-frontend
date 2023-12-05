@@ -1,7 +1,7 @@
 <template>
 	<div v-if="pageData">
 		<div class="container-row text-um-blue">
-			<div class="col-span-6 col-start-4">
+			<div class="lg:col-span-6 lg:col-start-4 col-span-4">
 				<HeroHeader
 					:headline="pageData.name"
 					:heroText="pageData.description"
