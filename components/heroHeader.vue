@@ -23,6 +23,6 @@ defineProps({
 	heroBreadCrumbs: {
 		type: String,
 		default: '',
-	}
+	},
 })
 </script>
