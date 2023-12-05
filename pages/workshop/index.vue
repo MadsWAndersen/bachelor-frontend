@@ -51,7 +51,6 @@ onMounted(async () => {
 		JSON.parse(window.localStorage.getItem('workshop')),
 	)
 	cmsContent.value = localStorageContent.value._value
-	console.log(cmsContent.value.childrenData._embedded.content)
 })
 
 // const { data } = useContent(`${route.query.id}/children`);

@@ -2,7 +2,7 @@
 	<div v-if="localStorageContent">
 		<div class="text-um-blue">
 			<div class="container-row">
-				<div class="col-span-2">
+				<div class="col-span-2 fixed">
 					<h1 class="text-2xl mb-5">
 						{{ cmsContent.documentationHeadline }}
 					</h1>
@@ -51,19 +51,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-span-2 col-start-11">
-					<div v-if="h3Contents.length > 0">
-						<p class="font-bold mb-4">Page Content</p>
-						<ul v-if="h3Contents.length > 0">
-							<li
-								v-for="(h3Tag, index) in h3Contents"
-								:key="index"
-								class="mb-4">
-								{{ h3Tag }}
-							</li>
-						</ul>
-					</div>
-				</div>
+				<pageContent
+					:h3Contents="h3Contents"
+					:scrollToSection="scrollToSection" />
 			</div>
 		</div>
 	</div>
@@ -75,6 +65,15 @@ const localStorageContent = ref()
 const cmsContent = ref()
 const h3Contents = ref([])
 const { formatDate } = useDateFormatter()
+
+const scrollToSection = (index) => {
+	const h3Elements = document.querySelectorAll('.rteBlock h3')
+
+	if (h3Elements.length > index) {
+		const h3Element = h3Elements[index]
+		h3Element.scrollIntoView({ behavior: 'smooth' })
+	}
+}
 
 onMounted(async () => {
 	localStorageContent.value = await ref(
