@@ -10,12 +10,12 @@
 			:src="image"
 			alt="background image" />
 
-		<!-- 	<img
+		<img
 			v-else
 			class="w-full h-full absolute left-0 top-0 rounded-sm -z-10 bg-cover"
 			src="@/assets/image/Pink_Full.png"
 			alt="background image" />
- -->
+
 		<div v-if="icon" class="absolute right-2 top-2 overflow-hidden">
 			<img
 				v-if="icon"
@@ -27,15 +27,13 @@
 		<h3 class="font-bold text-2xl mb-3 capitalize">{{ headline }}</h3>
 		<p class="text-sm pr-8 line-clamp-3" v-html="description"></p>
 
-		<NuxtLink
-			:to="url"
-			:target="target"
+		<div
 			class="z-30 absolute top-0 right-0 left-0 bottom-0 [&>div]:hover:opacity-100 [&>div]:hover:right-[20px] !ease-umbraco-ease duration-100">
 			<div
 				class="icon bg-um-white absolute right-[40px] bottom-[20px] flex justify-center items-center h-8 w-8 rounded-full opacity-0 hover:opacity-100 !ease-umbraco-ease duration-100">
 				<Icon class="![%>path]:fill-white" name="fa:arrow-right" />
 			</div>
-		</NuxtLink>
+		</div>
 	</NuxtLink>
 </template>
 
