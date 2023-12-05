@@ -1,7 +1,7 @@
 <template>
 	<NuxtLink
 		:to="url"
-		class="relative lg:col-span-3 col-span-full p-5 mt-4 rounded-sm min-h-[350px] flex flex-col justify-end bg-opacity-70 [&>.icon]:opacity-100 hover:shadow-2xl shadow-none duration-150 ease-umbraco-ease"
+		class="group relative border border-um-blue lg:col-span-3 col-span-full p-5 mt-4 rounded-sm min-h-[350px] flex flex-col justify-end bg-opacity-30 [&>.icon]:opacity-100 hover:shadow-2xl shadow-none duration-150 ease-umbraco-ease"
 		:class="containerStyling()"
 		:target="target">
 		<img
@@ -10,16 +10,19 @@
 			:src="image"
 			alt="background image" />
 
-		<img
+		<!-- 	<img
 			v-else
 			class="w-full h-full absolute left-0 top-0 rounded-sm -z-10 bg-cover"
-			src="@/assets/image/Dark_Blue_Full.png"
+			src="@/assets/image/Pink_Full.png"
 			alt="background image" />
-		<img
-			v-if="icon"
-			class="absolute h-[30px] w-[30px] top-0 right-0 m-5 bg-cover"
-			:alt="headline"
-			:src="icon" />
+ -->
+		<div v-if="icon" class="absolute right-2 top-2 overflow-hidden">
+			<img
+				v-if="icon"
+				class="h-[30px] w-[30px] m-5 bg-cover group-hover:invert group-hover:w-[70px] group-hover:h-[70px] duration-500"
+				:alt="headline"
+				:src="icon" />
+		</div>
 
 		<h3 class="font-bold text-2xl mb-3 capitalize">{{ headline }}</h3>
 		<p class="text-sm pr-8 line-clamp-3" v-html="description"></p>
