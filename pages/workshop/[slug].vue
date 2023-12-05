@@ -2,9 +2,10 @@
 	<div v-if="pageData">
 		<div class="container-row text-um-blue">
 			<div class="col-span-6 col-start-4">
-				<h1 v-if="pageData.name" class="text-4xl mb-5">
-					{{ pageData.name }}
-				</h1>
+				<HeroHeader
+					:headline="pageData.name"
+					:heroText="pageData.description"
+					:heroBreadCrumbs="pageData._url" />
 				<p v-if="pageData.date" class="mb-5">
 					<span class="font-bold mr-2">Date:</span>
 					{{ formatDate(pageData.date) }}
