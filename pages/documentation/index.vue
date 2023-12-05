@@ -1,8 +1,9 @@
 <template>
 	<div v-if="cmsContent">
 		<HeroHeader
-			:headline="cmsContent.documentationHeadline"
-			:heroText="cmsContent.documentationDescription" />
+			:headline="cmsContent.name"
+			:heroText="cmsContent.description"
+			:heroBreadCrumbs="cmsContent._url" />
 
 		<div v-if="cmsContent.childrenData._embedded.content" class="-mb-3">
 			<div

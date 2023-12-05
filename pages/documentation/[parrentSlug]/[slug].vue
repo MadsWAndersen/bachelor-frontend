@@ -28,6 +28,9 @@
 							<h1 v-if="pageData.name" class="text-4xl mb-5">
 								{{ pageData.name }}
 							</h1>
+
+							<BreadCrumb :data="pageData._url" />
+
 							<p v-if="pageData.date" class="mb-5">
 								<span class="font-bold mr-2">Date:</span>
 								{{ formatDate(pageData.date) }}
@@ -79,10 +82,27 @@ const route = useRoute()
 const localStorageContent = ref()
 const cmsContent = ref()
 const pageData = ref()
+const paths = ref()
 const { formatDate } = useDateFormatter()
 const h3Contents = ref([])
 const itemBefore = ref()
 const itemAfter = ref()
+
+/* const split = (e) => {
+	console.log(e);
+	var filtered = e.split('/').filter(function (el) {
+		return el != "";
+	});
+	console.log(filtered)
+	let pathsteps = "";
+	for (let i = 0; i < filtered.length; i++) {
+		pathsteps += "/" + filtered[i];
+		breadcrumbs.value.push({
+			"name": filtered[i],
+			"url": pathsteps
+		})
+	}
+} */
 
 const scrollToSection = (index) => {
 	const h3Elements = document.querySelectorAll('.rteBlock h3')
@@ -106,7 +126,7 @@ onMounted(async () => {
 
 	// Find h3 tags and display them in the h3Contents
 	const pageBodyText = pageData.value?.bodyText
-
+	paths.value = pageData.value._url
 	const matches = pageBodyText?.matchAll(/<h3>(.*?)<\/h3>/g)
 
 	h3Contents.value = []

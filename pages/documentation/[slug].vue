@@ -25,6 +25,7 @@
 								<h1 class="text-4xl mb-5">
 									{{ cmsContent.documentationHeadline }}
 								</h1>
+								<BreadCrumb :data="cmsContent._url" />
 								<p class="mb-5">
 									<span class="font-bold mr-2">Date:</span>
 									{{ formatDate(cmsContent._createDate) }}
@@ -80,7 +81,7 @@ onMounted(async () => {
 		JSON.parse(window.localStorage.getItem(`${route.params.slug}`)),
 	)
 	cmsContent.value = localStorageContent.value._value
-
+	console.log(cmsContent.value)
 	// Find h3 tags and display them in the h3Contents
 	const documentationDescription = cmsContent.value.documentationDescription
 

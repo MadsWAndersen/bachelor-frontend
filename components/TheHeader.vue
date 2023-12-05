@@ -25,6 +25,11 @@
 				>
 				<NuxtLink
 					class="text-um-blue font-bold m-0 hover:underline"
+					to="/submission"
+					>Submission</NuxtLink
+				>
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
 					to="/workshop"
 					>Workshop</NuxtLink
 				>

@@ -1,13 +1,9 @@
 <template>
 	<div v-if="cmsContent">
-		<div>
-			<h1 class="text-um-blue text-4xl mb-3">
-				{{ cmsContent.headline }}
-			</h1>
-			<p class="text-um-blue text-xl">
-				{{ cmsContent.description }}
-			</p>
-		</div>
+		<HeroHeader
+			:headline="cmsContent.name"
+			:heroText="cmsContent.description"
+			:heroBreadCrumbs="cmsContent._url" />
 		<div v-if="cmsContent.childrenData._embedded.content">
 			<div
 				v-for="(content, index) in cmsContent.childrenData._embedded

@@ -133,8 +133,10 @@ let submit = async () => {
 <template>
 	<div class="container-row flex justify-center">
 		<div class="col-span-12">
-			<h1 class="text-5xl text-um-blue font-semibold">Submit solution</h1>
-			<p>bread crumbs</p>
+			<HeroHeader
+				headline="Submission"
+				heroText=""
+				heroBreadCrumbs="submission" />
 
 			<h2 class="text-xl text-um-blue font-semibold pt-6">
 				Create a new solution
