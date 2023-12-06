@@ -84,7 +84,7 @@
 				</div>
 			</div>
 
-			<Button :buttonText="'Update'" @click="toggleModal" class="mt-6" />
+			<Button :buttonText="'Update'" class="mt-6" @click="toggleModal" />
 		</div>
 	</div>
 </template>

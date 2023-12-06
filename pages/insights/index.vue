@@ -31,8 +31,8 @@
 					name="ph:magnifying-glass-bold"
 					class="absolute fill-um-blue stroke-um-blue top-[50%] translate-y-[-50%]" />
 				<input
-					type="text"
 					v-model="searchTerm"
+					type="text"
 					placeholder="Search here.."
 					class="border-0 pl-5 outline-none w-full" />
 			</div>

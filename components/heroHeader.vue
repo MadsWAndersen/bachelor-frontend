@@ -1,6 +1,6 @@
 <template>
 	<div class="container-row">
-		<div class="col-span-5">
+		<div class="col-span-6">
 			<h1 v-if="headline" class="text-um-blue text-4xl mb-3">
 				{{ headline }}
 			</h1>
