@@ -5,7 +5,7 @@
 				{{ headline }}
 			</h1>
 			<BreadCrumb :data="heroBreadCrumbs" />
-			<p v-if="heroText" class="text-um-blue text-lg">{{ heroText }}</p>
+			<p v-if="heroText" class="text-um-black text-lg">{{ heroText }}</p>
 		</div>
 	</div>
 </template>
