@@ -154,85 +154,92 @@ const submit = async () => {
 	<div class="container-row flex lg:justify-center">
 		<div class="col-span-12 lg:w-1/2 md:w-2/3 w-full">
 			<HeroHeader headline="Submission" heroText="" heroBreadCrumbs="submission" />
+			<div class="container-row flex justify-center">
+				<div class="col-span-12 lg:w-1/2 w-2/3">
+					<HeroHeader headline="Submission" heroText="" heroBreadCrumbs="submission" />
 
-			<h2 class="text-xl text-um-blue font-semibold pt-6">
-				Create a new solution
-			</h2>
-			<p class="text-m text-um-black pb-6">
-				Here you will be able to submit a new solution for at workflow
-				or a know issue with the accounting
-			</p>
-
-			<div class="md:flex row  w-full mb-5">
-				<div class="md:w-2/3 md:pr-10">
-					<p class="w-full text-m font-semibold text-um-blue pt-6 mr-5">
-						Select the category
+					<h2 class="text-xl text-um-blue font-semibold pt-6">
+						Create a new solution
+					</h2>
+					<p class="text-m text-um-black pb-6">
+						Here you will be able to submit a new solution for at workflow
+						or a know issue with the accounting
 					</p>
-					<select id="parentId"
-						class="inline-flex  w-full justify-center rounded-t-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
-						<option value="none" selected disabled hidden>
-							Select an category
-						</option>
-						<option v-for="(content, index) in localStorageContent" :key="index"
-							class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-b-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5"
-							:value="content.childrenData.id" @click="selectedParentId()">
-							{{ content.name }}
-						</option>
-					</select>
+
+					<div class="lg:flex row w-full mb-5">
+						<div class="lg:w-1/2">
+							<p class="w-2/3 text-m font-semibold text-um-blue pt-6 mr-5">
+								Select the category
+							</p>
+							<select id="parentId"
+								class="inline-flex lg:w-3/4 w-full justify-center rounded-t-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
+								<option value="none" selected disabled hidden>
+									Select an category
+								</option>
+								<option v-for="(content, index) in localStorageContent" :key="index"
+									class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-b-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+									:value="content.childrenData.id" @click="selectedParentId()">
+									{{ content.name }}
+								</option>
+							</select>
+						</div>
+						<<<<<<< HEAD <div class="md:w-2/3 w-full">
+							<p class="w-2/3 text-m font-semibold text-um-blue pt-6 mr-5">
+								Select the versions
+							</p>
+							<div class="w-full flex">
+								<input id="versions"
+									class="inline-flex lg:w-3/4 w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+									placeholder="type in version" @keyup.enter="addVersion()" />
+								<button id="versionBtn"
+									class="inline-flex w-1/6 justify-center rounded-xs bg-white px-3 p-2 m-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+									@click="addVersion()">
+									+
+								</button>
+							</div>
+							<div class="w-full flex flex-wrap max-w-sm">
+								<span v-for="(version, index) in versions" :key="index"
+									class="flex row w-[100px] justify-center h-[30px] mr-1 mb-1 items-center bg-um-blue rounded-xs text-xs text-um-palepink font-bold">
+									{{ version }}</span>
+							</div>
+					</div>
 				</div>
-				<div class="md:w-2/3 w-full">
+
+				<div class="w-full">
 					<p class="w-2/3 text-m font-semibold text-um-blue pt-6 mr-5">
-						Select the versions
+						Select the headline
 					</p>
-					<div class="w-full flex">
-						<input id="versions"
-							class="inline-flex lg:w-3/4 w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
-							placeholder="type in version" @keyup.enter="addVersion()" />
-						<button id="versionBtn"
-							class="inline-flex w-1/6 justify-center rounded-xs bg-white px-3 p-2 m-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
-							@click="addVersion()">
-							+
-						</button>
-					</div>
-					<div class="w-full flex flex-wrap max-w-sm">
-						<span v-for="(version, index) in versions" :key="index"
-							class="flex row w-[100px] justify-center h-[30px] mr-1 mb-1 items-center bg-um-blue rounded-xs text-xs text-um-palepink font-bold">
-							{{ version }}</span>
-					</div>
+					<input id="headline" v-model="headline"
+						class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+						placeholder="Enter your headline here..." @keyup.enter="console.log(headline)" />
 				</div>
-			</div>
+				<div class="w-full">
+					<p class="text-m font-semibold text-um-blue pt-6 mr-5">
+						The issue
+					</p>
+					<textarea id="issue" v-model="issue"
+						class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+						placeholder="Add description of the issue"></textarea>
+				</div>
 
-			<div class="w-full">
-				<p class="w-2/3 text-m font-semibold text-um-blue pt-6 mr-5">
-					Select the headline
+				<p class="w-2/3 text-m font-semibold text-um-blue pt-6 my-3">
+					Describe the solution
 				</p>
-				<input id="headline" v-model="headline"
-					class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
-					placeholder="Enter your headline here..." @keyup.enter="console.log(headline)" />
+				<div id="bodytext"
+					class="m-0 rounded-xs bg-white p-1 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
+					<Editor api-key="ftvcr0z9nxcc2ozxsls3xowr1dtmrwm2atafqvcxtkw0mob4" :init="{
+						plugins:
+							'lists link image table code help wordcount code',
+					}" />
+				</div>
+				<<<<<<< HEAD <linkButton class="cursor-pointer mt-5 mb-10" url="" target="_blank" title="Submit solution"
+					:style="'dark'" @click="changeModal()" />
+				=======
+				<linkButton class="cursor-pointer mt-5 mb-10" url="" target="_blank" title="Submit solution" :style="'dark'"
+					@click="submit()" />
+				>>>>>>> develop
 			</div>
-			<div class="w-full">
-				<p class="text-m font-semibold text-um-blue pt-6 mr-5">
-					The issue
-				</p>
-				<textarea id="issue" v-model="issue"
-					class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
-					placeholder="Add description of the issue"></textarea>
-			</div>
-
-			<p class="w-2/3 text-m font-semibold text-um-blue pt-6 my-3">
-				Describe the solution
-			</p>
-			<div id="bodytext"
-				class="m-0 rounded-xs bg-white p-1 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
-				<Editor api-key="ftvcr0z9nxcc2ozxsls3xowr1dtmrwm2atafqvcxtkw0mob4" :init="{
-					plugins:
-						'lists link image table code help wordcount code',
-				}" />
-			</div>
-			<linkButton class="cursor-pointer mt-5 mb-10" url="" target="_blank" title="Submit solution" :style="'dark'"
-				@click="changeModal()" />
 		</div>
-	</div>
 </template>
 
 <style lang="scss" scoped></style>
