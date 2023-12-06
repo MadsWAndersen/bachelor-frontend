@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<div class="container-row">
-			<div class="col-span-full">
+			<!-- <div class="col-span-full">
 				<Editor
 					api-key="ftvcr0z9nxcc2ozxsls3xowr1dtmrwm2atafqvcxtkw0mob4"
 					:init="{
@@ -19,13 +19,14 @@
 				{{ Data }}
 			</div>
 
-			<pre>{{ data }}</pre>
+			<pre>{{ data }}</pre> -->
+			<EditSolution />
 		</div>
 	</div>
 </template>
 
 <script setup>
-import Editor from '@tinymce/tinymce-vue'
+/* import Editor from '@tinymce/tinymce-vue'
 useRedirect()
 
 const Data = ref('')
@@ -33,5 +34,5 @@ function updateContent() {
 	if (tinymce && tinymce.activeEditor) {
 		Data.value = tinymce.activeEditor.getContent()
 	}
-}
+} */
 </script>
