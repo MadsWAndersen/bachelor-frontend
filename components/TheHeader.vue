@@ -147,10 +147,9 @@ import { ref } from 'vue'
 import { useUserStore } from '../stores/user'
 const isDropdownVisible = ref(false)
 const isMobileMenuOpen = ref(false)
-
 const userData = useUserStore()
-const image =
-	'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+const image = ref()
+const imageUrlLocalStorage = ref()
 
 const toggleDropdown = () => {
 	isDropdownVisible.value = !isDropdownVisible.value
@@ -179,8 +178,65 @@ onMounted(() => {
 	}
 })
 
-onUnmounted(() => {
+onMounted(async () => {
 	const body = document.querySelector('body')
 	body.removeEventListener('click', closeDropdown)
+
+	const userInfo = await JSON.parse(localStorage.getItem('userInfo'))
+
+	if (userInfo && typeof userInfo.image === 'string') {
+		imageUrlLocalStorage.value = userInfo.image
+
+		const imageUrlWithoutPrefix = imageUrlLocalStorage.value.replace(
+			'umb:/',
+			'',
+		)
+
+		const completeImageUrl = `https://cdn.umbraco.io${imageUrlWithoutPrefix}`
+
+		// Fetch the image
+		try {
+			const response = await fetch(completeImageUrl, {
+				headers: {
+					'Accept-Language': 'en-US',
+					'umb-project-alias': 'pba-webdev',
+					Authorization: 'Basic elFJZk50eEpCYWFidFFDSTNweDg6',
+				},
+			})
+
+			// Was request was successful
+			if (response.ok) {
+				const imageUrl = response.url
+
+				// Make another fetch to get _url from the image URL
+				try {
+					const imageResponse = await fetch(imageUrl, {
+						headers: {
+							'Accept-Language': 'en-US',
+							'umb-project-alias': 'pba-webdev',
+							Authorization: 'Basic elFJZk50eEpCYWFidFFDSTNweDg6',
+						},
+					})
+
+					if (imageResponse.ok) {
+						const imageData = await imageResponse.json()
+						const imageUrlFromSecondFetch = imageData._url
+						image.value = imageUrlFromSecondFetch
+					} else {
+						console.error(
+							'Failed to fetch image:',
+							imageResponse.statusText,
+						)
+					}
+				} catch (error) {
+					console.error('Error during second fetch:', error)
+				}
+			} else {
+				console.error('Failed to fetch image:', response.statusText)
+			}
+		} catch (error) {
+			console.error('Error during fetch:', error)
+		}
+	}
 })
 </script>
