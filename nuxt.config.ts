@@ -13,9 +13,6 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  routeRules: {
-    '/*': { headers: { 'Access-Control-Allow-Origin': '' } },
-  },
 
   app: {
     pageTransition: { name: 'slide', mode: 'out-in' }
