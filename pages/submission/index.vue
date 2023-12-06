@@ -7,7 +7,18 @@ const versions = ref([])
 const parentId = ref('')
 const contentBodyText = ref()
 const timeElapsed = Date.now()
+let modal = ref(false);
 const today = new Date(timeElapsed)
+
+const changeModal = () => {
+	document.querySelector('#parentId').classList.remove('ring-um-red')
+	document.querySelector('#issue').classList.remove('ring-um-red')
+	document.querySelector('#versions').classList.remove('ring-um-red')
+	document.querySelector('#versionBtn').classList.remove('ring-um-red')
+	document.querySelector('#bodytext').classList.remove('ring-um-red')
+	document.querySelector('#headline').classList.remove('ring-um-red')
+	modal.value = !modal.value;
+}
 
 onMounted(async () => {
 	const x = await ref(
@@ -24,6 +35,7 @@ const addVersion = () => {
 }
 
 const submit = async () => {
+	modal.value = !modal.value;
 	parentId.value = document.querySelector('#parentId').value
 	if (tinymce && tinymce.activeEditor) {
 		contentBodyText.value = tinymce.activeEditor.getContent()
@@ -130,6 +142,15 @@ const submit = async () => {
 </script>
 
 <template>
+	<ModalBlock v-if="modal === true">
+		<h2 class="text-2xl text-um-blue">Are you sure</h2>
+		<span class="mb-3 text-um-blue">You are about to update your user informations.</span>
+
+		<div class="flex gap-2 justify-between mt-9">
+			<Button class="!w-full" :buttonText="'No cancel'" :style="'neutral'" @click="changeModal()" />
+			<Button class="!w-full" :buttonText="'Submit solution'" :style="'dark'" @click="submit()" />
+		</div>
+	</ModalBlock>
 	<div class="container-row flex justify-center">
 		<div class="col-span-12 lg:w-1/2 w-2/3">
 			<HeroHeader headline="Submission" heroText="" heroBreadCrumbs="submission" />
@@ -209,7 +230,7 @@ const submit = async () => {
 				}" />
 			</div>
 			<linkButton class="cursor-pointer mt-5 mb-10" url="" target="_blank" title="Submit solution" :style="'dark'"
-				@click="submit()" />
+				@click="changeModal()" />
 		</div>
 	</div>
 </template>
