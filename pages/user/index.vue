@@ -1,70 +1,41 @@
 <template>
 	<div class="container-row">
-		<div
-			class="lg:col-span-4 lg:col-start-4 col-span-full flex flex-col gap-3">
+		<div class="lg:col-span-4 lg:col-start-4 col-span-full flex flex-col gap-3">
 			<h1 class="text-2xl font-bold text-um-blue mb-5">User settings</h1>
 
 			<p class="text-base">Edit your user settings</p>
 
-			<div
-				class="flex lg:flex-row justify-between flex-col lg:gap-0 gap-2">
-				<span class="flex items-center text-um-blue text-sm"
-					>Name:</span
-				>
-				<input
-					v-if="user?.name"
-					v-model="updatedUser.name"
-					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full max-w-[300px]"
-					type="text"
+			<div class="flex lg:flex-row justify-between flex-col lg:gap-0 gap-2">
+				<span class="flex items-center text-um-blue text-sm">Name:</span>
+				<input v-if="user?.name" v-model="updatedUser.name"
+					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full max-w-[300px]" type="text"
 					:placeholder="user?.name" />
 			</div>
 
-			<div
-				class="flex lg:flex-row justify-between flex-col lg:gap-0 gap-2">
-				<span class="flex items-center text-um-blue text-sm"
-					>Member type:</span
-				>
-				<input
-					v-if="user?.memberTypeAlias"
-					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full max-w-[300px]"
-					type="text"
+			<div class="flex lg:flex-row justify-between flex-col lg:gap-0 gap-2">
+				<span class="flex items-center text-um-blue text-sm">Member type:</span>
+				<input v-if="user?.memberTypeAlias"
+					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full max-w-[300px]" type="text"
 					:placeholder="user.memberTypeAlias" />
 			</div>
 
-			<div
-				class="flex lg:flex-row justify-between flex-col lg:gap-0 gap-2">
-				<span class="flex items-center text-um-blue text-sm"
-					>Email:</span
-				>
-				<input
-					v-if="user?.email"
-					v-model="updatedUser.email"
-					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full max-w-[300px]"
-					type="text"
+			<div class="flex lg:flex-row justify-between flex-col lg:gap-0 gap-2">
+				<span class="flex items-center text-um-blue text-sm">Email:</span>
+				<input v-if="user?.email" v-model="updatedUser.email"
+					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full max-w-[300px]" type="text"
 					:placeholder="user?.email" />
 			</div>
 
 			<ModalBlock v-if="modal === true">
 				<h2 class="text-2xl text-um-blue">Are you sure</h2>
-				<span class="mb-3 text-um-blue"
-					>You are about to update your user informations.</span
-				>
+				<span class="mb-3 text-um-blue">You are about to update your user informations.</span>
 
 				<div class="flex gap-2 justify-between mt-9">
-					<Button
-						class="!w-full"
-						:buttonText="'No cancel'"
-						:style="'neutral'"
-						@click="toggleModal" />
-					<Button
-						class="!w-full"
-						:buttonText="'Update user'"
-						:style="'dark'"
-						@click="updateUserInfo" />
+					<Button class="!w-full" :buttonText="'No cancel'" :style="'neutral'" @click="toggleModal" />
+					<Button class="!w-full" :buttonText="'Update user'" :style="'dark'" @click="updateUserInfo" />
 				</div>
 			</ModalBlock>
-
-			<Button :buttonText="'Update'" class="mt-6" @click="toggleModal" />
+			<Button :buttonText="'Update'" :style="'dark'" class="mt-6" @click="toggleModal" />
 		</div>
 	</div>
 </template>

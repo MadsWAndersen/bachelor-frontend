@@ -10,7 +10,7 @@
     @apply mt-9
 }
 .rteBlock > h3 {
-    @apply text-3xl mb-5
+    @apply text-3xl text-um-blue mb-5
 }
 .rteBlock >  p {
     @apply text-base mb-5

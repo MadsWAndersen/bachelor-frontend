@@ -151,8 +151,8 @@ const submit = async () => {
 			<Button class="!w-full" :buttonText="'Submit solution'" :style="'dark'" @click="submit()" />
 		</div>
 	</ModalBlock>
-	<div class="container-row flex justify-center">
-		<div class="col-span-12 lg:w-1/2 w-2/3">
+	<div class="container-row flex lg:justify-center">
+		<div class="col-span-12 lg:w-1/2 md:w-2/3 w-full">
 			<HeroHeader headline="Submission" heroText="" heroBreadCrumbs="submission" />
 
 			<h2 class="text-xl text-um-blue font-semibold pt-6">
@@ -163,13 +163,13 @@ const submit = async () => {
 				or a know issue with the accounting
 			</p>
 
-			<div class="lg:flex row  w-full mb-5">
-				<div class="lg:w-1/2">
-					<p class="w-2/3 text-m font-semibold text-um-blue pt-6 mr-5">
+			<div class="md:flex row  w-full mb-5">
+				<div class="md:w-2/3 md:pr-10">
+					<p class="w-full text-m font-semibold text-um-blue pt-6 mr-5">
 						Select the category
 					</p>
 					<select id="parentId"
-						class="inline-flex lg:w-3/4 w-full justify-center rounded-t-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
+						class="inline-flex  w-full justify-center rounded-t-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
 						<option value="none" selected disabled hidden>
 							Select an category
 						</option>
@@ -180,7 +180,7 @@ const submit = async () => {
 						</option>
 					</select>
 				</div>
-				<div class="lg:w-1/2 w-full">
+				<div class="md:w-2/3 w-full">
 					<p class="w-2/3 text-m font-semibold text-um-blue pt-6 mr-5">
 						Select the versions
 					</p>

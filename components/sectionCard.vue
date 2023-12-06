@@ -7,7 +7,6 @@
 
 		<!-- 		<img v-else class="w-full h-full absolute left-0 top-0 rounded-sm -z-10 bg-cover opacity-90"
 			src="@/assets/image/Dark_Blue_Full.png" alt="background image" /> -->
-
 		<div v-if="icon" class="absolute right-2 top-2 overflow-hidden">
 			<img v-if="icon"
 				class="h-[30px] w-[30px] m-5 bg-cover invert group-hover:w-[40px] group-hover:h-[40px] duration-500"

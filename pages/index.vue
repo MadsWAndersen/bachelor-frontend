@@ -6,7 +6,7 @@
 					Hello {{ user.name }}
 				</h1>
 
-				<p class="text-um-blue text-lg">
+				<p class="text-um-black text-lg">
 					Welcome to the central Umbraco support system. Here you can
 					get the latest news related to SWAT
 				</p>

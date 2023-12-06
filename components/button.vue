@@ -1,8 +1,5 @@
 <template>
-	<button
-		:style="style"
-		:class="buttonStyling()"
-		class="py-5 pr-5 pl-5 max-w-[220px] border rounded-sm font-bold">
+	<button :style="style" :class="buttonStyling()" class="p5 max-w-[220px] max-h-[44px] border rounded-sm font-bold">
 		{{ buttonText }}
 	</button>
 </template>
