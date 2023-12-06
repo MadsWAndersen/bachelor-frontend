@@ -16,7 +16,7 @@
 		<div class="container-row">
 			<sectionCard v-for="(card, index) in cmsContent.childrenData._embedded
 				.content" :key="index" :url="card.toolLink[0].url" :target="card.toolLink[0].target" :headline="card.toolName"
-				:description="card.toolDescription" :image="card.image" :icon="card.icon?.src" :style="'dark'">
+				:description="card.toolDescription" :image="card.image" :icon="card.toolIcon.src" :style="'dark'">
 			</sectionCard>
 		</div>
 	</div>

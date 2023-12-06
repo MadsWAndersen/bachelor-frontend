@@ -1,23 +1,16 @@
 <template>
-	<NuxtLink
-		:to="url"
+	<NuxtLink :to="url"
 		class="group relative lg:col-span-3 md:col-span-2 col-span-full p-5 mt-4 rounded-sm min-h-[300px] flex flex-col justify-end [&>.icon]:opacity-100 hover:shadow-xl shadow-none duration-150 ease-umbraco-ease"
-		:class="containerStyling()"
-		:target="target">
-		<img
-			v-if="image"
-			class="w-full h-full absolute left-0 top-0 rounded-sm -z-10 bg-cover"
-			:src="image"
+		:class="containerStyling()" :target="target">
+		<img v-if="image" class="w-full h-full absolute left-0 top-0 rounded-sm -z-10 bg-cover" :src="image"
 			alt="background image" />
 
 		<!-- 		<img v-else class="w-full h-full absolute left-0 top-0 rounded-sm -z-10 bg-cover opacity-90"
 			src="@/assets/image/Dark_Blue_Full.png" alt="background image" /> -->
 		<div v-if="icon" class="absolute right-2 top-2 overflow-hidden">
-			<img
-				v-if="icon"
+			<img v-if="icon"
 				class="h-[30px] w-[30px] m-5 bg-cover invert group-hover:w-[40px] group-hover:h-[40px] duration-500"
-				:alt="headline"
-				:src="icon" />
+				:alt="headline" :src="icon" />
 		</div>
 
 		<h3 class="font-bold text-2xl mb-3 capitalize">{{ headline }}</h3>
