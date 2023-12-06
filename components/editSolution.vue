@@ -31,23 +31,31 @@ const formData = ref({
 })
 
 const submitForm = async () => {
-	try {
-		const response = await fetch(
-			'https://api.umbraco.io/api/forms/7f6f9150-e26b-4a67-836f-40ac7130c2dd/entries',
-			{
-				method: 'POST',
-				headers: {
-					Authorization: 'Basic elFJZk50eEpCYWFidFFDSTNweDg6',
-					'Accept-Language': 'en-US',
-					'Api-Version': '2.1',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(formData.value),
-			},
-		)
-		console.log('Response:', response)
-	} catch (error) {
-		console.error('Error:', error)
+	const apiUrl =
+		'https://api.umbraco.io/forms/7f6f9150-e26b-4a67-836f-40ac7130c2dd/entries'
+
+	const headers = new Headers()
+	headers.append('Content-Type', 'application/json')
+	headers.append('umb-project-alias', 'pba-webdev')
+	headers.append('Authorization', 'Basic elFJZk50eEpCYWFidFFDSTNweDg6')
+
+	const requestOptions = await {
+		method: 'POST',
+		headers: headers,
+		body: JSON.stringify(formData.value),
 	}
+
+	fetch(apiUrl, requestOptions)
+		.then((response) => {
+			if (response.ok) {
+				console.log('Data successfully posted.')
+			} else {
+				console.error('API call failed. Status:', response.status)
+				return response.json()
+			}
+		})
+		.catch((error) => {
+			console.error('Error:', error.message)
+		})
 }
 </script>
