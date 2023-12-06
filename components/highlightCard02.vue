@@ -1,25 +1,26 @@
 <template>
 	<div
 		v-if="isVisible"
-		class="overflow-hidden col-span-full bg-cover bg-left rounded-sm py-4 pr-4 pl-5 lg:pl-[33px] relative">
+		class="overflow-hidden col-span-full bg-um-white border border-um-green/40 hover:border-um-green/100 rounded-sm py-4 pr-4 pl-5 lg:pl-[33px] relative hover:shadow-md shadow-none duration-150 ease-umbraco-ease">
 		<div
 			:class="`h-full absolute w-[13px] left-0 top-0 ${highlightedColor}`"></div>
-		<div
-			class="bg-[url('/assets/image/Pale__Full.png')] w-full h-full absolute top-0 -z-10 bg-cover bg-left left-0 bg-opacity-5"></div>
+		<div class="w-full w-full h-full absolute top-0 -z-10 left-0"></div>
 
-		<div class="flex justify-between items-center cursor-pointer">
+		<div
+			class="flex justify-between lg:items-center md:items-center items-start cursor-pointer lg:flex-row md:flex-row flex-col lg:gap-0 gap-5">
 			<h3 class="text-um-blue">
 				New content "<span class="font-bold">{{ title }}</span
 				>" has been added recently
 			</h3>
 
-			<div class="flex gap-5 items-center">
+			<div
+				class="flex items-center lg:justify-end md:justify-end lg:gap-5 md:gap-5 justify-between lg:w-1/2 w-full">
 				<NuxtLink class="text-um-blue" :to="url"
 					>Go to solution</NuxtLink
 				>
 				<Icon
-					name="mingcute:add-fill"
-					class="!rotate-45 ![&>path]:fill-um-blue !w-4 !h-4"
+					name="radix-icons:cross-2"
+					class="text-um-green !w-4 !h-4 lg:relative md:relative absolute right-4 md:right-0 lg:right-0 top-1/2"
 					@click="closeIcon" />
 			</div>
 		</div>

@@ -16,5 +16,11 @@ module.exports = {
 	rules: {
 		'vue/attribute-hyphenation': 'off',
 		'vue/no-boolean-default': 'off',
+		'vue/multi-word-component-names': [
+			'error',
+			{
+				ignores: ['Button', '[slug]', 'index', 'login', 'default'],
+			},
+		],
 	},
 }

@@ -1,8 +1,8 @@
 <template>
 	<div class="app">
-		<TheHeader />
+		<theHeader />
 
-		<div class="container mt-10">
+		<div class="container pt-[14rem] relative">
 			<slot />
 		</div>
 	</div>

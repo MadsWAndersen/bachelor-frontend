@@ -54,7 +54,7 @@ module.exports = {
 		extend: {
 			backgroundImage: {
 				'hero-pattern': "url('/assets/image/Blue_Corner.png')",
-			  },
+			},
 
 			strokeWidth: {
 				1.5: "1.5px",
@@ -93,7 +93,7 @@ module.exports = {
 						paddingLeft: "54px",
 					},
 					"@screen xxxl": {
-						maxWidth: "1920px",
+						maxWidth: "1720px",
 					},
 				},
 			});

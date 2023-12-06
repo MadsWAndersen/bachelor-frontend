@@ -1,23 +1,29 @@
 <template>
-	<div
+	<NuxtLink
+		:to="url"
+		:target="target"
 		:btnStyle="btnStyle"
 		:class="flexOrientation()"
-		class="flex cursor-pointer bg-um-white justify-between items-center border-2 p-4 rounded-sm max-h-9">
-		<div class="flex flex-col pl-3" :class="textOrientation()">
-			<span class="text-xs font-medium"> {{ spanText }}</span>
-			<NuxtLink
-				:to="url"
-				:target="target"
-				class="text-lg capitalize line-clamp-1"
-				>{{ title }}
-			</NuxtLink>
+		class="group flex cursor-pointer bg-um-white justify-between items-center border-2 p-4 rounded-sm relative overflow-hidden">
+		<div class="flex flex-col pl-0 z-10" :class="textOrientation()">
+			<span
+				class="text-xs group-hover:text-um-white uppercase font-bold group-hover:duration-1000 duration-1000">
+				{{ spanText }}</span
+			>
+			<div
+				class="group-hover:text-um-white group-hover:duration-1000 duration-1000">
+				{{ title }}
+			</div>
 		</div>
-		<img
+		<div
+			class="absolute w-[600px] h-[600px] -z-0 bg-um-blue left-1/2 -translate-x-1/2 right-0 bottom-0 translate-y-full group-hover:translate-y-[100px] duration-500 group-hover:!ease-umbraco-ease rounded-full"></div>
+
+		<Icon
 			:class="iconOrientation()"
-			class="h-[20px] w-[20px]"
-			src="../assets/icons/docButtonArrow.svg"
+			class="h-[20px] w-[20px] group-hover:[&>path]:!fill-um-white z-10 group-hover:duration-1000 duration-1000"
+			name="material-symbols:arrow-left-alt"
 			alt="arrow" />
-	</div>
+	</NuxtLink>
 </template>
 
 <script setup>
