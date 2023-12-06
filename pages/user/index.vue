@@ -1,11 +1,13 @@
 <template>
 	<div class="container-row">
-		<div class="col-span-4 col-start-4 flex flex-col gap-3">
+		<div
+			class="lg:col-span-4 lg:col-start-4 col-span-full flex flex-col gap-3">
 			<h1 class="text-2xl font-bold text-um-blue mb-5">User settings</h1>
 
 			<p class="text-base">Edit your user settings</p>
 
-			<div class="flex flex-row justify-between">
+			<div
+				class="flex lg:flex-row justify-between flex-col lg:gap-0 gap-2">
 				<span class="flex items-center text-um-blue text-sm"
 					>Name:</span
 				>
@@ -17,7 +19,8 @@
 					:placeholder="user?.name" />
 			</div>
 
-			<div class="flex flex-row justify-between">
+			<div
+				class="flex lg:flex-row justify-between flex-col lg:gap-0 gap-2">
 				<span class="flex items-center text-um-blue text-sm"
 					>Member type:</span
 				>
@@ -28,7 +31,8 @@
 					:placeholder="user.memberTypeAlias" />
 			</div>
 
-			<div class="flex flex-row justify-between">
+			<div
+				class="flex lg:flex-row justify-between flex-col lg:gap-0 gap-2">
 				<span class="flex items-center text-um-blue text-sm"
 					>Email:</span
 				>
@@ -40,49 +44,25 @@
 					:placeholder="user?.email" />
 			</div>
 
-			<div
-				v-if="modal === true"
-				class="container absolute top-0 left-0 right-0 bottom-0 bg-um-black bg-opacity-25 z-10">
-				<div class="container-row h-full">
-					<div
-						class="col-span-6 col-start-4 flex items-center flex-col justify-center">
-						<div class="top bg-um-blue w-full h-12 relative">
-							<Icon
-								name="ic:twotone-question-mark"
-								class="!fill-um-white [&>path]:fill-um-white h-8 w-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-						</div>
-						<div class="bottom bg-um-white w-full">
-							<div class="container p-0">
-								<div class="container-row">
-									<div class="col-span-8 col-start-3 py-7">
-										<h2 class="text-2xl text-um-blue">
-											Are you sure
-										</h2>
-										<span class="mb-3 text-um-blue"
-											>You are about to update your user
-											informations.</span
-										>
+			<ModalBlock v-if="modal === true">
+				<h2 class="text-2xl text-um-blue">Are you sure</h2>
+				<span class="mb-3 text-um-blue"
+					>You are about to update your user informations.</span
+				>
 
-										<div
-											class="flex gap-2 justify-between mt-9">
-											<Button
-												class="!w-full"
-												:buttonText="'No cancel'"
-												:style="'neutral'"
-												@click="toggleModal" />
-											<Button
-												class="!w-full"
-												:buttonText="'Update user'"
-												:style="'dark'"
-												@click="updateUserInfo" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+				<div class="flex gap-2 justify-between mt-9">
+					<Button
+						class="!w-full"
+						:buttonText="'No cancel'"
+						:style="'neutral'"
+						@click="toggleModal" />
+					<Button
+						class="!w-full"
+						:buttonText="'Update user'"
+						:style="'dark'"
+						@click="updateUserInfo" />
 				</div>
-			</div>
+			</ModalBlock>
 
 			<Button :buttonText="'Update'" class="mt-6" @click="toggleModal" />
 		</div>
@@ -145,6 +125,9 @@ const updateUserInfo = async () => {
 
 		const data = await response.json()
 		console.log('User info updated:', data)
+		console.log('window.localStorage.clear()')
+		window.localStorage.clear()
+		window.location.replace('/login')
 	} catch (error) {
 		console.error('Error updating user info:', error)
 	}

@@ -2,7 +2,7 @@
 	<div class="app">
 		<theHeader />
 
-		<div class="container top-[14rem] relative">
+		<div class="container pt-[14rem] relative">
 			<slot />
 		</div>
 	</div>
