@@ -19,7 +19,7 @@
 						<HighlightCard
 							:highlightedColor="'bg-um-red'"
 							:title="childContent.name"
-							:bodyText="childContent.bodyText"
+							:bodyText="childContent.documentationDescription"
 							:url="childContent._url" />
 					</div>
 				</div>
