@@ -2,18 +2,31 @@
 	<div v-if="pageData">
 		<div class="container-row text-um-blue">
 			<div class="lg:col-span-6 lg:col-start-4 col-span-4">
-				<HeroHeader :headline="pageData.name" :heroText="pageData.description" :heroBreadCrumbs="pageData._url" />
+				<HeroHeader
+					:headline="pageData.name"
+					:heroText="pageData.description"
+					:heroBreadCrumbs="pageData._url" />
 				<p v-if="pageData.date" class="mb-5 text-um-black">
 					<span class="font-bold mr-2 text-um-blue">Date:</span>
 					{{ formatDate(pageData.date) }}
 				</p>
-				<div v-if="pageData.version && pageData.version.length > 0" class="mb-5 flex row-auto gap-2 items-center">
+				<div
+					v-if="pageData.version && pageData.version.length > 0"
+					class="mb-5 flex row-auto gap-2 items-center">
 					<span class="font-bold">Version:</span>
-					<versionTag v-for="(version, index) in pageData.version" :key="index" :version="version" />
+					<versionTag
+						v-for="(version, index) in pageData.version"
+						:key="index"
+						:version="version" />
 				</div>
-				<div ref="rteContent" class="rteBlock text-um-black" v-html="pageData.bodyText"></div>
+				<div
+					ref="rteContent"
+					class="rteBlock text-um-black"
+					v-html="pageData.bodyText"></div>
 			</div>
-			<pageContent :h3Contents="h3Contents" :scrollToSection="scrollToSection" />
+			<pageContent
+				:h3Contents="h3Contents"
+				:scrollToSection="scrollToSection" />
 		</div>
 	</div>
 </template>

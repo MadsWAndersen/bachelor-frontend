@@ -2,16 +2,25 @@
 	<div v-if="pageData">
 		<div class="container-row text-um-black">
 			<div v-if="pageData.image[0]" class="col-span-12 -mt-12 max-h-94">
-				<img class="w-full aspect-[8/2] mb-10" :src="pageData.image[0]?._url" :alt="pageData.image[0]?.name" />
+				<img
+					class="w-full aspect-[8/2] mb-10"
+					:src="pageData.image[0]?._url"
+					:alt="pageData.image[0]?.name" />
 			</div>
 
 			<div class="lg:col-span-6 lg:col-start-4 col-span-4">
-				<HeroHeader :headline="pageData.name" :heroText="pageData.description" :heroBreadCrumbs="pageData._url" />
+				<HeroHeader
+					:headline="pageData.name"
+					:heroText="pageData.description"
+					:heroBreadCrumbs="pageData._url" />
 				<p v-if="pageData.date" class="mb-5">
 					<span class="font-bold mr-2">Date:</span>
 					{{ formatDate(pageData.date) }}
 				</p>
-				<div v-if="pageData.bodyText" class="rteBlock text-um-black" v-html="pageData.bodyText"></div>
+				<div
+					v-if="pageData.bodyText"
+					class="rteBlock text-um-black"
+					v-html="pageData.bodyText"></div>
 			</div>
 			<!-- 
 			<pageContent
