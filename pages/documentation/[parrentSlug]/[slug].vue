@@ -1,7 +1,7 @@
 <template>
 	<div v-if="pageData">
 		<div class="container-row text-um-blue">
-			<div class="lg:hidden col-span-2 flex justify-start">
+			<div class="lg:hidden col-span-2 flex justify-start relative">
 				<button
 					class="text-um-blue z-30 py-4 absolute -top-10"
 					@click="toggleSideMenu">
@@ -36,10 +36,10 @@
 			</div>
 			<div
 				v-if="cmsContent.childrenData._embedded.content"
-				class="container pb-10 pt-10 fixed top-12 left-0 h-screen w-full bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-start gap-5 z-20"
+				class="container pb-10 pt-10 fixed top-12 lg:hidden left-0 h-screen w-full bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-start gap-5 z-20"
 				:class="{
-					'translate-x-0': isSideMenuOpen,
-					'translate-x-full': !isSideMenuOpen,
+					'translate-x-[-100%]': isSideMenuOpen,
+					'translate-x-0': !isSideMenuOpen,
 				}">
 				<h1
 					v-if="cmsContent.documentationHeadline"
@@ -75,7 +75,7 @@
 					<li class="ml-6 mb-4 hover:underline">
 						<NuxtLink
 							:to="`${content._url}`"
-							@click="toggleSideMenu"
+							@click="isDesktop ? '' : toggleSideMenu"
 							>{{ content.name }}</NuxtLink
 						>
 					</li>
@@ -148,26 +148,11 @@ const h3Contents = ref([])
 const itemBefore = ref()
 const itemAfter = ref()
 const isSideMenuOpen = ref(false)
+const isDesktop = ref(false)
 
 const toggleSideMenu = () => {
 	isSideMenuOpen.value = !isSideMenuOpen.value
 }
-
-/* const split = (e) => {
-	console.log(e);
-	var filtered = e.split('/').filter(function (el) {
-		return el != "";
-	});
-	console.log(filtered)
-	let pathsteps = "";
-	for (let i = 0; i < filtered.length; i++) {
-		pathsteps += "/" + filtered[i];
-		breadcrumbs.value.push({
-			"name": filtered[i],
-			"url": pathsteps
-		})
-	}
-} */
 
 const scrollToSection = (index) => {
 	const h3Elements = document.querySelectorAll('.rteBlock h3')
@@ -199,6 +184,8 @@ onMounted(async () => {
 	for (const match of matches) {
 		h3Contents?.value?.push(match[1])
 	}
+
+	isDesktop.value = window.matchMedia('(min-width: 1024px)').matches
 
 	// Find current page
 	const currentPage = cmsContent.value.childrenData._embedded.content

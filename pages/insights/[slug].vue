@@ -13,8 +13,10 @@
 				</p>
 				<div v-if="pageData.bodyText" class="rteBlock text-um-black" v-html="pageData.bodyText"></div>
 			</div>
-
-			<pageContent :h3Contents="h3Contents" :scrollToSection="scrollToSection" />
+			<!-- 
+			<pageContent
+				:h3Contents="h3Contents"
+				:scrollToSection="scrollToSection" /> -->
 		</div>
 	</div>
 </template>

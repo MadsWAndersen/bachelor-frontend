@@ -41,7 +41,7 @@
 			</div>
 
 			<div
-				class="container pb-10 pt-10 fixed top-0 right-0 h-screen w-full md:w-1/2 bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-end gap-5 z-40"
+				class="container pb-10 pt-10 fixed top-0 right-0 h-screen lg:hidden w-full md:w-1/2 bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-end gap-5 z-40"
 				:class="{
 					'translate-x-0': isMobileMenuOpen,
 					'translate-x-full': !isMobileMenuOpen,
