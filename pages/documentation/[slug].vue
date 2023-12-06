@@ -36,11 +36,14 @@
 			</div>
 			<div class="container-row">
 				<div
-					v-if="cmsContent.childrenData._embedded.content"
-					class="container pb-10 pt-10 fixed top-12 left-0 h-screen w-full bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-start gap-5 z-20"
+					v-if="
+						cmsContent.childrenData._embedded.content &&
+						isDesktop === false
+					"
+					class="container pb-10 pt-10 fixed top-12 lg:hidden left-0 h-screen w-full bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-start gap-5 z-20"
 					:class="{
-						'translate-x-0': isSideMenuOpen,
-						'translate-x-full': !isSideMenuOpen,
+						'translate-x-[-100%]': isSideMenuOpen,
+						'translate-x-0': !isSideMenuOpen,
 					}">
 					<h1
 						v-if="cmsContent.documentationHeadline"

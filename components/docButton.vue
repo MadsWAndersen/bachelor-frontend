@@ -4,7 +4,7 @@
 		:target="target"
 		:btnStyle="btnStyle"
 		:class="flexOrientation()"
-		class="group flex cursor-pointer bg-um-white justify-between items-center border-2 p-4 rounded-sm relative overflow-hidden">
+		class="group flex cursor-pointer bg-um-white justify-between items-center border-2 p-4 rounded-sm relative overflow-hidden lg:mb-0 mb-3">
 		<div class="flex flex-col pl-0 z-10" :class="textOrientation()">
 			<span
 				class="text-xs group-hover:text-um-white uppercase font-bold group-hover:duration-1000 duration-1000">

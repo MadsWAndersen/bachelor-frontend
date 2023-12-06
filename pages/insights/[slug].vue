@@ -1,7 +1,9 @@
 <template>
 	<div v-if="pageData">
 		<div class="container-row text-um-blue">
-			<div v-if="pageData.image[0]" class="col-span-12 -mt-12 max-h-94">
+			<div
+				v-if="pageData.image[0]"
+				class="lg:col-span-12 col-span-4 -mt-12 max-h-94">
 				<img
 					class="w-full aspect-[8/2] mb-10"
 					:src="pageData.image[0]?._url"
@@ -22,10 +24,10 @@
 					class="rteBlock"
 					v-html="pageData.bodyText"></div>
 			</div>
-
+			<!-- 
 			<pageContent
 				:h3Contents="h3Contents"
-				:scrollToSection="scrollToSection" />
+				:scrollToSection="scrollToSection" /> -->
 		</div>
 	</div>
 </template>

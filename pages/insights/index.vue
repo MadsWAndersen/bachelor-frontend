@@ -2,7 +2,8 @@
 	<div v-if="cmsContent">
 		<HeroHeader
 			:headline="cmsContent.insightsHeadline"
-			:heroText="cmsContent.insightsDescription" />
+			:heroText="cmsContent.insightsDescription"
+			:heroBreadCrumbs="cmsContent._url" />
 
 		<div v-if="cmsContent.childrenData._embedded.content">
 			<div
