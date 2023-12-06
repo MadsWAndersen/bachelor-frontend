@@ -15,19 +15,12 @@
 
 		<div v-if="cmsContent">
 			<div v-if="cmsContent.childrenData._embedded.content" class="-mb-3">
-				<div
-					v-for="(content, index) in cmsContent.childrenData._embedded
-						.content"
-					:key="index">
-					<div
-						v-for="(childContent, index) in content.childrenData
-							._embedded.content"
-						:key="index"
-						class="mb-3">
+				<div v-for="(content, index) in cmsContent.childrenData._embedded
+					.content" :key="index">
+					<div v-for="(childContent, index) in content.childrenData
+						._embedded.content" :key="index" class="mb-3">
 						<div v-if="childContent.highligted">
-							<HighlightCard
-								:title="childContent.name"
-								:bodyText="childContent.bodyText"
+							<HighlightCard :title="childContent.name" :bodyText="childContent.bodyText"
 								:url="childContent._url">
 							</HighlightCard>
 						</div>
@@ -36,16 +29,9 @@
 			</div>
 		</div>
 
-		<div class="container-row">
-			<sectionCard
-				v-for="(card, index) in data._embedded.content"
-				:key="index"
-				:url="card._url"
-				:headline="card.name"
-				:description="card.description"
-				:image="card.image"
-				:icon="card.icon?.src"
-				:style="'light'">
+		<div class="container-row my-auto">
+			<sectionCard v-for="(card, index) in data._embedded.content" :key="index" :url="card._url" :headline="card.name"
+				:description="card.description" :image="card.image" :icon="card.icon?.src" :style="'dark'">
 			</sectionCard>
 		</div>
 	</div>
