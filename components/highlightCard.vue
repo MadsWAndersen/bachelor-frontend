@@ -21,7 +21,7 @@
 
 		<div
 			v-if="isOpen"
-			class="text-um-blue pt-3 lg:pr-[227px] flex flex-col gap-5">
+			class="text-um-black pt-3 lg:pr-[227px] flex flex-col gap-5">
 			<div v-if="bodyText" v-html="bodyText"></div>
 
 			<NuxtLink class="text-um-blue" :to="url">Go to solution</NuxtLink>

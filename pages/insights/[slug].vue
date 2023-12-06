@@ -1,9 +1,7 @@
 <template>
 	<div v-if="pageData">
-		<div class="container-row text-um-blue">
-			<div
-				v-if="pageData.image[0]"
-				class="lg:col-span-12 col-span-4 -mt-12 max-h-94">
+		<div class="container-row text-um-black">
+			<div v-if="pageData.image[0]" class="col-span-12 -mt-12 max-h-94">
 				<img
 					class="w-full aspect-[8/2] mb-10"
 					:src="pageData.image[0]?._url"
@@ -21,7 +19,7 @@
 				</p>
 				<div
 					v-if="pageData.bodyText"
-					class="rteBlock"
+					class="rteBlock text-um-black"
 					v-html="pageData.bodyText"></div>
 			</div>
 			<!-- 

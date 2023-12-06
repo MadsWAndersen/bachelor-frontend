@@ -6,8 +6,8 @@
 					:headline="pageData.name"
 					:heroText="pageData.description"
 					:heroBreadCrumbs="pageData._url" />
-				<p v-if="pageData.date" class="mb-5">
-					<span class="font-bold mr-2">Date:</span>
+				<p v-if="pageData.date" class="mb-5 text-um-black">
+					<span class="font-bold mr-2 text-um-blue">Date:</span>
 					{{ formatDate(pageData.date) }}
 				</p>
 				<div
@@ -21,7 +21,7 @@
 				</div>
 				<div
 					ref="rteContent"
-					class="rteBlock"
+					class="rteBlock text-um-black"
 					v-html="pageData.bodyText"></div>
 			</div>
 			<pageContent

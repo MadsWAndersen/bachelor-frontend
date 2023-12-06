@@ -63,8 +63,11 @@
 						@click="updateUserInfo" />
 				</div>
 			</ModalBlock>
-
-			<Button :buttonText="'Update'" class="mt-6" @click="toggleModal" />
+			<Button
+				:buttonText="'Update'"
+				:style="'dark'"
+				class="mt-6"
+				@click="toggleModal" />
 		</div>
 	</div>
 </template>

@@ -33,7 +33,7 @@
 				:headline="card.toolName"
 				:description="card.toolDescription"
 				:image="card.image"
-				:icon="card.icon?.src"
+				:icon="card.toolIcon.src"
 				:style="'dark'">
 			</sectionCard>
 		</div>

@@ -50,8 +50,6 @@ onMounted(async () => {
 	)
 	cmsContent.value = localStorageContent.value._value
 })
-
-// const { data } = useContent(`${route.query.id}/children`);
 </script>
 
 <style></style>

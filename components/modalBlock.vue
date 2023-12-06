@@ -1,9 +1,9 @@
 <template>
 	<div
-		class="container absolute top-0 left-0 right-0 bottom-0 bg-um-black bg-opacity-25 z-50 h-screen">
+		class="fixed top-0 left-0 right-0 bottom-0 bg-um-black bg-opacity-25 z-50 h-screen w-screen">
 		<div class="container-row h-full">
 			<div
-				class="col-span-6 col-start-4 flex items-center flex-col justify-center">
+				class="lg:col-span-6 col-span-2 lg:col-start-4 col-start-2 flex items-center flex-col justify-center">
 				<div class="top bg-um-blue w-full h-12 relative">
 					<Icon
 						name="ic:twotone-question-mark"
@@ -11,8 +11,9 @@
 				</div>
 				<div class="bottom bg-um-white w-full">
 					<div class="container p-0">
-						<div class="container-row">
-							<div class="col-span-8 col-start-3 py-7">
+						<div class="lg:container-row container">
+							<div
+								class="col-span-8 lg:col-start-3 col-start-2 py-7">
 								<slot></slot>
 							</div>
 						</div>
