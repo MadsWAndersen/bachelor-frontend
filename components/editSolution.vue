@@ -41,6 +41,7 @@ const submitForm = async () => {
 					'Accept-Language': 'en-US',
 					'Api-Version': '2.1',
 					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*',
 				},
 				body: JSON.stringify(formData.value),
 			},
