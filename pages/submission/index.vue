@@ -1,38 +1,40 @@
 <script setup>
 import Editor from '@tinymce/tinymce-vue'
-let localStorageContent = ref()
-let headline = ref('')
-let issue = ref('')
-let versions = ref([])
-let parentId = ref('')
-let contentBodyText = ref()
+const localStorageContent = ref()
+const headline = ref('')
+const issue = ref('')
+const versions = ref([])
+const parentId = ref('')
+const contentBodyText = ref()
 const timeElapsed = Date.now()
 const today = new Date(timeElapsed)
 
 onMounted(async () => {
-	let x = await ref(JSON.parse(window.localStorage.getItem(`documentation`)))
+	const x = await ref(
+		JSON.parse(window.localStorage.getItem(`documentation`)),
+	)
 	localStorageContent.value = x.value.childrenData._embedded.content
 })
 
-let addVersion = () => {
-	let version = document.querySelector('#versions').value
+const addVersion = () => {
+	const version = document.querySelector('#versions').value
 	versions.value.push(version)
 	document.querySelector('#versions').value = ''
 	console.log(versions)
 }
 
-let submit = async () => {
+const submit = async () => {
 	parentId.value = document.querySelector('#parentId').value
 	if (tinymce && tinymce.activeEditor) {
 		contentBodyText.value = tinymce.activeEditor.getContent()
 	}
-	var myHeaders = new Headers()
+	const myHeaders = new Headers()
 	myHeaders.append('Umb-Project-Alias', 'pba-webdev')
 	myHeaders.append('Authorization', 'Basic cDA1ajNJMFF3T0JQMEpRZnBwcUw6')
 	myHeaders.append('Api-Version', '2')
 	myHeaders.append('Content-Type', 'application/json')
 
-	var raw = JSON.stringify({
+	const raw = JSON.stringify({
 		name: {
 			$invariant: headline.value,
 		},
@@ -60,7 +62,7 @@ let submit = async () => {
 		},
 	})
 
-	var requestOptions = {
+	const requestOptions = {
 		method: 'POST',
 		headers: myHeaders,
 		body: raw,
@@ -74,27 +76,24 @@ let submit = async () => {
 		versions.value &&
 		contentBodyText.value
 	) {
-		const { data, pending, error, refresh } = await useFetch(
-			'https://api.umbraco.io/content',
-			requestOptions,
-		)
+		useFetch('https://api.umbraco.io/content', requestOptions)
 
 		// ping the editors on slack
-		var myHeaders = new Headers()
+		const myHeaders2 = new Headers()
 		myHeaders.append('Content-Type', 'application/json')
 
-		var raw = JSON.stringify({
+		const raw2 = JSON.stringify({
 			text: 'event',
 		})
 
-		var requestOptions = {
+		const requestOptions2 = {
 			method: 'POST',
-			headers: myHeaders,
-			body: raw,
+			headers: myHeaders2,
+			body: raw2,
 			redirect: 'follow',
 		}
 
-		fetch('https://eocet9yn9ivqaq7.m.pipedream.net', requestOptions)
+		fetch('https://eocet9yn9ivqaq7.m.pipedream.net', requestOptions2)
 			.then((response) => response.text())
 			.then((result) => console.log(result))
 			.catch((error) => console.log('error', error))
@@ -102,7 +101,7 @@ let submit = async () => {
 		// redirects user
 		await navigateTo('/documentation')
 	} else {
-		//resets error handling
+		// resets error handling
 		document.querySelector('#parentId').classList.remove('ring-um-red')
 		document.querySelector('#issue').classList.remove('ring-um-red')
 		document.querySelector('#versions').classList.remove('ring-um-red')
@@ -112,7 +111,7 @@ let submit = async () => {
 		if (!headline.value) {
 			document.querySelector('#headline').classList.add('ring-um-red')
 		}
-		if (parentId.value == 'none') {
+		if (parentId.value === 'none') {
 			console.log(parentId.value)
 			document.querySelector('#parentId').classList.add('ring-um-red')
 		}
@@ -159,10 +158,11 @@ let submit = async () => {
 							Select an category
 						</option>
 						<option
-							@click="selectedParentId()"
+							v-for="(content, index) in localStorageContent"
+							:key="index"
 							class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-b-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5"
 							:value="content.childrenData.id"
-							v-for="content in localStorageContent">
+							@click="selectedParentId()">
 							{{ content.name }}
 						</option>
 					</select>
@@ -174,20 +174,21 @@ let submit = async () => {
 					</p>
 					<div class="w-full flex">
 						<input
-							class="inline-flex w-3/4 justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
-							@keyup.enter="addVersion()"
 							id="versions"
-							placeholder="type in version" />
+							class="inline-flex w-3/4 justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+							placeholder="type in version"
+							@keyup.enter="addVersion()" />
 						<button
-							@click="addVersion()"
 							id="versionBtn"
-							class="inline-flex w-1/6 justify-center rounded-xs bg-white px-3 p-2 m-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
+							class="inline-flex w-1/6 justify-center rounded-xs bg-white px-3 p-2 m-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+							@click="addVersion()">
 							+
 						</button>
 					</div>
 					<div class="w-full flex flex-wrap max-w-sm">
 						<span
-							v-for="version in versions"
+							v-for="(version, index) in versions"
+							:key="index"
 							class="flex row w-[100px] justify-center h-[30px] mr-1 mb-1 items-center bg-um-blue rounded-xs text-xs text-um-palepink font-bold">
 							{{ version }}</span
 						>
@@ -201,8 +202,8 @@ let submit = async () => {
 				</p>
 				<input
 					id="headline"
-					class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 					v-model="headline"
+					class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 					placeholder="Enter your headline here..."
 					@keyup.enter="console.log(headline)" />
 			</div>
@@ -212,8 +213,8 @@ let submit = async () => {
 				</p>
 				<textarea
 					id="issue"
-					class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 					v-model="issue"
+					class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 					placeholder="Add description of the issue"></textarea>
 			</div>
 
