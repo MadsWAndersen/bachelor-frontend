@@ -33,7 +33,7 @@ const formData = ref({
 const submitForm = async () => {
 	try {
 		const response = await fetch(
-			'https://api.umbraco.io/api/forms/7f6f9150-e26b-4a67-836f-40ac7130c2dd/entries',
+			'https://api.umbraco.io/forms/7f6f9150-e26b-4a67-836f-40ac7130c2dd/entries',
 			{
 				method: 'POST',
 				headers: {
@@ -41,6 +41,7 @@ const submitForm = async () => {
 					'Accept-Language': 'en-US',
 					'Api-Version': '2.1',
 					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*',
 				},
 				body: JSON.stringify(formData.value),
 			},
