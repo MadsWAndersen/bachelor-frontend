@@ -9,14 +9,8 @@
 					._embedded.content" :key="index" class="mb-3">
 					<div v-if="childContent.highligted === true">
 
-						<HighlightCard
-							:highlightedColor="'bg-um-red'"
-							:title="childContent.name"
-							:bodyText="childContent.documentationDescription"
-							:url="childContent._url" />
-
 						<HighlightCard :highlightedColor="'bg-um-red'" :title="childContent.name"
-							:bodyText="childContent.bodyText" :url="childContent._url" />
+							:bodyText="childContent.documentationDescription" :url="childContent._url" />
 
 					</div>
 				</div>
