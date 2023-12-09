@@ -85,9 +85,15 @@
 				<div class="container p-0">
 					<div class="container-row">
 						<div class="col-span-full mb-10">
-							<h1 v-if="pageData.name" class="text-4xl mb-5">
-								{{ pageData.name }}
-							</h1>
+							<div class="flex justify-between">
+								<h1 v-if="pageData.name" class="text-4xl mb-5">
+									{{ pageData.name }}
+								</h1>
+								<Button
+									button-text="Request edit"
+									class="mr-4"
+									@click="requestEdit" />
+							</div>
 
 							<BreadCrumb :data="pageData._url" />
 
@@ -138,6 +144,7 @@
 </template>
 
 <script setup>
+import { usePageStore } from '@/stores/usePageStore'
 const route = useRoute()
 const localStorageContent = ref()
 const cmsContent = ref()
@@ -149,6 +156,17 @@ const itemBefore = ref()
 const itemAfter = ref()
 const isSideMenuOpen = ref(false)
 const isDesktop = ref(false)
+
+const pageDataID = ref({
+	_id: '',
+})
+
+const requestEdit = () => {
+	const store = usePageStore()
+	store.setID(pageDataID.value._id)
+	const router = useRouter()
+	router.push('/edit-solution')
+}
 
 const toggleSideMenu = () => {
 	isSideMenuOpen.value = !isSideMenuOpen.value
@@ -198,6 +216,10 @@ onMounted(async () => {
 		// Set the value of itemBefore and itemAfter
 		itemBefore.value = currentPage[indexOfMatch - 1]
 		itemAfter.value = currentPage[indexOfMatch + 1]
+	}
+
+	pageDataID.value = {
+		_id: pageData.value._id,
 	}
 })
 </script>
