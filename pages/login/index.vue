@@ -197,14 +197,9 @@ async function fetchDetailedData(hrefs) {
 	<div class="p-0 lg:col-span-12">
 		<div class="container-row p-0">
 			<div class="lg:col-span-8 h-screen hidden lg:block">
-				<img
-					class="h-full object-cover"
-					src="../../assets/image/Pink_Full.png"
-					alt="" />
+				<img class="h-full object-cover" src="../../assets/image/Pink_Full.png" alt="" />
 			</div>
-			<div
-				v-if="!userData.loading"
-				class="col-span-4 h-screen flex justify-center items-center">
+			<div v-if="!userData.loading" class="col-span-4 h-screen flex justify-center items-center">
 				<div class="col-span-3 w-1/1">
 					<form class="lg:col-span-4 bg-white px-8 pt-6 pb-8 mb-4">
 						<div class="mb-4 text-center">
@@ -216,22 +211,14 @@ async function fetchDetailedData(hrefs) {
 							</p>
 						</div>
 						<div class="mb-4">
-							<input
-								id="username"
-								v-model="username"
+							<input id="username" v-model="username"
 								class="border-b-2 w-full py-2 text-um-blue leading-tight focus:outline-none focus:shadow-outline"
-								type="text"
-								placeholder="Username"
-								@keyup.enter="login" />
+								type="text" placeholder="Username" @keyup.enter="login" />
 						</div>
 						<div class="mb-6">
-							<input
-								id="password"
-								v-model="password"
+							<input id="password" v-model="password"
 								class="border-b-2 w-full py-2 text-um-blue mb-3 leading-tight focus:outline-none focus:shadow-outline"
-								type="password"
-								placeholder="Password"
-								@keyup.enter="login" />
+								type="password" placeholder="Password" @keyup.enter="login" />
 							<p class="text-um-red text-xs italic">
 								{{ errorMessage }}
 							</p>
@@ -243,12 +230,7 @@ async function fetchDetailedData(hrefs) {
                                 type="button">
                                 Sign In
                             </button> -->
-							<linkButton
-								class="cursor-pointer"
-								url=""
-								target="_blank"
-								title="Log in"
-								:style="'login'"
+							<linkButton class="cursor-pointer" url="" target="_blank" title="Log in" :style="'login'"
 								@click="login" />
 						</div>
 						<!--                         <div class="btn_logout">
@@ -362,24 +344,31 @@ async function fetchDetailedData(hrefs) {
 	10% {
 		transform: translateY(-105%);
 	}
+
 	25% {
 		transform: translateY(-100%);
 	}
+
 	35% {
 		transform: translateY(-205%);
 	}
+
 	50% {
 		transform: translateY(-200%);
 	}
+
 	60% {
 		transform: translateY(-305%);
 	}
+
 	75% {
 		transform: translateY(-300%);
 	}
+
 	85% {
 		transform: translateY(-405%);
 	}
+
 	100% {
 		transform: translateY(-400%);
 	}
