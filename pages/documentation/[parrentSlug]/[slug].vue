@@ -112,7 +112,7 @@
 								class="rteBlock"
 								v-html="pageData.bodyText"></div>
 							<img
-								v-if="pageData.image"
+								v-if="pageData.image && pageData.image[0]"
 								class="cover aspect-auto"
 								:src="pageData.image[0]._url"
 								:alt="pageData.image[0].name" />
