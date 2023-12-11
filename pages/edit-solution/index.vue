@@ -7,7 +7,8 @@
 					>You are about to request an update to this solution.</span
 				>
 
-				<div class="flex gap-2 justify-between mt-9">
+				<div
+					class="flex gap-2 justify-between mt-9 lg:flex-row flex-col">
 					<Button
 						class="!w-full"
 						:buttonText="'No cancel'"
@@ -74,8 +75,8 @@
 <script setup>
 import { ref } from 'vue'
 import { usePageStore } from '@/stores/usePageStore'
-const router = useRouter()
 const modal = ref(true)
+const router = useRouter()
 
 const formData = ref({
 	text: '',
@@ -90,7 +91,7 @@ const changeModal = () => {
 		document.querySelector('#text').classList.add('ring-um-red')
 	}
 
-	if (formData.value.text != '') {
+	if (formData.value.text !== '') {
 		modal.value = !modal.value
 	}
 }
@@ -99,19 +100,18 @@ const changeModal = () => {
 const store = usePageStore()
 formData.value.pageID = store.id
 
-const shouldSubmitForm = ref(false)
-
 // Create a new method to handle the confirmation and form submission
 const confirmAndSubmit = () => {
 	handleFormSubmit()
 
 	// Close the modal and clear form data
-	modal.value = false
+	modal.value = !modal.value
+
 	formData.value = {
 		text: '',
 		version: '',
 	}
-	//router.go(-1)
+	router.go(-1)
 }
 
 const handleFormSubmit = async () => {
@@ -137,7 +137,6 @@ const handleFormSubmit = async () => {
 			console.error('Error:', errorResult)
 		}
 
-		console.log('test')
 		// ping the editors on slack
 		const myHeaders = new Headers()
 		myHeaders.append('Content-Type', 'application/json')
@@ -146,17 +145,9 @@ const handleFormSubmit = async () => {
 			text: 'event',
 		})
 
-		const requestOptions = {
-			method: 'POST',
-			headers: myHeaders,
-			body: raw,
-			redirect: 'follow',
-		}
-
-		// Assuming you meant to use the same headers for the second request
 		const requestOptions2 = {
 			method: 'POST',
-			headers: myHeaders, // Use the correct variable name here (myHeaders instead of myHeaders2)
+			headers: myHeaders,
 			body: raw,
 			redirect: 'follow',
 		}

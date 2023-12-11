@@ -88,7 +88,6 @@ const modal = ref(false)
 
 const toggleModal = () => {
 	modal.value = !modal.value
-	console.log(modal.value)
 }
 
 onMounted(() => {
@@ -101,12 +100,10 @@ onMounted(() => {
 
 const updateUserInfo = async () => {
 	if (!user.value?.username) {
-		console.error('Username is undefined')
 		return
 	}
 
 	try {
-		console.log('Updating user with:', updatedUser.value)
 		const response = await fetch(
 			`https://api.umbraco.io/member/${user.value.username}`,
 			{
@@ -126,10 +123,6 @@ const updateUserInfo = async () => {
 			console.error('Server responded with:', errorData)
 			throw new Error(`HTTP error! status: ${response.status}`)
 		}
-
-		const data = await response.json()
-		console.log('User info updated:', data)
-		console.log('window.localStorage.clear()')
 		window.localStorage.clear()
 		window.location.replace('/login')
 	} catch (error) {

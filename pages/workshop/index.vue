@@ -12,9 +12,9 @@
 					.content"
 				:key="index">
 				<div
-					v-for="(childContent, index) in content.childrenData
-						._embedded.content"
-					:key="index"
+					v-for="(childContent, i) in content.childrenData._embedded
+						.content"
+					:key="i"
 					class="mb-4 last-of-type:mb-0">
 					<div v-if="childContent.highligted === true">
 						<HighlightCard

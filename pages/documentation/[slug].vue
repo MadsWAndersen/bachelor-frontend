@@ -1,9 +1,9 @@
 <template>
 	<div v-if="localStorageContent">
 		<div class="">
-			<div class="lg:hidden col-span-2 flex justify-start">
+			<div class="lg:hidden col-span-2 flex justify-start relative">
 				<button
-					class="text-um-blue z-30 py-4 absolute -top-10"
+					class="text-um-blue z-30 py-4 absolute -top-9"
 					@click="toggleSideMenu">
 					<svg
 						v-if="!isSideMenuOpen"
@@ -36,14 +36,11 @@
 			</div>
 			<div class="container-row">
 				<div
-					v-if="
-						cmsContent.childrenData._embedded.content &&
-						isDesktop === false
-					"
+					v-if="cmsContent.childrenData._embedded.content"
 					class="container pb-10 pt-10 fixed top-12 lg:hidden left-0 h-screen w-full bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-start gap-5 z-20"
 					:class="{
-						'translate-x-[-100%]': isSideMenuOpen,
-						'translate-x-0': !isSideMenuOpen,
+						'translate-x-0': isSideMenuOpen,
+						'translate-x-[-100%]': !isSideMenuOpen,
 					}">
 					<h1
 						v-if="cmsContent.documentationHeadline"
@@ -159,7 +156,7 @@ onMounted(async () => {
 		JSON.parse(window.localStorage.getItem(`${route.params.slug}`)),
 	)
 	cmsContent.value = localStorageContent.value._value
-	console.log(cmsContent.value)
+
 	// Find h3 tags and display them in the h3Contents
 	const documentationDescription = cmsContent.value.documentationDescription
 

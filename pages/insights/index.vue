@@ -11,9 +11,9 @@
 					.content"
 				:key="index">
 				<div
-					v-for="(childContent, index) in content.childrenData
-						._embedded.content"
-					:key="index"
+					v-for="(childContent, i) in content.childrenData._embedded
+						.content"
+					:key="i"
 					class="mb-4">
 					<div v-if="childContent.highligted === true">
 						<HighlightCard
@@ -47,8 +47,7 @@
 				:headline="card.insightHeadline"
 				:description="card.teaserText"
 				:image="card.image[0]._url"
-				:icon="card.icon?.src"
-				:style="'dark'">
+				:icon="card.icon?.src">
 			</sectionCard>
 		</div>
 	</div>
@@ -86,7 +85,6 @@ onMounted(async () => {
 		JSON.parse(window.localStorage.getItem('insights')),
 	)
 	cmsContent.value = localStorageContent.value._value
-	console.log(cmsContent.value.childrenData._embedded.content)
 })
 </script>
 

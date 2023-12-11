@@ -20,9 +20,9 @@
 						.content"
 					:key="index">
 					<div
-						v-for="(childContent, index) in content.childrenData
+						v-for="(childContent, i) in content.childrenData
 							._embedded.content"
-						:key="index"
+						:key="i"
 						class="mb-3">
 						<div v-if="childContent.highligted">
 							<HighlightCard
@@ -44,7 +44,11 @@
 				:key="index"
 				:url="card._url"
 				:headline="card.name"
-				:description="card.description"
+				:description="
+					card.description ||
+					card.insightsDescription ||
+					card.documentationDescription
+				"
 				:image="card.image"
 				:icon="card.icon?.src || card.documentationIcon?.src"
 				:style="'dark'">

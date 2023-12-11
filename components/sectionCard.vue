@@ -6,12 +6,10 @@
 		:target="target">
 		<img
 			v-if="image"
-			class="w-full h-full absolute left-0 top-0 rounded-sm -z-10 bg-cover"
+			class="w-full h-full absolute left-0 top-0 rounded-sm bg-cover opacity-70 object-cover"
 			:src="image"
 			alt="background image" />
 
-		<!-- 		<img v-else class="w-full h-full absolute left-0 top-0 rounded-sm -z-10 bg-cover opacity-90"
-			src="@/assets/image/Dark_Blue_Full.png" alt="background image" /> -->
 		<div v-if="icon" class="absolute right-2 top-2 overflow-hidden">
 			<img
 				v-if="icon"
@@ -19,10 +17,12 @@
 				:alt="headline"
 				:src="icon" />
 		</div>
-
-		<h3 class="font-bold text-2xl mb-3 capitalize">{{ headline }}</h3>
-		<p class="text-sm pr-8 line-clamp-3" v-html="description"></p>
-
+		<div class="z-20 bg-um-blue rounded-xs">
+			<h3 class="font-bold text-2xl mb-3 capitalize z-10">
+				{{ headline }}
+			</h3>
+			<p class="text-sm pr-8 line-clamp-3 z-10" v-html="description"></p>
+		</div>
 		<div
 			class="z-30 absolute top-0 right-0 left-0 bottom-0 [&>div]:hover:opacity-100 [&>div]:hover:right-[20px] !ease-umbraco-ease duration-100">
 			<div
@@ -81,7 +81,8 @@ const containerStyling = () => {
 				'bg-[url(@/assets/image/Pink_Corner.png)]  bg-cover text-um-blue '
 			break
 		default:
-			containerColor = ' text-um-palepink'
+			containerColor =
+				'text-um-white bg-[url(@/assets/image/Dark_Blue_Corner.png)]'
 			break
 	}
 

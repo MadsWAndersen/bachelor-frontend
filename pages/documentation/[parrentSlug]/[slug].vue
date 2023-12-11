@@ -34,6 +34,7 @@
 					</svg>
 				</button>
 			</div>
+
 			<div
 				v-if="cmsContent.childrenData._embedded.content"
 				class="container pb-10 pt-10 fixed top-12 lg:hidden left-0 h-screen w-full bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-start gap-5 z-20"
@@ -168,9 +169,6 @@ const itemBefore = ref()
 const itemAfter = ref()
 const isSideMenuOpen = ref(false)
 const isDesktop = ref(false)
-
-console.log(route)
-console.log(pageData)
 
 const pageDataID = ref({
 	_id: '',

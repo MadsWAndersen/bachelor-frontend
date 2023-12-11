@@ -2,7 +2,7 @@
 	<div v-if="cmsContent">
 		<HeroHeader
 			:headline="cmsContent.name"
-			:heroText="cmsContent.description"
+			:heroText="cmsContent.documentationDescription"
 			:heroBreadCrumbs="cmsContent._url" />
 
 		<div v-if="cmsContent.childrenData._embedded.content" class="-mb-3">
@@ -11,9 +11,9 @@
 					.content"
 				:key="index">
 				<div
-					v-for="(childContent, index) in content.childrenData
-						._embedded.content"
-					:key="index"
+					v-for="(childContent, i) in content.childrenData._embedded
+						.content"
+					:key="i"
 					class="mb-3">
 					<div v-if="childContent.highligted === true">
 						<HighlightCard
