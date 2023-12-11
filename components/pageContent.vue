@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="h3Contents && h3Contents.length > 0"
-		class="lg:col-span-2 lg:block hidden">
+		class="lg:col-start-11 lg:col-span-2 lg:block hidden">
 		<div class="sticky">
 			<p class="font-bold mb-4">Page content</p>
 			<ul>

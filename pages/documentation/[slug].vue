@@ -65,7 +65,7 @@
 
 				<div
 					v-if="cmsContent.childrenData._embedded.content"
-					class="lg:col-span-2 lg:block fixed hidden">
+					class="lg:col-span-2 lg:block lg:relative fixed hidden">
 					<h1
 						v-if="cmsContent.documentationHeadline"
 						class="text-2xl mb-5">

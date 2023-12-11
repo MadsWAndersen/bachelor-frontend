@@ -61,7 +61,7 @@
 
 			<div
 				v-if="cmsContent.childrenData._embedded.content"
-				class="lg:col-span-2 lg:block fixed hidden">
+				class="lg:col-span-2 lg:block hidden">
 				<h1
 					v-if="cmsContent.documentationHeadline"
 					class="text-2xl mb-5">
@@ -85,8 +85,11 @@
 				<div class="container p-0">
 					<div class="container-row">
 						<div class="col-span-full mb-10">
-							<div class="flex justify-between">
-								<h1 v-if="pageData.name" class="text-4xl mb-5">
+							<div
+								class="flex lg:justify-between lg:flex-row flex-col lg:mb-0 mb-3">
+								<h1
+									v-if="pageData.name"
+									class="text-4xl mb-5 lg:max-w-[70%]">
 									{{ pageData.name }}
 								</h1>
 								<Button
