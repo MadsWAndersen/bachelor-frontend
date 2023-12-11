@@ -25,9 +25,9 @@
 			</div>
 		</div>
 
-		<div class="container-row lg:mb-10 mb-6 lg:mt-10">
+		<div class="container-row lg:mb-10 mb-6 lg:mt-10 mt-6">
 			<div
-				class="border-2 col-span-3 rounded-xs border-um-blue py-2 px-2 w-full flex flex-row relative overflow-hidden">
+				class="border-2 col-span-4 lg:col-span-3 rounded-xs border-um-blue py-2 px-2 w-full flex flex-row relative overflow-hidden">
 				<Icon
 					name="ph:magnifying-glass-bold"
 					class="absolute fill-um-blue stroke-um-blue top-[50%] translate-y-[-50%]" />
