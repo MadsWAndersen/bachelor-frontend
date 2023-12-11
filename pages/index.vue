@@ -46,7 +46,7 @@
 				:headline="card.name"
 				:description="card.description"
 				:image="card.image"
-				:icon="card.icon?.src"
+				:icon="card.icon?.src || card.documentationIcon?.src"
 				:style="'dark'">
 			</sectionCard>
 		</div>
