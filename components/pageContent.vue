@@ -1,14 +1,10 @@
 <template>
-	<div
-		v-if="h3Contents && h3Contents.length > 0"
-		class="lg:col-span-2 lg:block hidden">
+	<div v-if="h3Contents && h3Contents.length > 0" class="lg:col-span-2 lg:block hidden">
 		<div class="sticky">
-			<p class="font-bold mb-4">Page content</p>
+			<p class="font-bold text-um-blue mb-4">Page content</p>
 			<ul>
-				<li
-					v-for="(h3Tag, index) in h3Contents"
-					:key="index"
-					class="mb-4 cursor-pointer hover:underline">
+				<li v-for="(h3Tag, index) in h3Contents" :key="index"
+					class="mb-4 cursor-pointer text-um-blue hover:underline">
 					<a @click="scrollToSection(index)">{{ h3Tag }}</a>
 				</li>
 			</ul>
