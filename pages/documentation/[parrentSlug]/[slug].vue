@@ -76,12 +76,12 @@
 						<NuxtLink
 							:to="`${content._url}`"
 							@click="isDesktop ? '' : toggleSideMenu"
-							>{{ content.name }}</NuxtLink
-						>
+							>{{ content.name }}
+						</NuxtLink>
 					</li>
 				</ul>
 			</div>
-			<div class="lg:col-span-6 lg:col-start-4 col-span-4">
+			<div class="lg:col-span-6 lg:col-start-4 col-span-4 text-um-black">
 				<div class="container p-0">
 					<div class="container-row">
 						<div class="col-span-full mb-10">
@@ -101,7 +101,9 @@
 							<BreadCrumb :data="pageData._url" />
 
 							<p v-if="pageData.date" class="mb-5">
-								<span class="font-bold mr-2">Date:</span>
+								<span class="font-bold text-um-blue mr-2"
+									>Date:</span
+								>
 								{{ formatDate(pageData.date) }}
 							</p>
 							<div
@@ -110,7 +112,9 @@
 									pageData.version.length > 0
 								"
 								class="mb-5 flex row-auto gap-2 items-center">
-								<span class="font-bold">Version:</span>
+								<span class="font-bold text-um-blue"
+									>Version:</span
+								>
 								<versionTag
 									v-for="(version, index) in pageData.version"
 									:key="index"
