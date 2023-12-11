@@ -3,7 +3,7 @@
 		<div class="container-row text-um-blue">
 			<div class="lg:hidden col-span-2 flex justify-start relative">
 				<button
-					class="text-um-blue z-30 py-4 absolute -top-10"
+					class="text-um-blue z-30 py-4 absolute -top-9"
 					@click="toggleSideMenu">
 					<svg
 						v-if="!isSideMenuOpen"
@@ -38,8 +38,8 @@
 				v-if="cmsContent.childrenData._embedded.content"
 				class="container pb-10 pt-10 fixed top-12 lg:hidden left-0 h-screen w-full bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-start gap-5 z-20"
 				:class="{
-					'translate-x-[-100%]': isSideMenuOpen,
-					'translate-x-0': !isSideMenuOpen,
+					'translate-x-0': isSideMenuOpen,
+					'translate-x-[-100%]': !isSideMenuOpen,
 				}">
 				<h1
 					v-if="cmsContent.documentationHeadline"
@@ -117,6 +117,11 @@
 								v-if="pageData.bodyText"
 								class="rteBlock"
 								v-html="pageData.bodyText"></div>
+							<img
+								v-if="pageData.image"
+								class="cover aspect-auto"
+								:src="pageData.image[0]._url"
+								:alt="pageData.image[0].name" />
 						</div>
 						<docButton
 							v-if="itemBefore"

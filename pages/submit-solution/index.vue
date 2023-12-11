@@ -1,15 +1,5 @@
 <template>
 	<div class="container-row flex lg:justify-center">
-		<ModalBlock v-if="modal === true">
-			<h2 class="text-2xl text-um-blue">Are you sure</h2>
-			<span class="mb-3 text-um-blue">You are about to update your user informations.</span>
-
-			<div class="flex gap-2 justify-between mt-9">
-				<Button class="!w-full" :buttonText="'No cancel'" :style="'neutral'" @click="changeModal()" />
-				<Button class="!w-full" :buttonText="'Submit solution'" :style="'dark'" @click="submit()" />
-			</div>
-		</ModalBlock>
-
 		<div class="col-span-12 lg:w-1/2 md:w-2/3 w-full">
 			<HeroHeader headline="Submit solution" heroText="" heroBreadCrumbs="Submit-solution" />
 			<div class="container-row lg:flex justify-center">
@@ -25,12 +15,12 @@
 					</p>
 
 					<div class="md:flex lg:row w-full mb-5">
-						<div class="md:w-1/2 pr-6">
+						<div class="md:pr-6 w-full">
 							<p class="w-full text-m font-semibold text-um-blue pt-6 mr-5">
 								Select the category
 							</p>
 							<select id="parentId"
-								class="inline-flex w-full justify-center rounded-t-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
+								class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
 								<option value="none" selected disabled hidden>
 									Select an category
 								</option>
@@ -43,7 +33,7 @@
 								</option>
 							</select>
 						</div>
-						<div class="md:w-1/2 w-full">
+						<div class="w-full">
 							<p class="w-full text-m font-semibold text-um-blue pt-6 mr-5">
 								Select the versions
 							</p>
@@ -52,9 +42,9 @@
 									class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 									placeholder="type in version" @keyup.enter="addVersion()" />
 								<button id="versionBtn"
-									class="inline-flex w-1/6 justify-center rounded-xs bg-white px-3 p-2 m-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+									class="inline-flex w-1/6 justify-center rounded-xs bg-white px-3 p-2 md:m-3 my-3 ml-2 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue flex items-center"
 									@click="addVersion()">
-									+
+									<Icon name="streamline:add-1-solid" class="" />
 								</button>
 							</div>
 							<div class="w-full flex flex-wrap max-w-sm">
@@ -98,10 +88,18 @@
 				</div>
 			</div>
 		</div>
+		<ModalBlock v-if="modal === true">
+			<h2 class="text-2xl text-um-blue">Are you sure</h2>
+			<span class="mb-3 text-um-blue">You are about to update your user informations.</span>
+
+			<div class="flex gap-2 justify-between mt-9 md:flex-row flex-col">
+				<Button class="!w-full" :buttonText="'No cancel'" :style="'neutral'" @click="changeModal()" />
+				<Button class="!w-full" :buttonText="'Submit solution'" :style="'dark'" @click="submit()" />
+			</div>
+		</ModalBlock>
 	</div>
 </template>
 
-<style lang="scss" scoped></style>
 <script setup>
 import Editor from '@tinymce/tinymce-vue'
 const localStorageContent = ref()

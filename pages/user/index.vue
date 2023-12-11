@@ -14,7 +14,7 @@
 				<input
 					v-if="user?.name"
 					v-model="updatedUser.name"
-					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full max-w-[300px]"
+					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full md:max-w-[300px]"
 					type="text"
 					:placeholder="user?.name" />
 			</div>
@@ -26,7 +26,7 @@
 				>
 				<input
 					v-if="user?.memberTypeAlias"
-					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full max-w-[300px]"
+					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full md:max-w-[300px]"
 					type="text"
 					:placeholder="user.memberTypeAlias" />
 			</div>
@@ -39,7 +39,7 @@
 				<input
 					v-if="user?.email"
 					v-model="updatedUser.email"
-					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full max-w-[300px]"
+					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full md:max-w-[300px]"
 					type="text"
 					:placeholder="user?.email" />
 			</div>
@@ -50,7 +50,8 @@
 					>You are about to update your user informations.</span
 				>
 
-				<div class="flex gap-2 justify-between mt-9">
+				<div
+					class="flex gap-2 justify-between mt-9 md:flex-row flex-col">
 					<Button
 						class="!w-full"
 						:buttonText="'No cancel'"
