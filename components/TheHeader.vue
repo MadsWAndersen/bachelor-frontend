@@ -1,140 +1,80 @@
 <template>
-	<header
-		class="container py-7 fixed bg-um-white top-0 left-1/2 -translate-x-1/2 shadow-sm w-full z-40">
+	<header class="container py-7 fixed bg-um-white top-0 left-1/2 -translate-x-1/2 shadow-sm w-full z-40">
 		<nav class="container-row items-center">
-			<NuxtLink
-				class="col-span-2 mr-auto text-white font-semibold"
-				to="/">
+			<NuxtLink class="col-span-2 mr-auto text-white font-semibold" to="/">
 				<img src="@/assets/icons/logo.svg" alt="" />
 			</NuxtLink>
 
 			<div class="lg:hidden col-span-2 flex justify-end">
 				<button class="text-um-blue z-50" @click="toggleMobileMenu">
-					<svg
-						v-if="!isMobileMenuOpen"
-						class="w-6 h-6"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
+					<svg v-if="!isMobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
 						xmlns="http://www.w3.org/2000/svg">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 6h16M4 12h16m-7 6h7"></path>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+						</path>
 					</svg>
 
-					<svg
-						v-else
-						class="w-6 h-6"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
+					<svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
 						xmlns="http://www.w3.org/2000/svg">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M6 18L18 6M6 6l12 12"></path>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+						</path>
 					</svg>
 				</button>
 			</div>
 
-			<div
-				class="container pb-10 pt-10 fixed top-0 right-0 h-screen lg:hidden w-full md:w-1/2 bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-end gap-5 z-40"
+			<div class="container pb-10 pt-10 fixed top-0 right-0 h-screen lg:hidden w-full md:w-1/2 bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-end gap-5 z-40"
 				:class="{
 					'translate-x-0': isMobileMenuOpen,
 					'translate-x-full': !isMobileMenuOpen,
 				}">
-				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underline"
-					to="/documentation"
-					@click="toggleMobileMenu">
+				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/documentation" @click="toggleMobileMenu">
 					Documentation
 				</NuxtLink>
-				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underline"
-					to="/tools"
-					@click="toggleMobileMenu">
+				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/tools" @click="toggleMobileMenu">
 					Tools
 				</NuxtLink>
-				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underline"
-					to="/insights"
-					@click="toggleMobileMenu">
+				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/insights" @click="toggleMobileMenu">
 					Insights
 				</NuxtLink>
-				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underline"
-					to="/submission"
-					@click="toggleMobileMenu">
+				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/submission" @click="toggleMobileMenu">
 					Submission
 				</NuxtLink>
-				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underline"
-					to="/workshop"
-					@click="toggleMobileMenu">
+				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/workshop" @click="toggleMobileMenu">
 					Workshop
 				</NuxtLink>
-				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underline"
-					to="/user"
-					@click="toggleMobileMenu"
-					>User
+				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/user" @click="toggleMobileMenu">User
 				</NuxtLink>
-				<a
-					class="text-um-blue font-bold m-0 hover:underline"
-					@click="userData.logout() && toggleMobileMenu"
-					>Log out</a
-				>
+				<a class="text-um-blue font-bold m-0 hover:underline" @click="userData.logout() && toggleMobileMenu">Log
+					out</a>
 			</div>
 
-			<div
-				class="lg:col-span-10 justify-end gap-8 items-center lg:flex hidden">
-				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underline"
-					to="/documentation">
+			<div class="lg:col-span-10 justify-end gap-8 items-center lg:flex hidden">
+				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/documentation">
 					Documentation
 				</NuxtLink>
-				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underline"
-					to="/tools">
+				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/tools">
 					Tools
 				</NuxtLink>
-				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underline"
-					to="/insights">
+				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/insights">
 					Insights
 				</NuxtLink>
-				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underline"
-					to="/submit-solution">
+				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/submit-solution">
 					Submit solution
 				</NuxtLink>
-				<NuxtLink
-					class="text-um-blue font-bold m-0 hover:underline"
-					to="/workshop">
+				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/workshop">
 					Workshop
 				</NuxtLink>
 
 				<div class="relative">
-					<profilePicture
-						class="cursor-pointer"
-						:src="image"
-						@click.stop="toggleDropdown()" />
-					<div
-						v-if="isDropdownVisible"
-						class="absolute right-0 mt-2 w-12 bg-white border-um-blue bg-um-white border rounded-sm shadow-md overflow-hidden">
+					<profilePicture class="cursor-pointer" :src="image" @click.stop="toggleDropdown()" />
+					<div v-if="isDropdownVisible"
+						class="absolute right-0 mt-2 w-[180px] bg-white border-um-blue bg-um-white border rounded-sm shadow-md overflow-hidden">
 						<NuxtLink
 							class="block py-2 px-7 text-sm text-gray-700 hover:bg-gray-100 hover:bg-um-palepink overflow-hidden"
-							to="/user"
-							>User</NuxtLink
-						>
-						<a
-							class="block py-2 px-7 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer hover:bg-um-palepink overflow-hidden"
-							@click="userData.logout()"
-							>Log out</a
-						>
+							to="/user">User</NuxtLink>
+						<a class="block py-2 px-7 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer hover:bg-um-palepink overflow-hidden"
+							@click="userData.logout()">Log out</a>
+						<p class="block py-2 px-7 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer hover:bg-um-palepink overflow-hidden"
+							@click="updateData()">Update content</p>
 					</div>
 				</div>
 			</div>
@@ -239,4 +179,123 @@ onMounted(async () => {
 		}
 	}
 })
+
+const updateData = async () => {
+	const initialResponse = await fetchData(
+		'https://cdn.umbraco.io/content/',
+	)
+	const hrefs = initialResponse._embedded.content.map(
+		(content) => content._links.self.href,
+	)
+	detailedData.value = await fetchDetailedData(hrefs)
+	window.localStorage.setItem(
+		'documentation',
+		JSON.stringify(detailedData.value[0]),
+	)
+	window.localStorage.setItem(
+		'insights',
+		JSON.stringify(detailedData.value[1]),
+	)
+	window.localStorage.setItem(
+		'tools',
+		JSON.stringify(detailedData.value[2]),
+	)
+
+	window.localStorage.setItem(
+		'workshop',
+		JSON.stringify(detailedData.value[3]),
+	)
+	// sort documentation
+	for (
+		let i = 0;
+		i < detailedData.value[0].childrenData._embedded.content.length;
+		i++
+	) {
+		window.localStorage.setItem(
+			detailedData.value[0].childrenData._embedded.content[
+				i
+			].name.toLowerCase(),
+			JSON.stringify(
+				detailedData.value[0].childrenData._embedded.content[i],
+			),
+		)
+	}
+	for (
+		let i = 0;
+		i < detailedData.value[1].childrenData._embedded.content.length;
+		i++
+	) {
+		window.localStorage.setItem(
+			detailedData.value[1].childrenData._embedded.content[
+				i
+			].name.toLowerCase(),
+			JSON.stringify(
+				detailedData.value[1].childrenData._embedded.content[i],
+			),
+		)
+	}
+
+	for (
+		let i = 0;
+		i < detailedData.value[3].childrenData._embedded.content.length;
+		i++
+	) {
+		window.localStorage.setItem(
+			detailedData.value[3].childrenData._embedded.content[
+				i
+			].name.toLowerCase(),
+			JSON.stringify(
+				detailedData.value[3].childrenData._embedded.content[i],
+			),
+		)
+	}
+
+	window.location.href = "/";
+
+}
+
+const detailedData = ref(null)
+function fetchData(url) {
+	return fetch(url, {
+		headers: {
+			'umb-project-alias': 'pba-webdev',
+			'Accept-Language': 'en-US',
+			Authorization: 'Basic elFJZk50eEpCYWFidFFDSTNweDg6',
+		},
+	}).then((response) => response.json())
+}
+
+async function fetchRecursive(url) {
+	const data = await fetchData(url)
+	if (data._embedded && data._embedded.content) {
+		await Promise.all(
+			data._embedded.content.map(async (item) => {
+				if (item._links && item._links.children) {
+					item.childrenData = await fetchRecursive(
+						item._links.children.href,
+					)
+				}
+			}),
+		)
+	}
+	return data
+}
+
+async function fetchDetailedData(hrefs) {
+	const details = await Promise.all(hrefs.map((href) => fetchData(href)))
+	return Promise.all(
+		details.map((detail) => {
+			if (detail._links && detail._links.children) {
+				return fetchRecursive(detail._links.children.href).then(
+					(childrenData) => {
+						return { ...detail, childrenData }
+					},
+				)
+			}
+			return detail
+		}),
+	)
+
+}
+
 </script>
