@@ -3,7 +3,7 @@
 		<div class="container-row text-um-blue">
 			<div class="lg:hidden col-span-2 flex justify-start relative">
 				<button
-					class="text-um-blue z-30 py-4 absolute -top-10"
+					class="text-um-blue z-30 py-4 absolute -top-9"
 					@click="toggleSideMenu">
 					<svg
 						v-if="!isSideMenuOpen"
@@ -38,8 +38,8 @@
 				v-if="cmsContent.childrenData._embedded.content"
 				class="container pb-10 pt-10 fixed top-12 lg:hidden left-0 h-screen w-full bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-start gap-5 z-20"
 				:class="{
-					'translate-x-[-100%]': isSideMenuOpen,
-					'translate-x-0': !isSideMenuOpen,
+					'translate-x-0': isSideMenuOpen,
+					'translate-x-[-100%]': !isSideMenuOpen,
 				}">
 				<h1
 					v-if="cmsContent.documentationHeadline"
@@ -61,7 +61,7 @@
 
 			<div
 				v-if="cmsContent.childrenData._embedded.content"
-				class="lg:col-span-2 lg:block fixed hidden">
+				class="lg:col-span-2 lg:block hidden">
 				<h1
 					v-if="cmsContent.documentationHeadline"
 					class="text-2xl mb-5">
@@ -76,23 +76,34 @@
 						<NuxtLink
 							:to="`${content._url}`"
 							@click="isDesktop ? '' : toggleSideMenu"
-							>{{ content.name }}</NuxtLink
-						>
+							>{{ content.name }}
+						</NuxtLink>
 					</li>
 				</ul>
 			</div>
-			<div class="lg:col-span-6 lg:col-start-4 col-span-4">
+			<div class="lg:col-span-6 lg:col-start-4 col-span-4 text-um-black">
 				<div class="container p-0">
 					<div class="container-row">
 						<div class="col-span-full mb-10">
-							<h1 v-if="pageData.name" class="text-4xl mb-5">
-								{{ pageData.name }}
-							</h1>
+							<div
+								class="flex lg:justify-between lg:flex-row flex-col lg:mb-0 mb-3">
+								<h1
+									v-if="pageData.name"
+									class="text-4xl mb-5 lg:max-w-[70%]">
+									{{ pageData.name }}
+								</h1>
+								<Button
+									button-text="Request edit"
+									class="mr-4"
+									@click="requestEdit" />
+							</div>
 
 							<BreadCrumb :data="pageData._url" />
 
 							<p v-if="pageData.date" class="mb-5">
-								<span class="font-bold mr-2">Date:</span>
+								<span class="font-bold text-um-blue mr-2"
+									>Date:</span
+								>
 								{{ formatDate(pageData.date) }}
 							</p>
 							<div
@@ -101,7 +112,9 @@
 									pageData.version.length > 0
 								"
 								class="mb-5 flex row-auto gap-2 items-center">
-								<span class="font-bold">Version:</span>
+								<span class="font-bold text-um-blue"
+									>Version:</span
+								>
 								<versionTag
 									v-for="(version, index) in pageData.version"
 									:key="index"
@@ -111,6 +124,11 @@
 								v-if="pageData.bodyText"
 								class="rteBlock"
 								v-html="pageData.bodyText"></div>
+							<img
+								v-if="pageData.image && pageData.image[0]"
+								class="cover aspect-auto"
+								:src="pageData.image[0]._url"
+								:alt="pageData.image[0].name" />
 						</div>
 						<docButton
 							v-if="itemBefore"
@@ -138,6 +156,7 @@
 </template>
 
 <script setup>
+import { usePageStore } from '@/stores/usePageStore'
 const route = useRoute()
 const localStorageContent = ref()
 const cmsContent = ref()
@@ -149,6 +168,20 @@ const itemBefore = ref()
 const itemAfter = ref()
 const isSideMenuOpen = ref(false)
 const isDesktop = ref(false)
+
+console.log(route)
+console.log(pageData)
+
+const pageDataID = ref({
+	_id: '',
+})
+
+const requestEdit = () => {
+	const store = usePageStore()
+	store.setID(pageDataID.value._id)
+	const router = useRouter()
+	router.push('/edit-solution')
+}
 
 const toggleSideMenu = () => {
 	isSideMenuOpen.value = !isSideMenuOpen.value
@@ -171,7 +204,7 @@ onMounted(async () => {
 	pageData.value = cmsContent.value.childrenData._embedded.content.filter(
 		(contentNode) =>
 			contentNode.name.toLowerCase() ===
-			`${route.params.slug.replace('-', ' ')}`,
+			`${route.params.slug.replace(/-/g, ' ')}`,
 	)[0]
 
 	// Find h3 tags and display them in the h3Contents
@@ -198,6 +231,10 @@ onMounted(async () => {
 		// Set the value of itemBefore and itemAfter
 		itemBefore.value = currentPage[indexOfMatch - 1]
 		itemAfter.value = currentPage[indexOfMatch + 1]
+	}
+
+	pageDataID.value = {
+		_id: pageData.value._id,
 	}
 })
 </script>

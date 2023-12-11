@@ -1,6 +1,6 @@
 <template>
 	<div v-if="localStorageContent">
-		<div class="text-um-blue">
+		<div class="">
 			<div class="lg:hidden col-span-2 flex justify-start">
 				<button
 					class="text-um-blue z-30 py-4 absolute -top-10"
@@ -47,7 +47,7 @@
 					}">
 					<h1
 						v-if="cmsContent.documentationHeadline"
-						class="text-2xl mb-5">
+						class="text-2xl text-um-blue mb-5">
 						{{ cmsContent.documentationHeadline }}
 					</h1>
 					<ul
@@ -65,7 +65,7 @@
 
 				<div
 					v-if="cmsContent.childrenData._embedded.content"
-					class="lg:col-span-2 lg:block fixed hidden">
+					class="lg:col-span-2 lg:block lg:relative fixed hidden">
 					<h1
 						v-if="cmsContent.documentationHeadline"
 						class="text-2xl mb-5">
@@ -76,7 +76,7 @@
 							._embedded.content"
 						:key="index"
 						class="list-disc">
-						<li class="ml-6 mb-4 hover:underline">
+						<li class="ml-6 mb-4 text-um-blue hover:underline">
 							<NuxtLink
 								:to="`${content._url}`"
 								@click="toggleSideMenu"
@@ -89,12 +89,18 @@
 					<div class="container p-0">
 						<div class="container-row">
 							<div class="col-span-full mb-10">
-								<h1 class="text-4xl mb-5">
-									{{ cmsContent.documentationHeadline }}
+								<h1 class="text-4xl text-um-blue mb-5">
+									Welcome to the
+									<span class="font-semibold italic">{{
+										cmsContent.documentationHeadline
+									}}</span>
+									category
 								</h1>
 								<BreadCrumb :data="cmsContent._url" />
 								<p class="mb-5">
-									<span class="font-bold mr-2">Date:</span>
+									<span class="font-bold text-um-blue mr-2"
+										>Date:</span
+									>
 									{{ formatDate(cmsContent._createDate) }}
 								</p>
 

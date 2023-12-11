@@ -197,14 +197,9 @@ async function fetchDetailedData(hrefs) {
 	<div class="p-0 lg:col-span-12">
 		<div class="container-row p-0">
 			<div class="lg:col-span-8 h-screen hidden lg:block">
-				<img
-					class="h-full object-cover"
-					src="../../assets/image/Pink_Full.png"
-					alt="" />
+				<img class="h-full object-cover" src="../../assets/image/Pink_Full.png" alt="" />
 			</div>
-			<div
-				v-if="!userData.loading"
-				class="col-span-4 h-screen flex justify-center items-center">
+			<div v-if="!userData.loading" class="col-span-4 h-screen flex justify-center items-center">
 				<div class="col-span-3 w-1/1">
 					<form class="lg:col-span-4 bg-white px-8 pt-6 pb-8 mb-4">
 						<div class="mb-4 text-center">
@@ -216,22 +211,14 @@ async function fetchDetailedData(hrefs) {
 							</p>
 						</div>
 						<div class="mb-4">
-							<input
-								id="username"
-								v-model="username"
+							<input id="username" v-model="username"
 								class="border-b-2 w-full py-2 text-um-blue leading-tight focus:outline-none focus:shadow-outline"
-								type="text"
-								placeholder="Username"
-								@keyup.enter="login" />
+								type="text" placeholder="Username" @keyup.enter="login" />
 						</div>
 						<div class="mb-6">
-							<input
-								id="password"
-								v-model="password"
+							<input id="password" v-model="password"
 								class="border-b-2 w-full py-2 text-um-blue mb-3 leading-tight focus:outline-none focus:shadow-outline"
-								type="password"
-								placeholder="Password"
-								@keyup.enter="login" />
+								type="password" placeholder="Password" @keyup.enter="login" />
 							<p class="text-um-red text-xs italic">
 								{{ errorMessage }}
 							</p>
@@ -243,12 +230,7 @@ async function fetchDetailedData(hrefs) {
                                 type="button">
                                 Sign In
                             </button> -->
-							<linkButton
-								class="cursor-pointer"
-								url=""
-								target="_blank"
-								title="Log in"
-								:style="'login'"
+							<linkButton class="cursor-pointer" url="" target="_blank" title="Log in" :style="'login'"
 								@click="login" />
 						</div>
 						<!--                         <div class="btn_logout">
@@ -261,11 +243,12 @@ async function fetchDetailedData(hrefs) {
 				</div>
 			</div>
 		</div>
+
 		<div v-if="userData.loading" class="spinnerContainer">
 			<div class="spinner"></div>
-			<div class="loader">
-				<p>loading</p>
-				<div class="words">
+			<div class="loader w-3/4">
+				<p class="basis-1/2 text-end">loading</p>
+				<div class="words basis-1/2 w-full">
 					<span class="word"></span>
 					<span class="word">Insights</span>
 					<span class="word">Tools</span>
@@ -290,31 +273,65 @@ async function fetchDetailedData(hrefs) {
 	align-items: center;
 	justify-content: center;
 	user-select: none;
-}
 
-.spinner {
-	width: 66px;
-	height: 66px;
-	display: grid;
-	border: 4px solid #0000;
-	border-radius: 50%;
-	border-right-color: #c49a96;
-	animation: tri-spinner 1s infinite linear;
-}
+	.spinner {
+		width: 66px;
+		height: 66px;
+		display: grid;
+		border: 4px solid #0000;
+		border-radius: 50%;
+		border-right-color: #c49a96;
+		animation: tri-spinner 1s infinite linear;
 
-.spinner::before,
-.spinner::after {
-	content: '';
-	grid-area: 1/1;
-	margin: 2px;
-	border: inherit;
-	border-radius: 50%;
-	animation: tri-spinner 2s infinite;
-}
+		@media (max-width: 800px) {
+			width: 33px;
+			height: 33px;
+		}
 
-.spinner::after {
-	margin: 8px;
-	animation-duration: 3s;
+		&::before,
+		&::after {
+			content: '';
+			grid-area: 1/1;
+			margin: 2px;
+			border: inherit;
+			border-radius: 50%;
+			animation: tri-spinner 2s infinite;
+		}
+
+		&::after {
+			margin: 8px;
+			animation-duration: 3s;
+		}
+	}
+
+	.loader {
+		color: #fff;
+		font-family: 'Poppins', sans-serif;
+		font-weight: 500;
+		font-size: 25px;
+		box-sizing: content-box;
+		height: 50px;
+		padding: 10px 10px;
+		display: flex;
+		border-radius: 8px;
+		font-size: 34px;
+
+		@media (max-width: 800px) {
+			font-size: 15px;
+		}
+
+		.words {
+			overflow: hidden;
+
+			.word {
+				display: block;
+				height: 100%;
+				padding-left: 6px;
+				color: #c49a96;
+				animation: cycle-words 5s infinite;
+			}
+		}
+	}
 }
 
 @keyframes tri-spinner {
@@ -323,72 +340,36 @@ async function fetchDetailedData(hrefs) {
 	}
 }
 
-.loader {
-	color: #fff;
-	font-family: 'Poppins', sans-serif;
-	font-weight: 500;
-	font-size: 25px;
-	-webkit-box-sizing: content-box;
-	box-sizing: content-box;
-	height: 50px;
-	padding: 10px 10px;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	border-radius: 8px;
-	font-size: 34px;
-}
-
-.words {
-	overflow: hidden;
-}
-
-.word {
-	display: block;
-	height: 100%;
-	padding-left: 6px;
-	color: #c49a96;
-	animation: cycle-words 5s infinite;
-}
-
 @keyframes cycle-words {
 	10% {
-		-webkit-transform: translateY(-105%);
 		transform: translateY(-105%);
 	}
 
 	25% {
-		-webkit-transform: translateY(-100%);
 		transform: translateY(-100%);
 	}
 
 	35% {
-		-webkit-transform: translateY(-205%);
 		transform: translateY(-205%);
 	}
 
 	50% {
-		-webkit-transform: translateY(-200%);
 		transform: translateY(-200%);
 	}
 
 	60% {
-		-webkit-transform: translateY(-305%);
 		transform: translateY(-305%);
 	}
 
 	75% {
-		-webkit-transform: translateY(-300%);
 		transform: translateY(-300%);
 	}
 
 	85% {
-		-webkit-transform: translateY(-405%);
 		transform: translateY(-405%);
 	}
 
 	100% {
-		-webkit-transform: translateY(-400%);
 		transform: translateY(-400%);
 	}
 }

@@ -22,5 +22,6 @@ module.exports = {
 				ignores: ['Button', '[slug]', 'index', 'login', 'default'],
 			},
 		],
+		'object-shorthand': ['error', 'methods'],
 	},
 }

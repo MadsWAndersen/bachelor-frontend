@@ -3,7 +3,7 @@
 		class="fixed top-0 left-0 right-0 bottom-0 bg-um-black bg-opacity-25 z-50 h-screen w-screen">
 		<div class="container-row h-full">
 			<div
-				class="lg:col-span-6 col-span-2 lg:col-start-4 col-start-2 flex items-center flex-col justify-center">
+				class="lg:col-span-6 col-span-4 lg:col-start-4 col-start-0 flex items-center flex-col justify-center lg:w-full w-11/12 m-auto">
 				<div class="top bg-um-blue w-full h-12 relative">
 					<Icon
 						name="ic:twotone-question-mark"

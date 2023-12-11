@@ -1,6 +1,6 @@
 <template>
 	<div v-if="data">
-		<div class="container-row">
+		<div class="container-row lg:mb-6 mb-7">
 			<div class="col-span-5">
 				<h1 v-if="user?.name" class="text-um-blue text-4xl mb-3">
 					Hello {{ user.name }}
@@ -46,7 +46,7 @@
 				:headline="card.name"
 				:description="card.description"
 				:image="card.image"
-				:icon="card.icon?.src"
+				:icon="card.icon?.src || card.documentationIcon?.src"
 				:style="'dark'">
 			</sectionCard>
 		</div>
