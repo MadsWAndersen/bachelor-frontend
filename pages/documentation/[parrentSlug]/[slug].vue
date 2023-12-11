@@ -101,6 +101,9 @@ const itemAfter = ref()
 const isSideMenuOpen = ref(false)
 const isDesktop = ref(false)
 
+console.log(route)
+console.log(pageData)
+
 const pageDataID = ref({
 	_id: '',
 })
@@ -133,7 +136,7 @@ onMounted(async () => {
 	pageData.value = cmsContent.value.childrenData._embedded.content.filter(
 		(contentNode) =>
 			contentNode.name.toLowerCase() ===
-			`${route.params.slug.replace('-', ' ')}`,
+			`${route.params.slug.replace(/-/g, ' ')}`,
 	)[0]
 
 	// Find h3 tags and display them in the h3Contents
