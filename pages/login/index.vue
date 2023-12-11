@@ -261,11 +261,12 @@ async function fetchDetailedData(hrefs) {
 				</div>
 			</div>
 		</div>
+
 		<div v-if="userData.loading" class="spinnerContainer">
 			<div class="spinner"></div>
-			<div class="loader">
-				<p>loading</p>
-				<div class="words">
+			<div class="loader w-3/4">
+				<p class="basis-1/2 text-end">loading</p>
+				<div class="words basis-1/2 w-full">
 					<span class="word"></span>
 					<span class="word">Insights</span>
 					<span class="word">Tools</span>
@@ -290,31 +291,65 @@ async function fetchDetailedData(hrefs) {
 	align-items: center;
 	justify-content: center;
 	user-select: none;
-}
 
-.spinner {
-	width: 66px;
-	height: 66px;
-	display: grid;
-	border: 4px solid #0000;
-	border-radius: 50%;
-	border-right-color: #c49a96;
-	animation: tri-spinner 1s infinite linear;
-}
+	.spinner {
+		width: 66px;
+		height: 66px;
+		display: grid;
+		border: 4px solid #0000;
+		border-radius: 50%;
+		border-right-color: #c49a96;
+		animation: tri-spinner 1s infinite linear;
 
-.spinner::before,
-.spinner::after {
-	content: '';
-	grid-area: 1/1;
-	margin: 2px;
-	border: inherit;
-	border-radius: 50%;
-	animation: tri-spinner 2s infinite;
-}
+		@media (max-width: 800px) {
+			width: 33px;
+			height: 33px;
+		}
 
-.spinner::after {
-	margin: 8px;
-	animation-duration: 3s;
+		&::before,
+		&::after {
+			content: '';
+			grid-area: 1/1;
+			margin: 2px;
+			border: inherit;
+			border-radius: 50%;
+			animation: tri-spinner 2s infinite;
+		}
+
+		&::after {
+			margin: 8px;
+			animation-duration: 3s;
+		}
+	}
+
+	.loader {
+		color: #fff;
+		font-family: 'Poppins', sans-serif;
+		font-weight: 500;
+		font-size: 25px;
+		box-sizing: content-box;
+		height: 50px;
+		padding: 10px 10px;
+		display: flex;
+		border-radius: 8px;
+		font-size: 34px;
+
+		@media (max-width: 800px) {
+			font-size: 15px;
+		}
+
+		.words {
+			overflow: hidden;
+
+			.word {
+				display: block;
+				height: 100%;
+				padding-left: 6px;
+				color: #c49a96;
+				animation: cycle-words 5s infinite;
+			}
+		}
+	}
 }
 
 @keyframes tri-spinner {
@@ -323,72 +358,29 @@ async function fetchDetailedData(hrefs) {
 	}
 }
 
-.loader {
-	color: #fff;
-	font-family: 'Poppins', sans-serif;
-	font-weight: 500;
-	font-size: 25px;
-	-webkit-box-sizing: content-box;
-	box-sizing: content-box;
-	height: 50px;
-	padding: 10px 10px;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	border-radius: 8px;
-	font-size: 34px;
-}
-
-.words {
-	overflow: hidden;
-}
-
-.word {
-	display: block;
-	height: 100%;
-	padding-left: 6px;
-	color: #c49a96;
-	animation: cycle-words 5s infinite;
-}
-
 @keyframes cycle-words {
 	10% {
-		-webkit-transform: translateY(-105%);
 		transform: translateY(-105%);
 	}
-
 	25% {
-		-webkit-transform: translateY(-100%);
 		transform: translateY(-100%);
 	}
-
 	35% {
-		-webkit-transform: translateY(-205%);
 		transform: translateY(-205%);
 	}
-
 	50% {
-		-webkit-transform: translateY(-200%);
 		transform: translateY(-200%);
 	}
-
 	60% {
-		-webkit-transform: translateY(-305%);
 		transform: translateY(-305%);
 	}
-
 	75% {
-		-webkit-transform: translateY(-300%);
 		transform: translateY(-300%);
 	}
-
 	85% {
-		-webkit-transform: translateY(-405%);
 		transform: translateY(-405%);
 	}
-
 	100% {
-		-webkit-transform: translateY(-400%);
 		transform: translateY(-400%);
 	}
 }

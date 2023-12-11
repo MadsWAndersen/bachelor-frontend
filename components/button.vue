@@ -2,7 +2,7 @@
 	<button
 		:style="style"
 		:class="buttonStyling()"
-		class="p5 max-w-[220px] max-h-[44px] border rounded-sm font-bold">
+		class="p5 md:max-w-[220px] max-h-[44px] border rounded-sm font-bold">
 		{{ buttonText }}
 	</button>
 </template>
