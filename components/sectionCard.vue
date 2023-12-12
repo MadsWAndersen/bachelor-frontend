@@ -17,7 +17,7 @@
 				:alt="headline"
 				:src="icon" />
 		</div>
-		<div class="z-20 bg-um-blue rounded-xs">
+		<div class="z-20 rounded-xs">
 			<h3 class="font-bold text-2xl mb-3 capitalize z-10">
 				{{ headline }}
 			</h3>
