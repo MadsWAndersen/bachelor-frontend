@@ -49,7 +49,9 @@ const router = useRouter()
 
 const redirect = useRedirect();
 onMounted(async () => {
-	redirect();
+	if (!localStorage.getItem('bearerToken')) {
+		redirect();
+	}
 })
 
 const formData = ref({

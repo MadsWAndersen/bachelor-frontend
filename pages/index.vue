@@ -48,7 +48,9 @@ const userLocalStoage = ref()
 const user = ref()
 const redirect = useRedirect();
 onMounted(async () => {
-	redirect();
+	if (!localStorage.getItem('bearerToken')) {
+		redirect();
+	}
 	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem('documentation')),
 	)
@@ -58,6 +60,6 @@ onMounted(async () => {
 		JSON.parse(window.localStorage.getItem('userInfo')),
 	)
 	user.value = userLocalStoage.value._value
-	console.log(user.value)
+
 })
 </script>
