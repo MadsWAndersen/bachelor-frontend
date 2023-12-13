@@ -1,49 +1,28 @@
 <template>
 	<div v-if="localStorageContent">
 		<div class="">
-			<div class="lg:hidden col-span-2 flex justify-start">
+			<div class="lg:hidden col-span-2 flex justify-start relative">
 				<button
-					class="text-um-blue z-30 py-4 absolute -top-10"
+					class="text-um-blue z-30 py-4 absolute -top-9"
 					@click="toggleSideMenu">
-					<svg
+					<Icon
+						name="ci:hamburger-md"
 						v-if="!isSideMenuOpen"
-						class="w-6 h-6"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 6h16M4 12h16M4 18h16"></path>
-					</svg>
+						class="w-[30px] h-[30px]"></Icon>
 
-					<svg
+					<Icon
+						name="material-symbols:close-small-outline"
 						v-else
-						class="w-6 h-6"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M6 18L18 6M6 6l12 12"></path>
-					</svg>
+						class="w-[30px] h-[30px]"></Icon>
 				</button>
 			</div>
 			<div class="container-row">
 				<div
-					v-if="
-						cmsContent.childrenData._embedded.content &&
-						isDesktop === false
-					"
+					v-if="cmsContent.childrenData._embedded.content"
 					class="container pb-10 pt-10 fixed top-12 lg:hidden left-0 h-screen w-full bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-start gap-5 z-20"
 					:class="{
-						'translate-x-[-100%]': isSideMenuOpen,
-						'translate-x-0': !isSideMenuOpen,
+						'translate-x-0': isSideMenuOpen,
+						'translate-x-[-100%]': !isSideMenuOpen,
 					}">
 					<h1
 						v-if="cmsContent.documentationHeadline"
@@ -140,6 +119,7 @@ const cmsContent = ref()
 const h3Contents = ref([])
 const { formatDate } = useDateFormatter()
 const isSideMenuOpen = ref(false)
+const redirect = useRedirect()
 
 const toggleSideMenu = () => {
 	isSideMenuOpen.value = !isSideMenuOpen.value
@@ -153,13 +133,15 @@ const scrollToSection = (index) => {
 		h3Element.scrollIntoView({ behavior: 'smooth' })
 	}
 }
-
 onMounted(async () => {
+	if (!localStorage.getItem('bearerToken')) {
+		redirect()
+	}
 	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem(`${route.params.slug}`)),
 	)
 	cmsContent.value = localStorageContent.value._value
-	console.log(cmsContent.value)
+
 	// Find h3 tags and display them in the h3Contents
 	const documentationDescription = cmsContent.value.documentationDescription
 

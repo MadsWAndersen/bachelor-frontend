@@ -150,7 +150,7 @@ const versions = ref([])
 const parentId = ref('')
 const contentBodyText = ref()
 const timeElapsed = Date.now()
-let modal = ref(false)
+const modal = ref(false)
 const today = new Date(timeElapsed)
 
 const changeModal = () => {
@@ -174,7 +174,6 @@ const addVersion = () => {
 	const version = document.querySelector('#versions').value
 	versions.value.push(version)
 	document.querySelector('#versions').value = ''
-	console.log(versions)
 }
 
 const submit = async () => {
@@ -267,7 +266,6 @@ const submit = async () => {
 			document.querySelector('#headline').classList.add('ring-um-red')
 		}
 		if (parentId.value === 'none') {
-			console.log(parentId.value)
 			document.querySelector('#parentId').classList.add('ring-um-red')
 		}
 		if (!issue.value) {

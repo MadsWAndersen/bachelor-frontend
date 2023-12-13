@@ -8,6 +8,8 @@ export const useUserStore = defineStore('user', () => {
 	const RedirectUser = () => {
 		if (!localStorage.getItem('bearerToken')) {
 			window.location.href = '/login'
+		} else {
+			return;
 		}
 	}
 
