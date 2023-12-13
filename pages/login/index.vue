@@ -52,104 +52,67 @@ const login = async () => {
 	}
 }
 
+// Helper function to set local storage items
+const setLocalStorageItem = (key, value) => {
+	window.localStorage.setItem(key, JSON.stringify(value))
+}
+
+// Function to fetch and process detailed data
+const processDetailedData = async (hrefs) => {
+	const detailedData = await fetchDetailedData(hrefs)
+	;['documentation', 'insights', 'tools', 'workshop'].forEach(
+		(key, index) => {
+			setLocalStorageItem(key, detailedData[index])
+			detailedData[index].childrenData._embedded.content.forEach(
+				(content) => {
+					setLocalStorageItem(content.name.toLowerCase(), content)
+				},
+			)
+		},
+	)
+}
+
+// Main function to fetch user data
 const fetchUser = async () => {
 	userData.loading = true
-	const requestOptions = {
-		method: 'GET',
-		headers: {
-			'Umb-Project-Alias': 'pba-webdev',
-			Authorization: 'Basic cDA1ajNJMFF3T0JQMEpRZnBwcUw6',
-		},
-		redirect: 'follow',
-	}
-	const { data, pending, error, refresh } = await useFetch(
-		`https://api.umbraco.io/member/${username.value}`,
-		requestOptions,
-	)
-	console.log(data)
+
 	try {
+		const requestOptions = {
+			method: 'GET',
+			headers: {
+				'Umb-Project-Alias': 'pba-webdev',
+				Authorization: 'Basic cDA1ajNJMFF3T0JQMEpRZnBwcUw6',
+			},
+			redirect: 'follow',
+		}
+
+		// Fetch user data
+		const { data } = await useFetch(
+			`https://api.umbraco.io/member/${username.value}`,
+			requestOptions,
+		)
+		setLocalStorageItem('userInfo', data.value)
+
+		// Fetch and process detailed data
 		const initialResponse = await fetchData(
 			'https://cdn.umbraco.io/content/',
 		)
 		const hrefs = initialResponse._embedded.content.map(
 			(content) => content._links.self.href,
 		)
-		detailedData.value = await fetchDetailedData(hrefs)
-		window.localStorage.setItem(
-			'documentation',
-			JSON.stringify(detailedData.value[0]),
-		)
-		window.localStorage.setItem(
-			'insights',
-			JSON.stringify(detailedData.value[1]),
-		)
-		window.localStorage.setItem(
-			'tools',
-			JSON.stringify(detailedData.value[2]),
-		)
+		await processDetailedData(hrefs)
 
-		window.localStorage.setItem(
-			'workshop',
-			JSON.stringify(detailedData.value[3]),
-		)
-		// sort documentation
-		for (
-			let i = 0;
-			i < detailedData.value[0].childrenData._embedded.content.length;
-			i++
-		) {
-			window.localStorage.setItem(
-				detailedData.value[0].childrenData._embedded.content[
-					i
-				].name.toLowerCase(),
-				JSON.stringify(
-					detailedData.value[0].childrenData._embedded.content[i],
-				),
-			)
-		}
-		for (
-			let i = 0;
-			i < detailedData.value[1].childrenData._embedded.content.length;
-			i++
-		) {
-			window.localStorage.setItem(
-				detailedData.value[1].childrenData._embedded.content[
-					i
-				].name.toLowerCase(),
-				JSON.stringify(
-					detailedData.value[1].childrenData._embedded.content[i],
-				),
-			)
-		}
-
-		for (
-			let i = 0;
-			i < detailedData.value[3].childrenData._embedded.content.length;
-			i++
-		) {
-			window.localStorage.setItem(
-				detailedData.value[3].childrenData._embedded.content[
-					i
-				].name.toLowerCase(),
-				JSON.stringify(
-					detailedData.value[3].childrenData._embedded.content[i],
-				),
-			)
-		}
+		// Redirects user to home page
+		await navigateTo('/')
 	} catch (err) {
 		error.value = err
+	} finally {
+		userData.loading = false
 	}
-
-	// save user infomation in pinia
-	window.localStorage.setItem('userInfo', JSON.stringify(data.value))
-	userData.loading = false
-	// Redirects user to home page
-	await navigateTo('/')
-
-	return { data, pending, error, refresh }
 }
 
 const detailedData = ref(null)
+
 function fetchData(url) {
 	return fetch(url, {
 		headers: {
@@ -238,11 +201,6 @@ async function fetchDetailedData(hrefs) {
 						</div>
 
 						<div class="w-full">
-							<!--              <button
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="button">
-                                Sign In
-                            </button> -->
 							<linkButton
 								class="cursor-pointer"
 								url=""
@@ -251,12 +209,6 @@ async function fetchDetailedData(hrefs) {
 								:style="'login'"
 								@click="login" />
 						</div>
-						<!--                         <div class="btn_logout">
-                            <button @click="userData.logout()"
-                                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                                Logout
-                            </button>
-                        </div> -->
 					</form>
 				</div>
 			</div>
