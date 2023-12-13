@@ -151,6 +151,7 @@ const itemBefore = ref()
 const itemAfter = ref()
 const isSideMenuOpen = ref(false)
 const isDesktop = ref(false)
+const redirect = useRedirect()
 
 const pageDataID = ref({
 	_id: '',
@@ -175,8 +176,10 @@ const scrollToSection = (index) => {
 		h3Element.scrollIntoView({ behavior: 'smooth' })
 	}
 }
-
 onMounted(async () => {
+	if (!localStorage.getItem('bearerToken')) {
+		redirect()
+	}
 	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem(`${route.params.parrentSlug}`)),
 	)

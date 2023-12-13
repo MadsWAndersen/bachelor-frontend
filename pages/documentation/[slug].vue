@@ -119,6 +119,7 @@ const cmsContent = ref()
 const h3Contents = ref([])
 const { formatDate } = useDateFormatter()
 const isSideMenuOpen = ref(false)
+const redirect = useRedirect()
 
 const toggleSideMenu = () => {
 	isSideMenuOpen.value = !isSideMenuOpen.value
@@ -132,9 +133,11 @@ const scrollToSection = (index) => {
 		h3Element.scrollIntoView({ behavior: 'smooth' })
 	}
 }
-
-onMounted(() => {
-	localStorageContent.value = ref(
+onMounted(async () => {
+	if (!localStorage.getItem('bearerToken')) {
+		redirect()
+	}
+	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem(`${route.params.slug}`)),
 	)
 	cmsContent.value = localStorageContent.value._value
