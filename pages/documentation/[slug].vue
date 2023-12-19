@@ -2,32 +2,38 @@
 	<div v-if="localStorageContent">
 		<div class="">
 			<div class="lg:hidden col-span-2 flex justify-start relative">
-				<button class="text-um-blue z-30 py-4 absolute -top-9" @click="toggleSideMenu">
-					<svg v-if="!isSideMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-						</path>
-					</svg>
+				<button
+					class="text-um-blue z-30 py-4 absolute -top-9"
+					@click="toggleSideMenu">
+					<Icon
+						name="ci:hamburger-md"
+						v-if="!isSideMenuOpen"
+						class="w-[30px] h-[30px]"></Icon>
 
-					<svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-						</path>
-					</svg>
+					<Icon
+						name="material-symbols:close-small-outline"
+						v-else
+						class="w-[30px] h-[30px]"></Icon>
 				</button>
 			</div>
 			<div class="container-row">
-				<div v-if="cmsContent.childrenData._embedded.content"
+				<div
+					v-if="cmsContent.childrenData._embedded.content"
 					class="container pb-10 pt-10 fixed top-12 lg:hidden left-0 h-screen w-full bg-um-white shadow-lg transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-start gap-5 z-20"
 					:class="{
 						'translate-x-0': isSideMenuOpen,
 						'translate-x-[-100%]': !isSideMenuOpen,
 					}">
-					<h1 v-if="cmsContent.documentationHeadline" class="text-2xl text-um-blue mb-5">
+					<h1
+						v-if="cmsContent.documentationHeadline"
+						class="text-2xl text-um-blue mb-5">
 						{{ cmsContent.documentationHeadline }}
 					</h1>
-					<ul v-for="(content, index) in cmsContent.childrenData
-								._embedded.content" :key="index" class="list-disc">
+					<ul
+						v-for="(content, index) in cmsContent.childrenData
+							._embedded.content"
+						:key="index"
+						class="list-disc">
 						<li class="ml-6 mb-4 hover:underline">
 							<NuxtLink :to="`${content._url}`">{{
 								content.name
@@ -36,15 +42,25 @@
 					</ul>
 				</div>
 
-				<div v-if="cmsContent.childrenData._embedded.content"
+				<div
+					v-if="cmsContent.childrenData._embedded.content"
 					class="lg:col-span-2 lg:block lg:relative fixed hidden">
-					<h1 v-if="cmsContent.documentationHeadline" class="text-2xl mb-5">
+					<h1
+						v-if="cmsContent.documentationHeadline"
+						class="text-2xl mb-5">
 						{{ cmsContent.documentationHeadline }}
 					</h1>
-					<ul v-for="(content, index) in cmsContent.childrenData
-						._embedded.content" :key="index" class="list-disc">
+					<ul
+						v-for="(content, index) in cmsContent.childrenData
+							._embedded.content"
+						:key="index"
+						class="list-disc">
 						<li class="ml-6 mb-4 text-um-blue hover:underline">
-							<NuxtLink :to="`${content._url}`" @click="toggleSideMenu">{{ content.name }}</NuxtLink>
+							<NuxtLink
+								:to="`${content._url}`"
+								@click="toggleSideMenu"
+								>{{ content.name }}</NuxtLink
+							>
 						</li>
 					</ul>
 				</div>
@@ -61,22 +77,36 @@
 								</h1>
 								<BreadCrumb :data="cmsContent._url" />
 								<p class="mb-5">
-									<span class="font-bold text-um-blue mr-2">Date:</span>
+									<span class="font-bold text-um-blue mr-2"
+										>Date:</span
+									>
 									{{ formatDate(cmsContent._createDate) }}
 								</p>
 
-								<div class="rteBlock" v-html="cmsContent.documentationDescription
+								<div
+									class="rteBlock"
+									v-html="
+										cmsContent.documentationDescription
 									"></div>
 							</div>
-							<docButton :url="cmsContent.childrenData._embedded.content[0]
-								._url
-								" :title="cmsContent.childrenData._embedded.content[0]
-		.name
-		" spanText="next" :btnStyle="'next'" class="col-span-6 mb-10" />
+							<docButton
+								:url="
+									cmsContent.childrenData._embedded.content[0]
+										._url
+								"
+								:title="
+									cmsContent.childrenData._embedded.content[0]
+										.name
+								"
+								spanText="next"
+								:btnStyle="'next'"
+								class="col-span-6 mb-10" />
 						</div>
 					</div>
 				</div>
-				<pageContent :h3Contents="h3Contents" :scrollToSection="scrollToSection" />
+				<pageContent
+					:h3Contents="h3Contents"
+					:scrollToSection="scrollToSection" />
 			</div>
 		</div>
 	</div>
@@ -89,7 +119,7 @@ const cmsContent = ref()
 const h3Contents = ref([])
 const { formatDate } = useDateFormatter()
 const isSideMenuOpen = ref(false)
-const redirect = useRedirect();
+const redirect = useRedirect()
 
 const toggleSideMenu = () => {
 	isSideMenuOpen.value = !isSideMenuOpen.value
@@ -105,7 +135,7 @@ const scrollToSection = (index) => {
 }
 onMounted(async () => {
 	if (!localStorage.getItem('bearerToken')) {
-		redirect();
+		redirect()
 	}
 	localStorageContent.value = await ref(
 		JSON.parse(window.localStorage.getItem(`${route.params.slug}`)),

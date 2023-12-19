@@ -54,6 +54,7 @@ const login = async () => {
 	}
 }
 
+<<<<<<< HEAD
 const fetchUser = async () => {
 	// starts spinner 
 	userData.loading = true
@@ -64,16 +65,55 @@ const fetchUser = async () => {
 		headers: {
 			'Umb-Project-Alias': 'pba-webdev',
 			Authorization: 'Basic cDA1ajNJMFF3T0JQMEpRZnBwcUw6',
+=======
+// Helper function to set local storage items
+const setLocalStorageItem = (key, value) => {
+	window.localStorage.setItem(key, JSON.stringify(value))
+}
+
+// Function to fetch and process detailed data
+const processDetailedData = async (hrefs) => {
+	const detailedData = await fetchDetailedData(hrefs)
+	;['documentation', 'insights', 'tools', 'workshop'].forEach(
+		(key, index) => {
+			setLocalStorageItem(key, detailedData[index])
+			detailedData[index].childrenData._embedded.content.forEach(
+				(content) => {
+					setLocalStorageItem(content.name.toLowerCase(), content)
+				},
+			)
+>>>>>>> 622e7d433c6d628fee1ddb950959ae867fee99fc
 		},
-		redirect: 'follow',
-	}
-	const { data, pending, error, refresh } = await useFetch(
-		`https://api.umbraco.io/member/${username.value}`,
-		requestOptions,
 	)
+<<<<<<< HEAD
 
 	// fetches all content from backoffice
+=======
+}
+
+// Main function to fetch user data
+const fetchUser = async () => {
+	userData.loading = true
+
+>>>>>>> 622e7d433c6d628fee1ddb950959ae867fee99fc
 	try {
+		const requestOptions = {
+			method: 'GET',
+			headers: {
+				'Umb-Project-Alias': 'pba-webdev',
+				Authorization: 'Basic cDA1ajNJMFF3T0JQMEpRZnBwcUw6',
+			},
+			redirect: 'follow',
+		}
+
+		// Fetch user data
+		const { data } = await useFetch(
+			`https://api.umbraco.io/member/${username.value}`,
+			requestOptions,
+		)
+		setLocalStorageItem('userInfo', data.value)
+
+		// Fetch and process detailed data
 		const initialResponse = await fetchData(
 			'https://cdn.umbraco.io/content/',
 		)
@@ -82,6 +122,7 @@ const fetchUser = async () => {
 		const hrefs = initialResponse._embedded.content.map(
 			(content) => content._links.self.href,
 		)
+<<<<<<< HEAD
 
 
 		// stores all content from fetchDetailsData
@@ -121,9 +162,18 @@ const fetchUser = async () => {
 			)
 		}
 
+=======
+		await processDetailedData(hrefs)
+
+		// Redirects user to home page
+		await navigateTo('/')
+>>>>>>> 622e7d433c6d628fee1ddb950959ae867fee99fc
 	} catch (err) {
 		error.value = err
+	} finally {
+		userData.loading = false
 	}
+<<<<<<< HEAD
 
 	// save user infomation in localstorage
 	window.localStorage.setItem('userInfo', JSON.stringify(data.value))
@@ -138,6 +188,12 @@ const fetchUser = async () => {
 
 const detailedData = ref(null)
 // fetch function
+=======
+}
+
+const detailedData = ref(null)
+
+>>>>>>> 622e7d433c6d628fee1ddb950959ae867fee99fc
 function fetchData(url) {
 	return fetch(url, {
 		headers: {
@@ -216,20 +272,23 @@ async function fetchDetailedData(hrefs) {
 						</div>
 
 						<div class="w-full">
+<<<<<<< HEAD
 							<!--              <button
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 type="button">
                                 Sign In
                             </button> -->
 							<linkButton class="cursor-pointer" url="" target="_blank" title="Log in" :style="'login'"
+=======
+							<linkButton
+								class="cursor-pointer"
+								url=""
+								target="_blank"
+								title="Log in"
+								:style="'login'"
+>>>>>>> 622e7d433c6d628fee1ddb950959ae867fee99fc
 								@click="login" />
 						</div>
-						<!--                         <div class="btn_logout">
-                            <button @click="userData.logout()"
-                                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                                Logout
-                            </button>
-                        </div> -->
 					</form>
 				</div>
 			</div>
