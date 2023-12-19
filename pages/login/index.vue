@@ -14,11 +14,13 @@ const username = ref('testperson')
 const password = ref('')
 
 const login = async () => {
+	// error handeling 
 	if (!username.value + !password.value) {
 		document.querySelector('#username').classList.add('text-um-red')
 		document.querySelector('#password').classList.add('text-um-red')
 		errorMessage.value = 'The username or password is missing.'
 	} else {
+		// fetch bearertoken
 		const requestOptions = {
 			method: 'POST',
 			headers: {
@@ -41,7 +43,7 @@ const login = async () => {
 			errorMessage.value = error._object.udMUIHuGdc.data.error
 		}
 
-		// saves bearer token in localstorage
+		// saves bearer token in pinia
 		userData.bearerToken = data.value.access_token
 
 		// saves bearer token in localstorage
@@ -53,7 +55,10 @@ const login = async () => {
 }
 
 const fetchUser = async () => {
+	// starts spinner 
 	userData.loading = true
+
+	// fetches user infomation
 	const requestOptions = {
 		method: 'GET',
 		headers: {
@@ -66,15 +71,23 @@ const fetchUser = async () => {
 		`https://api.umbraco.io/member/${username.value}`,
 		requestOptions,
 	)
-	console.log(data)
+
+	// fetches all content from backoffice
 	try {
 		const initialResponse = await fetchData(
 			'https://cdn.umbraco.io/content/',
 		)
+
+		// gets urls for all content sections
 		const hrefs = initialResponse._embedded.content.map(
 			(content) => content._links.self.href,
 		)
+
+
+		// stores all content from fetchDetailsData
 		detailedData.value = await fetchDetailedData(hrefs)
+
+		// sort and save content to localstorage
 		window.localStorage.setItem(
 			'documentation',
 			JSON.stringify(detailedData.value[0]),
@@ -92,7 +105,7 @@ const fetchUser = async () => {
 			'workshop',
 			JSON.stringify(detailedData.value[3]),
 		)
-		// sort documentation
+		// sort documentation categories
 		for (
 			let i = 0;
 			i < detailedData.value[0].childrenData._embedded.content.length;
@@ -107,41 +120,15 @@ const fetchUser = async () => {
 				),
 			)
 		}
-		for (
-			let i = 0;
-			i < detailedData.value[1].childrenData._embedded.content.length;
-			i++
-		) {
-			window.localStorage.setItem(
-				detailedData.value[1].childrenData._embedded.content[
-					i
-				].name.toLowerCase(),
-				JSON.stringify(
-					detailedData.value[1].childrenData._embedded.content[i],
-				),
-			)
-		}
 
-		for (
-			let i = 0;
-			i < detailedData.value[3].childrenData._embedded.content.length;
-			i++
-		) {
-			window.localStorage.setItem(
-				detailedData.value[3].childrenData._embedded.content[
-					i
-				].name.toLowerCase(),
-				JSON.stringify(
-					detailedData.value[3].childrenData._embedded.content[i],
-				),
-			)
-		}
 	} catch (err) {
 		error.value = err
 	}
 
-	// save user infomation in pinia
+	// save user infomation in localstorage
 	window.localStorage.setItem('userInfo', JSON.stringify(data.value))
+
+	// stop spinner
 	userData.loading = false
 	// Redirects user to home page
 	await navigateTo('/')
@@ -150,6 +137,7 @@ const fetchUser = async () => {
 }
 
 const detailedData = ref(null)
+// fetch function
 function fetchData(url) {
 	return fetch(url, {
 		headers: {
@@ -160,6 +148,8 @@ function fetchData(url) {
 	}).then((response) => response.json())
 }
 
+// loops until there is no more _links then returns its data layer
+// returns nested content
 async function fetchRecursive(url) {
 	const data = await fetchData(url)
 	if (data._embedded && data._embedded.content) {
@@ -176,6 +166,7 @@ async function fetchRecursive(url) {
 	return data
 }
 
+//Loops though all the hrefs from the backoffice, for each href it uses fetchRecursive til get its content. Return all the content
 async function fetchDetailedData(hrefs) {
 	const details = await Promise.all(hrefs.map((href) => fetchData(href)))
 	return Promise.all(
@@ -197,14 +188,9 @@ async function fetchDetailedData(hrefs) {
 	<div class="p-0 lg:col-span-12">
 		<div class="container-row p-0">
 			<div class="lg:col-span-8 h-screen hidden lg:block">
-				<img
-					class="h-full object-cover"
-					src="../../assets/image/Pink_Full.png"
-					alt="" />
+				<img class="h-full object-cover" src="../../assets/image/Pink_Full.png" alt="" />
 			</div>
-			<div
-				v-if="!userData.loading"
-				class="col-span-4 h-screen flex justify-center items-center">
+			<div v-if="!userData.loading" class="col-span-4 h-screen flex justify-center items-center">
 				<div class="col-span-3 w-1/1">
 					<form class="lg:col-span-4 bg-white px-8 pt-6 pb-8 mb-4">
 						<div class="mb-4 text-center">
@@ -216,22 +202,14 @@ async function fetchDetailedData(hrefs) {
 							</p>
 						</div>
 						<div class="mb-4">
-							<input
-								id="username"
-								v-model="username"
+							<input id="username" v-model="username"
 								class="border-b-2 w-full py-2 text-um-blue leading-tight focus:outline-none focus:shadow-outline"
-								type="text"
-								placeholder="Username"
-								@keyup.enter="login" />
+								type="text" placeholder="Username" @keyup.enter="login" />
 						</div>
 						<div class="mb-6">
-							<input
-								id="password"
-								v-model="password"
+							<input id="password" v-model="password"
 								class="border-b-2 w-full py-2 text-um-blue mb-3 leading-tight focus:outline-none focus:shadow-outline"
-								type="password"
-								placeholder="Password"
-								@keyup.enter="login" />
+								type="password" placeholder="Password" @keyup.enter="login" />
 							<p class="text-um-red text-xs italic">
 								{{ errorMessage }}
 							</p>
@@ -243,12 +221,7 @@ async function fetchDetailedData(hrefs) {
                                 type="button">
                                 Sign In
                             </button> -->
-							<linkButton
-								class="cursor-pointer"
-								url=""
-								target="_blank"
-								title="Log in"
-								:style="'login'"
+							<linkButton class="cursor-pointer" url="" target="_blank" title="Log in" :style="'login'"
 								@click="login" />
 						</div>
 						<!--                         <div class="btn_logout">
