@@ -44,7 +44,6 @@ for (let i = 0; i < filtered.length; i++) {
 		url: pathSteps,
 	})
 
-	console.log(breadcrumbs.value)
 }
 </script>
 

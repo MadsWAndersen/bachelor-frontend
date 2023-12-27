@@ -249,8 +249,6 @@ const submit = async () => {
 
 		fetch('https://eocet9yn9ivqaq7.m.pipedream.net', requestOptions2)
 			.then((response) => response.text())
-			.then((result) => console.log(result))
-			.catch((error) => console.log('error', error))
 
 		// redirects user
 		await navigateTo('/documentation')

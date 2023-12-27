@@ -54,18 +54,6 @@ const login = async () => {
 	}
 }
 
-<<<<<<< HEAD
-const fetchUser = async () => {
-	// starts spinner 
-	userData.loading = true
-
-	// fetches user infomation
-	const requestOptions = {
-		method: 'GET',
-		headers: {
-			'Umb-Project-Alias': 'pba-webdev',
-			Authorization: 'Basic cDA1ajNJMFF3T0JQMEpRZnBwcUw6',
-=======
 // Helper function to set local storage items
 const setLocalStorageItem = (key, value) => {
 	window.localStorage.setItem(key, JSON.stringify(value))
@@ -82,20 +70,14 @@ const processDetailedData = async (hrefs) => {
 					setLocalStorageItem(content.name.toLowerCase(), content)
 				},
 			)
->>>>>>> 622e7d433c6d628fee1ddb950959ae867fee99fc
 		},
 	)
-<<<<<<< HEAD
-
-	// fetches all content from backoffice
-=======
 }
 
 // Main function to fetch user data
 const fetchUser = async () => {
 	userData.loading = true
 
->>>>>>> 622e7d433c6d628fee1ddb950959ae867fee99fc
 	try {
 		const requestOptions = {
 			method: 'GET',
@@ -122,78 +104,19 @@ const fetchUser = async () => {
 		const hrefs = initialResponse._embedded.content.map(
 			(content) => content._links.self.href,
 		)
-<<<<<<< HEAD
-
-
-		// stores all content from fetchDetailsData
-		detailedData.value = await fetchDetailedData(hrefs)
-
-		// sort and save content to localstorage
-		window.localStorage.setItem(
-			'documentation',
-			JSON.stringify(detailedData.value[0]),
-		)
-		window.localStorage.setItem(
-			'insights',
-			JSON.stringify(detailedData.value[1]),
-		)
-		window.localStorage.setItem(
-			'tools',
-			JSON.stringify(detailedData.value[2]),
-		)
-
-		window.localStorage.setItem(
-			'workshop',
-			JSON.stringify(detailedData.value[3]),
-		)
-		// sort documentation categories
-		for (
-			let i = 0;
-			i < detailedData.value[0].childrenData._embedded.content.length;
-			i++
-		) {
-			window.localStorage.setItem(
-				detailedData.value[0].childrenData._embedded.content[
-					i
-				].name.toLowerCase(),
-				JSON.stringify(
-					detailedData.value[0].childrenData._embedded.content[i],
-				),
-			)
-		}
-
-=======
 		await processDetailedData(hrefs)
 
 		// Redirects user to home page
 		await navigateTo('/')
->>>>>>> 622e7d433c6d628fee1ddb950959ae867fee99fc
 	} catch (err) {
 		error.value = err
 	} finally {
 		userData.loading = false
 	}
-<<<<<<< HEAD
-
-	// save user infomation in localstorage
-	window.localStorage.setItem('userInfo', JSON.stringify(data.value))
-
-	// stop spinner
-	userData.loading = false
-	// Redirects user to home page
-	await navigateTo('/')
-
-	return { data, pending, error, refresh }
-}
-
-const detailedData = ref(null)
-// fetch function
-=======
 }
 
 const detailedData = ref(null)
 
->>>>>>> 622e7d433c6d628fee1ddb950959ae867fee99fc
 function fetchData(url) {
 	return fetch(url, {
 		headers: {
@@ -272,21 +195,12 @@ async function fetchDetailedData(hrefs) {
 						</div>
 
 						<div class="w-full">
-<<<<<<< HEAD
-							<!--              <button
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="button">
-                                Sign In
-                            </button> -->
-							<linkButton class="cursor-pointer" url="" target="_blank" title="Log in" :style="'login'"
-=======
 							<linkButton
 								class="cursor-pointer"
 								url=""
 								target="_blank"
 								title="Log in"
 								:style="'login'"
->>>>>>> 622e7d433c6d628fee1ddb950959ae867fee99fc
 								@click="login" />
 						</div>
 					</form>
