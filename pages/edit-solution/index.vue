@@ -17,19 +17,19 @@
 				<div class="col-span-12 w-full">
 					<form @submit.prevent="postForm">
 						<div class="w-full flex flex-col">
-							<label for="text" class="w-full text-m font-semibold text-um-blue pt-6 mr-5">
+							<label for="text" class="w-full text-m font-bold text-um-blue pt-6 mr-5">
 								Edit solution text:</label>
 							<textarea id="text" v-model="formData.text" placeholder="Enter the edit you want to request"
 								type="text"
-								class="inline-flex w-full h-12 justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+								class="inline-flex w-full h-12 justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 								required />
 						</div>
 						<div class="w-full flex flex-col">
-							<label for="version" class="w-full text-m font-semibold text-um-blue pt-6 mr-5">
+							<label for="version" class="w-full text-m font-bold text-um-blue pt-6 mr-5">
 								Version:</label>
 							<input id="version" v-model="formData.version"
 								placeholder="Version specific, enter the version here" type="text"
-								class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+								class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 								required />
 						</div>
 						<linkButton class="cursor-pointer mt-5 mb-10" url="" target="_blank" title="Submit solution"

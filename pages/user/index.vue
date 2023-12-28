@@ -12,12 +12,6 @@
 					:placeholder="user?.name" />
 			</div>
 
-			<div class="flex lg:flex-row justify-between flex-col lg:gap-0 gap-2">
-				<span class="flex items-center text-um-blue text-sm">Member type:</span>
-				<input v-if="user?.memberTypeAlias"
-					class="py-2 px-2 border-2 border-um-blue rounded-xs outline-none w-full md:max-w-[300px]" type="text"
-					:placeholder="user.memberTypeAlias" />
-			</div>
 
 			<div class="flex lg:flex-row justify-between flex-col lg:gap-0 gap-2">
 				<span class="flex items-center text-um-blue text-sm">Email:</span>
@@ -48,7 +42,6 @@ const user = ref(null)
 const updatedUser = ref({
 	name: '',
 	email: '',
-	memberTypeAlias: 'Member',
 	username: '',
 })
 

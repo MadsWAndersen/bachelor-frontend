@@ -10,15 +10,17 @@ const userData = useUserStore()
 
 const errorMessage = ref('') // Declare a variable to store the fetch result
 
-const username = ref('testperson')
+const username = ref('')
 const password = ref('')
 
 const login = async () => {
+	// error handeling 
 	if (!username.value + !password.value) {
 		document.querySelector('#username').classList.add('text-um-red')
 		document.querySelector('#password').classList.add('text-um-red')
 		errorMessage.value = 'The username or password is missing.'
 	} else {
+		// fetch bearertoken
 		const requestOptions = {
 			method: 'POST',
 			headers: {
@@ -41,7 +43,7 @@ const login = async () => {
 			errorMessage.value = error._object.udMUIHuGdc.data.error
 		}
 
-		// saves bearer token in localstorage
+		// saves bearer token in pinia
 		userData.bearerToken = data.value.access_token
 
 		// saves bearer token in localstorage
@@ -97,6 +99,8 @@ const fetchUser = async () => {
 		const initialResponse = await fetchData(
 			'https://cdn.umbraco.io/content/',
 		)
+
+		// gets urls for all content sections
 		const hrefs = initialResponse._embedded.content.map(
 			(content) => content._links.self.href,
 		)
@@ -123,6 +127,8 @@ function fetchData(url) {
 	}).then((response) => response.json())
 }
 
+// loops until there is no more _links then returns its data layer
+// returns nested content
 async function fetchRecursive(url) {
 	const data = await fetchData(url)
 	if (data._embedded && data._embedded.content) {
@@ -139,6 +145,7 @@ async function fetchRecursive(url) {
 	return data
 }
 
+//Loops though all the hrefs from the backoffice, for each href it uses fetchRecursive til get its content. Return all the content
 async function fetchDetailedData(hrefs) {
 	const details = await Promise.all(hrefs.map((href) => fetchData(href)))
 	return Promise.all(
@@ -160,41 +167,28 @@ async function fetchDetailedData(hrefs) {
 	<div class="p-0 lg:col-span-12">
 		<div class="container-row p-0">
 			<div class="lg:col-span-8 h-screen hidden lg:block">
-				<img
-					class="h-full object-cover"
-					src="../../assets/image/Pink_Full.png"
-					alt="" />
+				<img class="h-full object-cover" src="../../assets/image/Pink_Full.png" alt="" />
 			</div>
-			<div
-				v-if="!userData.loading"
-				class="col-span-4 h-screen flex justify-center items-center">
+			<div v-if="!userData.loading" class="col-span-4 h-screen flex justify-center items-center">
 				<div class="col-span-3 w-1/1">
 					<form class="lg:col-span-4 bg-white px-8 pt-6 pb-8 mb-4">
 						<div class="mb-4 text-center">
-							<h1 class="text-5xl text-um-blue font-semibold p-2">
+							<h1 class="text-5xl text-um-blue p-2">
 								Welcome Back
 							</h1>
-							<p class="text-um-blue font-black pb-6">
+							<p class="text-um-blue font-bold pb-6">
 								Log in to the Support Hub
 							</p>
 						</div>
 						<div class="mb-4">
-							<input
-								id="username"
-								v-model="username"
+							<input id="username" v-model="username"
 								class="border-b-2 w-full py-2 text-um-blue leading-tight focus:outline-none focus:shadow-outline"
-								type="text"
-								placeholder="Username"
-								@keyup.enter="login" />
+								type="text" placeholder="Username" @keyup.enter="login" />
 						</div>
 						<div class="mb-6">
-							<input
-								id="password"
-								v-model="password"
+							<input id="password" v-model="password"
 								class="border-b-2 w-full py-2 text-um-blue mb-3 leading-tight focus:outline-none focus:shadow-outline"
-								type="password"
-								placeholder="Password"
-								@keyup.enter="login" />
+								type="password" placeholder="Password" @keyup.enter="login" />
 							<p class="text-um-red text-xs italic">
 								{{ errorMessage }}
 							</p>
