@@ -3,7 +3,7 @@
 		class="container py-7 fixed bg-um-white top-0 left-1/2 -translate-x-1/2 shadow-sm w-full z-40">
 		<nav class="container-row items-center">
 			<NuxtLink
-				class="col-span-2 mr-auto text-white font-semibold"
+				class="col-span-2 mr-auto text-white font-bold"
 				to="/">
 				<img src="@/assets/icons/logo.svg" alt="" />
 			</NuxtLink>

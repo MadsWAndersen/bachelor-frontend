@@ -70,7 +70,7 @@
 							<div class="col-span-full mb-10">
 								<h1 class="text-4xl text-um-blue mb-5">
 									Welcome to the
-									<span class="font-semibold italic">{{
+									<span class="font-bold italic">{{
 										cmsContent.documentationHeadline
 									}}</span>
 									category

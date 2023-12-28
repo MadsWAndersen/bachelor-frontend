@@ -10,7 +10,7 @@ const userData = useUserStore()
 
 const errorMessage = ref('') // Declare a variable to store the fetch result
 
-const username = ref('testperson')
+const username = ref('')
 const password = ref('')
 
 const login = async () => {
@@ -173,10 +173,10 @@ async function fetchDetailedData(hrefs) {
 				<div class="col-span-3 w-1/1">
 					<form class="lg:col-span-4 bg-white px-8 pt-6 pb-8 mb-4">
 						<div class="mb-4 text-center">
-							<h1 class="text-5xl text-um-blue font-semibold p-2">
+							<h1 class="text-5xl text-um-blue p-2">
 								Welcome Back
 							</h1>
-							<p class="text-um-blue font-black pb-6">
+							<p class="text-um-blue font-bold pb-6">
 								Log in to the Support Hub
 							</p>
 						</div>

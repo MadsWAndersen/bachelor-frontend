@@ -9,7 +9,7 @@
 				<div class="col-span-12 w-full">
 					<!-- 					<HeroHeader headline="Submission" heroText="" heroBreadCrumbs="submission" /> -->
 
-					<h2 class="text-xl text-um-blue font-semibold pt-6">
+					<h2 class="text-xl text-um-blue font-bold pt-6">
 						Create a new solution
 					</h2>
 					<p class="text-m text-um-black pb-6">
@@ -20,12 +20,12 @@
 					<div class="md:flex lg:row w-full mb-5">
 						<div class="md:pr-6 w-full">
 							<p
-								class="w-full text-m font-semibold text-um-blue pt-6 mr-5">
+								class="w-full text-m font-bold text-um-blue pt-6 mr-5">
 								Select the category
 							</p>
 							<select
 								id="parentId"
-								class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
+								class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
 								<option value="none" selected disabled hidden>
 									Select an category
 								</option>
@@ -43,18 +43,18 @@
 						</div>
 						<div class="w-full">
 							<p
-								class="w-full text-m font-semibold text-um-blue pt-6 mr-5">
+								class="w-full text-m font-bold text-um-blue pt-6 mr-5">
 								Select the versions
 							</p>
 							<div class="w-full flex">
 								<input
 									id="versions"
-									class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+									class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 									placeholder="type in version"
 									@keyup.enter="addVersion()" />
 								<button
 									id="versionBtn"
-									class="inline-flex w-1/6 justify-center rounded-xs bg-white px-3 p-2 md:m-3 my-3 ml-2 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue flex items-center"
+									class="inline-flex w-1/6 justify-center rounded-xs bg-white px-3 p-2 md:m-3 my-3 ml-2 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue flex items-center"
 									@click="addVersion()">
 									<Icon
 										name="streamline:add-1-solid"
@@ -74,34 +74,34 @@
 
 					<div class="w-full">
 						<p
-							class="w-2/3 text-m font-semibold text-um-blue pt-6 mr-5">
+							class="w-2/3 text-m font-bold text-um-blue pt-6 mr-5">
 							Select the headline
 						</p>
 						<input
 							id="headline"
 							v-model="headline"
-							class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+							class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 							placeholder="Enter your headline here..."
 							@keyup.enter="console.log(headline)" />
 					</div>
 					<div class="w-full">
-						<p class="text-m font-semibold text-um-blue pt-6 mr-5">
+						<p class="text-m font-bold text-um-blue pt-6 mr-5">
 							The issue
 						</p>
 						<textarea
 							id="issue"
 							v-model="issue"
-							class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
+							class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 							placeholder="Add description of the issue"></textarea>
 					</div>
 
 					<p
-						class="w-2/3 text-m font-semibold text-um-blue pt-6 my-3">
+						class="w-2/3 text-m font-bold text-um-blue pt-6 my-3">
 						Describe the solution
 					</p>
 					<div
 						id="bodytext"
-						class="m-0 rounded-xs bg-white p-1 text-sm font-semibold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
+						class="m-0 rounded-xs bg-white p-1 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue">
 						<Editor
 							api-key="ftvcr0z9nxcc2ozxsls3xowr1dtmrwm2atafqvcxtkw0mob4"
 							:init="{
@@ -152,6 +152,7 @@ const contentBodyText = ref()
 const timeElapsed = Date.now()
 const modal = ref(false)
 const today = new Date(timeElapsed)
+const redirect = useRedirect();
 
 const changeModal = () => {
 	document.querySelector('#parentId').classList.remove('ring-um-red')
@@ -164,11 +165,15 @@ const changeModal = () => {
 }
 
 onMounted(async () => {
+	if (!localStorage.getItem('bearerToken')) {
+		redirect();
+	}
 	const x = await ref(
 		JSON.parse(window.localStorage.getItem(`documentation`)),
 	)
 	localStorageContent.value = x.value.childrenData._embedded.content
 })
+
 
 const addVersion = () => {
 	const version = document.querySelector('#versions').value
