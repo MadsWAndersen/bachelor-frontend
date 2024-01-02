@@ -4,13 +4,15 @@ export function useFetchAll() {
 	const storedData = ref(null)
 	const detailedData = ref(null)
 	const error = ref(null)
+	const config = useRuntimeConfig()
+	
 
 	function fetchData(url) {
 		return fetch(url, {
 			headers: {
-				'umb-project-alias': 'pba-webdev',
-				'Accept-Language': 'en-US',
-				Authorization: 'Basic elFJZk50eEpCYWFidFFDSTNweDg6',
+				'umb-project-alias': config.public.project_alias,
+			'Accept-Language': config.public.accept_lang,
+			Authorization: `Basic ${config.public.authentication}`,
 			},
 		}).then((response) => response.json())
 	}

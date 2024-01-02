@@ -95,8 +95,7 @@
 							placeholder="Add description of the issue"></textarea>
 					</div>
 
-					<p
-						class="w-2/3 text-m font-bold text-um-blue pt-6 my-3">
+					<p class="w-2/3 text-m font-bold text-um-blue pt-6 my-3">
 						Describe the solution
 					</p>
 					<div
@@ -152,7 +151,8 @@ const contentBodyText = ref()
 const timeElapsed = Date.now()
 const modal = ref(false)
 const today = new Date(timeElapsed)
-const redirect = useRedirect();
+const redirect = useRedirect()
+const config = useRuntimeConfig()
 
 const changeModal = () => {
 	document.querySelector('#parentId').classList.remove('ring-um-red')
@@ -166,14 +166,13 @@ const changeModal = () => {
 
 onMounted(async () => {
 	if (!localStorage.getItem('bearerToken')) {
-		redirect();
+		redirect()
 	}
 	const x = await ref(
 		JSON.parse(window.localStorage.getItem(`documentation`)),
 	)
 	localStorageContent.value = x.value.childrenData._embedded.content
 })
-
 
 const addVersion = () => {
 	const version = document.querySelector('#versions').value
@@ -188,8 +187,8 @@ const submit = async () => {
 		contentBodyText.value = tinymce.activeEditor.getContent()
 	}
 	const myHeaders = new Headers()
-	myHeaders.append('Umb-Project-Alias', 'pba-webdev')
-	myHeaders.append('Authorization', 'Basic cDA1ajNJMFF3T0JQMEpRZnBwcUw6')
+	myHeaders.append('Umb-Project-Alias', config.public.project_alias)
+	myHeaders.append('Authorization', `Basic ${config.public.authentication}`)
 	myHeaders.append('Api-Version', '2')
 	myHeaders.append('Content-Type', 'application/json')
 
@@ -252,8 +251,9 @@ const submit = async () => {
 			redirect: 'follow',
 		}
 
-		fetch('https://eocet9yn9ivqaq7.m.pipedream.net', requestOptions2)
-			.then((response) => response.text())
+		fetch('https://eocet9yn9ivqaq7.m.pipedream.net', requestOptions2).then(
+			(response) => response.text(),
+		)
 
 		// redirects user
 		await navigateTo('/documentation')

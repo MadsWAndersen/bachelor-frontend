@@ -9,7 +9,7 @@ export const useUserStore = defineStore('user', () => {
 		if (!localStorage.getItem('bearerToken')) {
 			window.location.href = '/login'
 		} else {
-			return;
+			return
 		}
 	}
 

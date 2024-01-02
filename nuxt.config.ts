@@ -13,18 +13,16 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-
+  runtimeConfig: {
+    secret: process.env.AUTHORIZATION,
+    public: {
+      authentication: process.env.AUTHORIZATION,
+      project_alias: process.env.PROJECT_ALIAS,
+      accept_lang: process.env.ACCEPT_LANGUAGE,
+    }
+  },
   app: {
     pageTransition: { name: 'slide', mode: 'out-in' }
   },
-  runtimeConfig: {
-    // The private keys which are only available within server-side
-    UmbProjectAlias: 'pba-webdev',
-    AcceptLanguage: 'en-US',
-    Authorization: 'Basic elFJZk50eEpCYWFidFFDSTNweDg6',
-    public: {
-      apiBase: '/api',
-    }
-
-  },
+ 
 })
