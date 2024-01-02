@@ -7,14 +7,14 @@ definePageMeta({
 })
 
 const userData = useUserStore()
-
+const config = useRuntimeConfig()
 const errorMessage = ref('') // Declare a variable to store the fetch result
 
 const username = ref('')
 const password = ref('')
 
 const login = async () => {
-	// error handeling 
+	// error handeling
 	if (!username.value + !password.value) {
 		document.querySelector('#username').classList.add('text-um-red')
 		document.querySelector('#password').classList.add('text-um-red')
@@ -24,7 +24,7 @@ const login = async () => {
 		const requestOptions = {
 			method: 'POST',
 			headers: {
-				'Umb-Project-Alias': 'pba-webdev',
+				'Umb-Project-Alias': config.public.project_alias,
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
 			body: new URLSearchParams({
@@ -82,8 +82,8 @@ const fetchUser = async () => {
 		const requestOptions = {
 			method: 'GET',
 			headers: {
-				'Umb-Project-Alias': 'pba-webdev',
-				Authorization: 'Basic cDA1ajNJMFF3T0JQMEpRZnBwcUw6',
+				'Umb-Project-Alias': config.public.project_alias,
+				Authorization: `Basic ${config.public.authentication}`,
 			},
 			redirect: 'follow',
 		}
@@ -120,9 +120,9 @@ const detailedData = ref(null)
 function fetchData(url) {
 	return fetch(url, {
 		headers: {
-			'umb-project-alias': 'pba-webdev',
-			'Accept-Language': 'en-US',
-			Authorization: 'Basic elFJZk50eEpCYWFidFFDSTNweDg6',
+			'umb-project-alias': config.public.project_alias,
+			'Accept-Language': config.public.accept_lang,
+			Authorization: `Basic ${config.public.authentication}`,
 		},
 	}).then((response) => response.json())
 }
@@ -167,9 +167,14 @@ async function fetchDetailedData(hrefs) {
 	<div class="p-0 lg:col-span-12">
 		<div class="container-row p-0">
 			<div class="lg:col-span-8 h-screen hidden lg:block">
-				<img class="h-full object-cover" src="../../assets/image/Pink_Full.png" alt="" />
+				<img
+					class="h-full object-cover"
+					src="../../assets/image/Pink_Full.png"
+					alt="" />
 			</div>
-			<div v-if="!userData.loading" class="col-span-4 h-screen flex justify-center items-center">
+			<div
+				v-if="!userData.loading"
+				class="col-span-4 h-screen flex justify-center items-center">
 				<div class="col-span-3 w-1/1">
 					<form class="lg:col-span-4 bg-white px-8 pt-6 pb-8 mb-4">
 						<div class="mb-4 text-center">
@@ -181,14 +186,22 @@ async function fetchDetailedData(hrefs) {
 							</p>
 						</div>
 						<div class="mb-4">
-							<input id="username" v-model="username"
+							<input
+								id="username"
+								v-model="username"
 								class="border-b-2 w-full py-2 text-um-blue leading-tight focus:outline-none focus:shadow-outline"
-								type="text" placeholder="Username" @keyup.enter="login" />
+								type="text"
+								placeholder="Username"
+								@keyup.enter="login" />
 						</div>
 						<div class="mb-6">
-							<input id="password" v-model="password"
+							<input
+								id="password"
+								v-model="password"
 								class="border-b-2 w-full py-2 text-um-blue mb-3 leading-tight focus:outline-none focus:shadow-outline"
-								type="password" placeholder="Password" @keyup.enter="login" />
+								type="password"
+								placeholder="Password"
+								@keyup.enter="login" />
 							<p class="text-um-red text-xs italic">
 								{{ errorMessage }}
 							</p>
