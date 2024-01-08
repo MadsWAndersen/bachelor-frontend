@@ -40,7 +40,7 @@
 							<div class="w-full flex">
 								<input id="versions"
 									class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
-									placeholder="Add versions in versions" @keyup.enter="addVersion()" />
+									placeholder="Add versions to solution" @keyup.enter="addVersion()" />
 								<button id="versionBtn"
 									class="inline-flex w-1/6 justify-center rounded-xs bg-white px-3 p-2 md:m-3 my-3 ml-2 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue flex items-center"
 									@click="addVersion()">
