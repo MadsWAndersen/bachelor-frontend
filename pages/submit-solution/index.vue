@@ -59,12 +59,14 @@
 					</div>
 
 					<div class="w-full">
-						<p class="w-2/3 text-m font-bold text-um-blue pt-6 mr-5">
+						<p id="headlineTitle" class="w-2/3 text-m font-bold text-um-blue pt-6 mr-5"
+							title="Title can't include '-'.">
 							Select the headline
 						</p>
-						<input id="headline" v-model="headline"
+						<input id="headline" v-model="headline" type="text" pattern="[^\-]*"
+							title="Title can't include '-'."
 							class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
-							placeholder="Enter your headline here..." />
+							placeholder="Enter your headline here" />
 					</div>
 					<div class="w-full">
 						<p class="text-m font-bold text-um-blue pt-6 mr-5">
@@ -119,6 +121,8 @@ const config = useRuntimeConfig()
 const removeVersion = (e) => {
 	versions.value.splice(e, 1);
 }
+
+
 
 const changeModal = () => {
 	document.querySelector('#parentId').classList.remove('ring-um-red')
@@ -231,14 +235,21 @@ const submit = async () => {
 			*/
 	} else {
 		// resets error handling
+
 		document.querySelector('#parentId').classList.remove('ring-um-red')
 		document.querySelector('#issue').classList.remove('ring-um-red')
 		document.querySelector('#versions').classList.remove('ring-um-red')
 		document.querySelector('#versionBtn').classList.remove('ring-um-red')
 		document.querySelector('#bodytext').classList.remove('ring-um-red')
 		document.querySelector('#headline').classList.remove('ring-um-red')
+		document.querySelector('#headlineTitle').innerHTML = ("Select the headline")
 		if (!headline.value) {
 			document.querySelector('#headline').classList.add('ring-um-red')
+
+		}
+		if (headline.value.includes("-")) {
+			document.querySelector('#headline').classList.add('ring-um-red')
+			document.querySelector('#headlineTitle').innerHTML += ("<span class='text-um-red'> * Title can't include '-' * </span>")
 		}
 		if (parentId.value === 'none') {
 			document.querySelector('#parentId').classList.add('ring-um-red')
