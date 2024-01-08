@@ -30,25 +30,14 @@
 </template>
 
 <script setup>
-defineProps({
-	bodyText: {
-		type: String,
-		default: '',
-	},
-	title: {
-		type: String,
-		default: '',
-	},
-	url: {
-		type: String,
-		default: '',
-	},
-	highlightedColor: {
-		type: String,
-		default: 'bg-um-red',
-	},
+const props = defineProps({
+	bodyText: String,
+	title: String,
+	url: String,
+	highlightedColor: String,
+	defaultOpen: Boolean,
 })
-const isOpen = ref(false)
+const isOpen = ref(props.defaultOpen)
 
 const toggle = () => {
 	isOpen.value = !isOpen.value
