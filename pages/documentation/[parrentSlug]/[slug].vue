@@ -24,11 +24,12 @@
 					'translate-x-0': isSideMenuOpen,
 					'translate-x-[-100%]': !isSideMenuOpen,
 				}">
-				<h1
+				<NuxtLink
 					v-if="cmsContent.documentationHeadline"
-					class="text-2xl mb-5">
-					{{ cmsContent.documentationHeadline }}
-				</h1>
+					class="text-2xl mb-5 block hover:underline"
+					:to="`${cmsContent._url}`"
+					>{{ cmsContent.documentationHeadline }}</NuxtLink
+				>
 				<ul
 					v-for="(content, index) in cmsContent.childrenData._embedded
 						.content"
@@ -45,11 +46,12 @@
 			<div
 				v-if="cmsContent.childrenData._embedded.content"
 				class="lg:col-span-2 lg:block hidden">
-				<h1
+				<NuxtLink
 					v-if="cmsContent.documentationHeadline"
-					class="text-2xl mb-5">
-					{{ cmsContent.documentationHeadline }}
-				</h1>
+					class="text-2xl mb-5 block hover:underline"
+					:to="`${cmsContent._url}`"
+					>{{ cmsContent.documentationHeadline }}</NuxtLink
+				>
 				<ul
 					v-for="(content, index) in cmsContent.childrenData._embedded
 						.content"
