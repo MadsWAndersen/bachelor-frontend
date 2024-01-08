@@ -1,80 +1,179 @@
 <template>
-	<header class="container py-7 fixed bg-um-white top-0 left-1/2 -translate-x-1/2 shadow-sm w-full z-40">
+	<header
+		class="container py-7 fixed bg-um-white top-0 left-1/2 -translate-x-1/2 shadow-sm w-full z-40">
+		<div v-if="searchQuery === ''"></div>
+
+		<div
+			v-else
+			class="container-row fixed bg-um-white shadow-2xl top-11 overflow-y-scroll h-screen">
+			<NuxtLink
+				:to="item._url"
+				v-for="item in filteredContent"
+				:key="item._id"
+				@click="resetSearch"
+				class="col-span-4 gap-3 border rounded-sm mb-3 p-3 bg-[url(@/assets/image/Pale__Full.png)]">
+				<div v-if="!item.parentName">
+					<h3 class="text-um-blue font-bold">
+						<NuxtLink :to="item._url">{{ item.name }}</NuxtLink>
+					</h3>
+					<p
+						class="text-um-blue-light"
+						v-if="item.documentationDescription">
+						{{ item.documentationDescription }}
+					</p>
+				</div>
+				<div v-else>
+					<h4 class="text-um-blue font-bold">
+						<NuxtLink :to="item._url"> {{ item.name }}</NuxtLink>
+					</h4>
+					<p class="text-um-blue-light line-clamp-3">
+						{{ item.documentationDescription }}
+					</p>
+				</div>
+			</NuxtLink>
+		</div>
+
 		<nav class="container-row items-center">
 			<NuxtLink class="col-span-2 mr-auto text-white font-bold" to="/">
 				<img src="@/assets/icons/logo.svg" alt="" />
 			</NuxtLink>
 
+			<div class="col-span-2">
+				<input
+					type="text"
+					v-model="searchQuery"
+					placeholder="Search by title or description..." />
+			</div>
+
 			<div class="lg:hidden col-span-2 flex justify-end">
 				<button class="text-um-blue z-50" @click="toggleMobileMenu">
-					<svg v-if="!isMobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+					<svg
+						v-if="!isMobileMenuOpen"
+						class="w-6 h-6"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
 						xmlns="http://www.w3.org/2000/svg">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
-						</path>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M4 6h16M4 12h16m-7 6h7"></path>
 					</svg>
 
-					<svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+					<svg
+						v-else
+						class="w-6 h-6"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
 						xmlns="http://www.w3.org/2000/svg">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-						</path>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M6 18L18 6M6 6l12 12"></path>
 					</svg>
 				</button>
 			</div>
 
-			<div class="container pb-10 pt-10 fixed top-0 right-0 lg:hidden md:text-4xl text-2xl w-full md:w-1/2 bg-um-white shadow-lg h-[100svh] transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-end gap-5 z-40"
+			<div
+				class="container pb-10 pt-10 fixed top-0 right-0 lg:hidden md:text-4xl text-2xl w-full md:w-1/2 bg-um-white shadow-lg h-[100svh] transform transition-transform ease-umbraco-ease duration-300 flex flex-col items-end gap-5 z-40"
 				:class="{
 					'translate-x-0': isMobileMenuOpen,
 					'translate-x-full': !isMobileMenuOpen,
 				}">
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/documentation" @click="toggleMobileMenu">
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/documentation"
+					@click="toggleMobileMenu">
 					Documentation
 				</NuxtLink>
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/tools" @click="toggleMobileMenu">
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/tools"
+					@click="toggleMobileMenu">
 					Tools
 				</NuxtLink>
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/insights" @click="toggleMobileMenu">
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/insights"
+					@click="toggleMobileMenu">
 					Insights
 				</NuxtLink>
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/submit-solution"
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/submit-solution"
 					@click="toggleMobileMenu">
 					Submit solution
 				</NuxtLink>
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/workshop" @click="toggleMobileMenu">
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/workshop"
+					@click="toggleMobileMenu">
 					Workshop
 				</NuxtLink>
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/user" @click="toggleMobileMenu">User
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/user"
+					@click="toggleMobileMenu"
+					>User
 				</NuxtLink>
-				<a class="text-um-blue font-bold m-0 hover:underline" @click="userData.logout() && toggleMobileMenu">Log
-					out</a>
+				<a
+					class="text-um-blue font-bold m-0 hover:underline"
+					@click="userData.logout() && toggleMobileMenu"
+					>Log out</a
+				>
 			</div>
 
-			<div class="lg:col-span-10 justify-end gap-8 items-center lg:flex hidden">
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/documentation">
+			<div
+				class="lg:col-span-8 justify-end gap-8 items-center lg:flex hidden">
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/documentation">
 					Documentation
 				</NuxtLink>
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/tools">
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/tools">
 					Tools
 				</NuxtLink>
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/insights">
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/insights">
 					Insights
 				</NuxtLink>
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/submit-solution">
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/submit-solution">
 					Submit solution
 				</NuxtLink>
-				<NuxtLink class="text-um-blue font-bold m-0 hover:underline" to="/workshop">
+				<NuxtLink
+					class="text-um-blue font-bold m-0 hover:underline"
+					to="/workshop">
 					Workshop
 				</NuxtLink>
 
 				<div class="relative">
-					<profilePicture class="cursor-pointer" :src="image" @click.stop="toggleDropdown()" />
-					<div v-if="isDropdownVisible"
+					<profilePicture
+						class="cursor-pointer"
+						:src="image"
+						@click.stop="toggleDropdown()" />
+					<div
+						v-if="isDropdownVisible"
 						class="absolute right-0 mt-2 w-[180px] bg-white border-um-blue bg-um-white border rounded-sm shadow-md overflow-hidden">
 						<NuxtLink
 							class="block py-2 px-7 text-sm text-gray-700 hover:bg-gray-100 hover:bg-um-palepink overflow-hidden"
-							to="/user">User</NuxtLink>
-						<a class="block py-2 px-7 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer hover:bg-um-palepink overflow-hidden"
-							@click="userData.logout()">Log out</a>
-						<p class="block py-2 px-7 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer hover:bg-um-palepink overflow-hidden"
+							to="/user"
+							>User</NuxtLink
+						>
+						<a
+							class="block py-2 px-7 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer hover:bg-um-palepink overflow-hidden"
+							@click="userData.logout()"
+							>Log out</a
+						>
+						<p
+							class="block py-2 px-7 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer hover:bg-um-palepink overflow-hidden"
 							@click="updateData()">
 							Update content
 						</p>
@@ -292,6 +391,10 @@ async function fetchRecursive(url) {
 	return data
 }
 
+const resetSearch = () => {
+	searchQuery.value = '' // Reset searchQuery to an empty string
+}
+
 async function fetchDetailedData(hrefs) {
 	const details = await Promise.all(hrefs.map((href) => fetchData(href)))
 	return Promise.all(
@@ -307,6 +410,70 @@ async function fetchDetailedData(hrefs) {
 		}),
 	)
 }
+
+const searchData = ref(null)
+
+onMounted(async () => {
+	try {
+		const initialResponse = await fetchData(
+			'https://cdn.umbraco.io/content/',
+		)
+		const searchHrefs = initialResponse._embedded.content.map(
+			(content) => content._links.self.href,
+		)
+		searchData.value = await fetchDetailedData(searchHrefs)
+	} catch (err) {
+		error.value = err
+	}
+})
+const searchQuery = ref('')
+
+function flattenData(data) {
+	const flatData = []
+
+	data.forEach((parentItem) => {
+		flatData.push({ ...parentItem, isParent: true })
+		if (parentItem.childrenData._embedded.content) {
+			parentItem.childrenData._embedded.content.forEach((childItem) => {
+				flatData.push({
+					...childItem,
+					isParent: false,
+					parentName: parentItem.name,
+				})
+			})
+		}
+	})
+
+	return flatData
+}
+
+const filteredContent = computed(() => {
+	if (!searchData.value || !searchData.value.length) return []
+
+	let flatData = []
+	searchData.value.forEach((category) => {
+		flatData = flatData.concat(
+			flattenData(category.childrenData._embedded.content),
+		)
+	})
+
+	return flatData.filter((item) => {
+		const nameMatch = item.name
+			.toLowerCase()
+			.includes(searchQuery.value.toLowerCase())
+		const descriptionMatch =
+			(item.documentationDescription &&
+				item.documentationDescription
+					.toLowerCase()
+					.includes(searchQuery.value.toLowerCase())) ||
+			(item.insightsDescription &&
+				item.insightsDescription
+					.toLowerCase()
+					.includes(searchQuery.value.toLowerCase()))
+
+		return nameMatch || descriptionMatch
+	})
+})
 </script>
 
 <style lang="scss" scoped>

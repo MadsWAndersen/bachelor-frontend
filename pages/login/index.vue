@@ -145,7 +145,7 @@ async function fetchRecursive(url) {
 	return data
 }
 
-//Loops though all the hrefs from the backoffice, for each href it uses fetchRecursive til get its content. Return all the content
+//	Loops though all the hrefs from the backoffice, for each href it uses fetchRecursive til get its content. Return all the content
 async function fetchDetailedData(hrefs) {
 	const details = await Promise.all(hrefs.map((href) => fetchData(href)))
 	return Promise.all(
