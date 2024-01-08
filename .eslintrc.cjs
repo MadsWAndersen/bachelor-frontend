@@ -12,7 +12,7 @@ module.exports = {
 		'@nuxtjs/eslint-config-typescript',
 		'plugin:prettier/recommended',
 	],
-	plugins: [],
+	plugins: ['vitest'],
 	rules: {
 		'vue/attribute-hyphenation': 'off',
 		'vue/no-boolean-default': 'off',
@@ -24,5 +24,4 @@ module.exports = {
 		],
 		'object-shorthand': ['error', 'methods'],
 	},
-	ignorePatterns: ['**/*.test.js', '**/*.spec.js', 'node_modules/', 'build/'],
 }

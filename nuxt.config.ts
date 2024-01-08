@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "nuxt-icon", "@pinia/nuxt"],
+  modules: ["@nuxtjs/tailwindcss", "nuxt-icon", "@pinia/nuxt", '@nuxt/test-utils/module'],
   css: ['~/assets/css/main.css'],
   nitro: {
     preset: 'netlify'
