@@ -15,6 +15,11 @@
 
 		<div v-if="cmsContent">
 			<div v-if="cmsContent.childrenData._embedded.content" class="-mb-3">
+				<h2
+					v-if="cmsContent.childrenData._embedded.content"
+					class="text-lg mt-7 text-um-blue font-bold">
+					Highlighted solution
+				</h2>
 				<div
 					v-for="(content, index) in cmsContent.childrenData._embedded
 						.content"
