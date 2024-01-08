@@ -144,7 +144,7 @@ const handleFormSubmit = async () => {
 			const errorResult = await response.json()
 			console.error('Error:', errorResult)
 		}
-
+		/*
 		// ping the editors on slack
 		const myHeaders = new Headers()
 		myHeaders.append('Content-Type', 'application/json')
@@ -164,6 +164,8 @@ const handleFormSubmit = async () => {
 			.then((response) => response.text())
 			.then((result) => console.log(result))
 			.catch((error) => console.log('error', error))
+			*/
+		sendSlackNotification()
 	} catch (error) {
 		console.error('Error:', error.message)
 	}

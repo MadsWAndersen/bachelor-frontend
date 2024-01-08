@@ -24,4 +24,5 @@ module.exports = {
 		],
 		'object-shorthand': ['error', 'methods'],
 	},
+	ignorePatterns: ['**/*.test.js', '**/*.spec.js', 'node_modules/', 'build/'],
 }

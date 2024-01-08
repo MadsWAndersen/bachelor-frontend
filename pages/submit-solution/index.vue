@@ -142,6 +142,8 @@
 
 <script setup>
 import Editor from '@tinymce/tinymce-vue'
+import { useSlackNotification } from '@/composables/useSlackNotification'
+
 const localStorageContent = ref()
 const headline = ref('')
 const issue = ref('')
@@ -153,6 +155,7 @@ const modal = ref(false)
 const today = new Date(timeElapsed)
 const redirect = useRedirect()
 const config = useRuntimeConfig()
+const { sendSlackNotification } = useSlackNotification()
 
 const changeModal = () => {
 	document.querySelector('#parentId').classList.remove('ring-um-red')
@@ -236,7 +239,9 @@ const submit = async () => {
 	) {
 		useFetch('https://api.umbraco.io/content', requestOptions)
 
-		// ping the editors on slack
+		sendSlackNotification()
+
+		/* // ping the editors on slack
 		const myHeaders2 = new Headers()
 		myHeaders.append('Content-Type', 'application/json')
 
@@ -254,7 +259,7 @@ const submit = async () => {
 		fetch('https://eocet9yn9ivqaq7.m.pipedream.net', requestOptions2).then(
 			(response) => response.text(),
 		)
-
+		*/
 		// redirects user
 		await navigateTo('/documentation')
 	} else {
