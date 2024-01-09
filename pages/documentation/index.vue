@@ -5,7 +5,12 @@
 			:heroText="cmsContent.documentationDescription"
 			:heroBreadCrumbs="cmsContent._url" />
 
-		<div v-if="cmsContent.childrenData._embedded.content" class="-mb-3">
+		<div v-if="cmsContent.childrenData._embedded.content" class="mb-3">
+			<h2
+				v-if="cmsContent.childrenData._embedded.content"
+				class="text-lg mt-7 text-um-blue font-bold">
+				Highlighted solution
+			</h2>
 			<div
 				v-for="(content, index) in cmsContent.childrenData._embedded
 					.content"
@@ -27,6 +32,11 @@
 		</div>
 
 		<div v-if="sortedAndLimitedContent.length > 0" class="mt-6">
+			<h2
+				v-if="sortedAndLimitedContent.length > 0"
+				class="text-lg mb-3 mt-7 text-um-blue font-bold">
+				Newly added content
+			</h2>
 			<div
 				v-for="(solution, index) in sortedAndLimitedContent"
 				:key="index"
