@@ -5,29 +5,22 @@
 			:heroText="cmsContent.documentationDescription"
 			:heroBreadCrumbs="cmsContent._url" />
 
-		<div v-if="cmsContent.childrenData._embedded.content" class="mb-3">
+		<div v-if="highlightedContent.length">
 			<h2
 				v-if="cmsContent.childrenData._embedded.content"
-				class="text-lg mt-7 text-um-blue font-bold">
+				class="text-lg mt-7 mb-2 text-um-blue font-bold">
 				Highlighted solution
 			</h2>
 			<div
-				v-for="(content, index) in cmsContent.childrenData._embedded
-					.content"
-				:key="index">
-				<div
-					v-for="(childContent, i) in content.childrenData._embedded
-						.content"
-					:key="i"
-					class="mb-3">
-					<div v-if="childContent.highligted === true">
-						<HighlightCard
-							:highlightedColor="'bg-um-red'"
-							:title="childContent.name"
-							:bodyText="childContent.documentationDescription"
-							:url="childContent._url" />
-					</div>
-				</div>
+				v-for="(content, index) in highlightedContent"
+				:key="index"
+				class="mb-3">
+				<HighlightCard
+					:highlightedColor="'bg-um-red'"
+					:title="content.name"
+					:bodyText="content.documentationDescription"
+					:url="content._url"
+					:defaultOpen="index === 0" />
 			</div>
 		</div>
 
@@ -68,6 +61,16 @@
 const localStorageContent = ref()
 const cmsContent = ref()
 const redirect = useRedirect()
+
+const highlightedContent = computed(() => {
+	if (!cmsContent.value || !cmsContent.value.childrenData._embedded.content) {
+		return []
+	}
+
+	return cmsContent.value.childrenData._embedded.content
+		.flatMap((content) => content.childrenData._embedded.content)
+		.filter((childContent) => childContent.highligted)
+})
 
 onMounted(async () => {
 	if (!localStorage.getItem('bearerToken')) {

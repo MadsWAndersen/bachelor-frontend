@@ -2,47 +2,81 @@
 	<section>
 		<div class="container-row flex lg:justify-center">
 			<ModalBlock v-if="modal === false">
-				<h2 class="text-2xl text-um-blue">Thanks for providing a update for this solution</h2>
-				<span class="mb-3 text-um-blue">You are about to request a edit, are you sure the details are
-					correct?</span>
+				<h2 class="text-2xl text-um-blue">
+					Thanks for providing a update for this solution
+				</h2>
+				<span class="mb-3 text-um-blue"
+					>You are about to request a edit, are you sure the details
+					are correct?</span
+				>
 
-				<div class="flex gap-2 justify-between mt-9 lg:flex-row flex-col">
-					<Button class="!w-full" :buttonText="'No cancel'" :style="'neutral'" @click="modal = !modal" />
-					<Button class="!w-full" :buttonText="'Request edit'" :style="'dark'" @click="confirmAndSubmit()" />
+				<div
+					class="flex gap-2 justify-between mt-9 lg:flex-row flex-col">
+					<Button
+						class="!w-full"
+						:buttonText="'No cancel'"
+						:style="'neutral'"
+						@click="modal = !modal" />
+					<Button
+						class="!w-full"
+						:buttonText="'Request edit'"
+						:style="'dark'"
+						@click="confirmAndSubmit()" />
 				</div>
 			</ModalBlock>
 		</div>
 
 		<div class="col-span-12 lg:w-1/2 md:w-2/3 w-full">
-			<HeroHeader headline="Edit Solution" heroText="" heroBreadCrumbs="edit-solution" />
+			<HeroHeader
+				headline="Edit Solution"
+				heroText=""
+				heroBreadCrumbs="edit-solution" />
 			<div>
 				<p>
-					In order to request a edit on a solution, please provide a detailed and exactly description of what
-					needs to be change and what versions are involved. This will ensure that our editor can deliver a
-					accurate solution.
+					In order to request a edit on a solution, please provide a
+					detailed and exactly description of what needs to be change
+					and what versions are involved. This will ensure that our
+					editor can deliver a accurate solution.
 				</p>
 			</div>
 			<div class="container-row lg:flex justify-center">
 				<div class="col-span-12 w-full">
 					<form @submit.prevent="postForm">
 						<div class="w-full flex flex-col">
-							<label for="text" class="w-full text-m font-bold text-um-blue pt-6 mr-5">
-								Edit solution text:</label>
-							<textarea id="text" v-model="formData.text" placeholder="Enter the edit you want to request"
+							<label
+								for="text"
+								class="w-full text-m font-bold text-um-blue pt-6 mr-5">
+								Edit solution text:</label
+							>
+							<textarea
+								id="text"
+								v-model="formData.text"
+								placeholder="Enter the edit you want to request"
 								type="text"
 								class="inline-flex w-full h-12 justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 								required />
 						</div>
 						<div class="w-full flex flex-col">
-							<label for="version" class="w-full text-m font-bold text-um-blue pt-6 mr-5">
-								Version:</label>
-							<input id="version" v-model="formData.version"
-								placeholder="Version specific, enter the version here" type="text"
+							<label
+								for="version"
+								class="w-full text-m font-bold text-um-blue pt-6 mr-5">
+								Version:</label
+							>
+							<input
+								id="version"
+								v-model="formData.version"
+								placeholder="Version specific, enter the version here"
+								type="text"
 								class="inline-flex w-full justify-center rounded-xs bg-white px-3 p-2 my-3 text-sm font-bold text-um-blu shadow-sm ring-1 ring-inset ring-um-blue"
 								required />
 						</div>
-						<linkButton class="cursor-pointer mt-5 mb-10" url="" target="_blank" title="Submit solution"
-							:style="'dark'" @click="changeModal()" />
+						<linkButton
+							class="cursor-pointer mt-5 mb-10"
+							url=""
+							target="_blank"
+							title="Submit solution"
+							:style="'dark'"
+							@click="changeModal()" />
 					</form>
 				</div>
 			</div>
