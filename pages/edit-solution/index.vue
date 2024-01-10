@@ -165,7 +165,7 @@ const handleFormSubmit = async () => {
 			.then((result) => console.log(result))
 			.catch((error) => console.log('error', error))
 			*/
-		sendSlackNotification()
+		sendSlackNotification('https://eok3lwmexfrcpy1.m.pipedream.net')
 	} catch (error) {
 		console.error('Error:', error.message)
 	}

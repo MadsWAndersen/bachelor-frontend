@@ -239,7 +239,7 @@ const submit = async () => {
 	) {
 		useFetch('https://api.umbraco.io/content', requestOptions)
 
-		sendSlackNotification()
+		sendSlackNotification('https://eocet9yn9ivqaq7.m.pipedream.net')
 
 		/* // ping the editors on slack
 		const myHeaders2 = new Headers()

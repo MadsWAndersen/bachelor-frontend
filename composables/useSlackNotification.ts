@@ -1,8 +1,6 @@
 export function useSlackNotification() {
-	const sendSlackNotification = async (): Promise<void> => {
+	const sendSlackNotification = async (apiUrl: string): Promise<void> => {
 		try {
-			const apiUrl: string = 'xxx'
-
 			const response: Response = await fetch(apiUrl, {
 				method: 'POST',
 				headers: {
