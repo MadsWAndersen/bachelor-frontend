@@ -5,30 +5,30 @@
 
 		<div
 			v-else
-			class="container-row fixed bg-um-white shadow-2xl top-11 overflow-y-scroll h-screen">
+			class="container-row fixed bg-um-white top-11 overflow-y-scroll w-full h-screen">
 			<NuxtLink
-				:to="item._url"
 				v-for="item in filteredContent"
 				:key="item._id"
-				@click="resetSearch"
-				class="col-span-4 gap-3 border rounded-sm mb-3 p-3 bg-[url(@/assets/image/Pale__Full.png)]">
+				:to="item._url"
+				class="col-span-4 max-h-[200px] flex gap-3 border rounded-sm mb-3 p-3 bg-cover bg-[url(@/assets/image/Pale__Full.png)]"
+				@click="resetSearch">
 				<div v-if="!item.parentName">
-					<h3 class="text-um-blue font-bold">
+					<h3 class="text-um-blue font-bold text-2xl">
 						<NuxtLink :to="item._url">{{ item.name }}</NuxtLink>
 					</h3>
 					<p
-						class="text-um-blue-light"
-						v-if="item.documentationDescription">
-						{{ item.documentationDescription }}
-					</p>
+						v-if="item.documentationDescription"
+						class="text-um-blue"
+						v-html="item.documentationDescription"></p>
 				</div>
+
 				<div v-else>
-					<h4 class="text-um-blue font-bold">
+					<h4 class="text-um-blue font-bold text-2xl">
 						<NuxtLink :to="item._url"> {{ item.name }}</NuxtLink>
 					</h4>
-					<p class="text-um-blue-light line-clamp-3">
-						{{ item.documentationDescription }}
-					</p>
+					<p
+						class="text-um-blue line-clamp-3"
+						v-html="item.documentationDescription"></p>
 				</div>
 			</NuxtLink>
 		</div>
@@ -42,6 +42,7 @@
 				<input
 					type="text"
 					v-model="searchQuery"
+					class="w-full border rounded-xs p-1 border-um-blue"
 					placeholder="Search by title or description..." />
 			</div>
 
@@ -412,8 +413,10 @@ async function fetchDetailedData(hrefs) {
 }
 
 const searchData = ref(null)
-
 onMounted(async () => {
+	if (searchQuery.value !== '') {
+	}
+
 	try {
 		const initialResponse = await fetchData(
 			'https://cdn.umbraco.io/content/',
@@ -426,7 +429,16 @@ onMounted(async () => {
 		error.value = err
 	}
 })
+
 const searchQuery = ref('')
+
+watch(searchQuery, (newValue) => {
+	if (newValue !== '') {
+		document.body.style.overflow = 'hidden'
+	} else {
+		document.body.style.overflow = ''
+	}
+})
 
 function flattenData(data) {
 	const flatData = []
@@ -462,14 +474,10 @@ const filteredContent = computed(() => {
 			.toLowerCase()
 			.includes(searchQuery.value.toLowerCase())
 		const descriptionMatch =
-			(item.documentationDescription &&
-				item.documentationDescription
-					.toLowerCase()
-					.includes(searchQuery.value.toLowerCase())) ||
-			(item.insightsDescription &&
-				item.insightsDescription
-					.toLowerCase()
-					.includes(searchQuery.value.toLowerCase()))
+			item.documentationDescription &&
+			item.documentationDescription
+				.toLowerCase()
+				.includes(searchQuery.value.toLowerCase())
 
 		return nameMatch || descriptionMatch
 	})
